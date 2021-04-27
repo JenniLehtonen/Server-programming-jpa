@@ -14,7 +14,7 @@
   <div class="dropdown">
   	<button class="dropbtn">Valitse puolue</button>
   	<div class="dropdown-content">
-
+<!--  
     <a href="/readparty?party='Vasemmistoliitto'">Vasemmistoliitto</a>
     <a href="/readparty?party='Suomen Sosialidemokraattinen Puolue'">Suomen Sosialidemokraattinen Puolue</a>
     <a href="/readparty?party='Vihrea liitto'">Vihreä liitto</a>
@@ -24,26 +24,26 @@
     <a href="/readparty?party='Suomen Kristillisdemokraatit (KD)'">Suomen Kristillisdemokraatit (KD)</a>
     <a href="/readparty?party='Kansallinen Kokoomus'">Kansallinen Kokoomus</a>
     <a href="/readparty?party='Itsenaisyyspuolue'">Itsenäisyyspuolue</a>
-    
+    -->
   </div>
 </div>
 <br><br>
 
 
-<c:forEach var="candidate" items="${requestScope.candidateslist}" >
-<h2><b>${candidate.ehdokas_id}:</b> ${candidate.etunimi} ${candidate.sukunimi} </h2>
+<c:forEach var="candidate" items="${requestScope.candidateList}" >
+<h2><b>${Ehdokkaat.ehdokas_id}:</b> ${Ehdokkaat.etunimi} ${Ehdokkaat.sukunimi} </h2>
 <b>Puolue: </b><br>
-${candidate.puolue} <br>
+${Ehdokkaat.puolue} <br>
 <b>Kotipaikkakunta:</b><br>
-${candidate.kotipaikkakunta}<br>
+${Ehdokkaat.kotipaikkakunta}<br>
 <b>Ikä: </b><br>
-${candidate.ika}<br>
+${Ehdokkaat.ika}<br>
 <b>Ammatti:</b><br>
-${candidate.ammatti}<br>
+${Ehdokkaat.ammatti}<br>
 <b>Miksi haluat eduskuntaan?</b><br>
-${candidate.miksi_eduskuntaan}<br>
+${Ehdokkaat.miksi_eduskuntaan}<br>
 <b>Mitä asioita haluat edistää?</b><br>
-${candidate.mita_asioita_haluat_edistaa}<br>
+${Ehdokkaat.mita_asioita_haluat_edistaa}<br>
 <br> <br>
 
 </c:forEach>
