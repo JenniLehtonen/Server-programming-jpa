@@ -16,8 +16,28 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import data.*;
+import dao.*;
 
 @Path("/candidaterest")
 public class CandidateRest {
+	
+	
+	@POST
+	@Path("/getallcandidates")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes("application/x-www-form-urlencoded")
+	public ArrayList<Ehdokkaat> getAllCandidates()
+	{
+		ArrayList<Ehdokkaat> candidateList = new ArrayList<Ehdokkaat>();
+		Dao dao = new Dao();
+		
+		candidateList = dao.getAllCandidates();
+		
+		return candidateList;
+		
+	}
+	{
+		
+	}
 
 }
