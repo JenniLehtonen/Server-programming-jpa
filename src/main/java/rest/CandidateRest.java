@@ -1,7 +1,13 @@
 package rest;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -21,23 +27,33 @@ import dao.*;
 @Path("/candidaterest")
 public class CandidateRest {
 	
+	/**
+	 * Request and response, can be used in every method
+	 */
+	@Context HttpServletRequest request;
+	@Context HttpServletResponse response;
 	
-	@POST
+	/**
+	 * @Sanna Nieminen-Vuorio
+	 * Method gets all the candidates from database, using Dao-class method
+	 * @return candidateList, list of all candidates
+	 */
+	@GET
 	@Path("/getallcandidates")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes("application/x-www-form-urlencoded")
-	public ArrayList<Ehdokkaat> getAllCandidates()
+	public void getAllCandidates() throws ServletException, IOException
 	{
-		ArrayList<Ehdokkaat> candidateList = new ArrayList<Ehdokkaat>();
+		List<Ehdokkaat> candidateList = new ArrayList<Ehdokkaat>();
 		Dao dao = new Dao();
-		
+
 		candidateList = dao.getAllCandidates();
 		
-		return candidateList;
 		
-	}
-	{
+		request.setAttribute("candidateList", candidateList);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/showcandidates.jsp");
+		rd.forward(request, response);
 		
-	}
+	} //getAllCandidates-sulje
 
-}
+
+} // class sulje
