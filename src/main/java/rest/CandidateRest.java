@@ -17,6 +17,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import data.*;
 
+@Path("/candidaterest")
 public class CandidateRest {
 
 }
