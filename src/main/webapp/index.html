@@ -1,20 +1,35 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-  <head>
-    <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
-    <title>Hello App Engine</title>
-  </head>
+<head>
+<meta http-equiv="content-type"
+	content="application/xhtml+xml; charset=UTF-8" />
+<link rel="stylesheet" href="koodit.css">
+<title>Vaalikone</title>
+</head>
 
-  <body>
-    <h1>Hello App Engine!</h1>
+<body>
+	<div class="kaikki">
+		<div class="header">
+			<h1>Vaalikone</h1>
+		</div>
+		<div class="navi">
 
-    <table>
-      <tr>
-        <td colspan="2" style="font-weight:bold;">Available Servlets:</td>        
-      </tr>
-      <tr>
-        <td><a href='/hello'>The servlet</a></td>
-      </tr>
-    </table>
-  </body>
+			<a href="http://localhost:8080">Etusivu</a> | <a href='/showcandidates'>Kaikki ehdokkaat</a> | <a href='/ShowQuestion'>Vastaa kysymyksiin</a> | <a href="/login">Ylläpito</a>
+		</div>
+		<div class="body">
+			<div class="body2">
+				<div style="width:100%; text-align:center;">
+				<img src="../vaalit.jpg" alt="Vaalikuva" style="width:100%;">
+				<br>
+				<a class="btn" href="/ShowQuestion">Vastaa kysymyksiin</a>
+				</div>
+
+
+			</div>
+		</div>
+		<div class="footer">
+			<p>Jenni Lehtonen, Liisa Vuorenmaa, Sanna Nieminen-Vuorio,
+				Riikka Siukola</p>
+		</div> </div>
+</body>
 </html>
