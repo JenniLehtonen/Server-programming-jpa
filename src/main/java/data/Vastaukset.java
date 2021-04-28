@@ -20,16 +20,6 @@ public class Vastaukset implements Serializable {
 
 	private int vastaus;
 
-	//bi-directional many-to-one association to Ehdokkaat
-	@ManyToOne
-	@JoinColumn(name="EHDOKAS_ID")
-	private Ehdokkaat ehdokkaat;
-
-	//bi-directional many-to-one association to Kysymykset
-	@ManyToOne
-	@JoinColumn(name="KYSYMYS_ID")
-	private Kysymykset kysymykset;
-
 	public Vastaukset() {
 	}
 
@@ -55,22 +45,6 @@ public class Vastaukset implements Serializable {
 
 	public void setVastaus(int vastaus) {
 		this.vastaus = vastaus;
-	}
-
-	public Ehdokkaat getEhdokkaat() {
-		return this.ehdokkaat;
-	}
-
-	public void setEhdokkaat(Ehdokkaat ehdokkaat) {
-		this.ehdokkaat = ehdokkaat;
-	}
-
-	public Kysymykset getKysymykset() {
-		return this.kysymykset;
-	}
-
-	public void setKysymykset(Kysymykset kysymykset) {
-		this.kysymykset = kysymykset;
 	}
 
 }
