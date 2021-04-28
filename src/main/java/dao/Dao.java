@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import data.*;
 import javax.persistence.Entity;
@@ -40,7 +41,13 @@ public class Dao {
 		EntityManagerFactory emf=Persistence.createEntityManagerFactory("Server-programming-jpa");
 
 		EntityManager em=emf.createEntityManager();
-		
+//		Query query = em.createQuery("SELECT u FROM User u WHERE u.email=:email");
+//	    query.setParameter("email", party);
+//	    try {
+//	    	List<Ehdokkaat> list = (Ehdokkaat) query.getSingleResult();
+//	    } catch (Exception e) {
+//	        // Handle exception
+//	    }
 
 		List<Ehdokkaat> list = em.createQuery("select a from Ehdokkaat a").getResultList();
 		

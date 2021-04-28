@@ -68,7 +68,7 @@ public class CandidateRest {
 	@GET
 	@Path("/getcandidatesbyparty/{party}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void getCandidatesByParty(@PathParam("number") String party) //throws ServletException, IOException
+	public void getCandidatesByParty(@PathParam("party") String party) //throws ServletException, IOException
 	{ 
 		List<Ehdokkaat> candidateList = new ArrayList<Ehdokkaat>();
 		Dao dao = new Dao();
