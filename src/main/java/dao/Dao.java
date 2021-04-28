@@ -39,17 +39,19 @@ public class Dao {
 	public List<Ehdokkaat> getCandidatesByParty(String party)
 	{
 		EntityManagerFactory emf=Persistence.createEntityManagerFactory("Server-programming-jpa");
-
+		Ehdokkaat ehdokas = null;
+		List<Ehdokkaat> list = new ArrayList<Ehdokkaat>();
 		EntityManager em=emf.createEntityManager();
-//		Query query = em.createQuery("SELECT u FROM User u WHERE u.email=:email");
-//	    query.setParameter("email", party);
-//	    try {
-//	    	List<Ehdokkaat> list = (Ehdokkaat) query.getSingleResult();
-//	    } catch (Exception e) {
-//	        // Handle exception
-//	    }
+		Query query = em.createQuery("SELECT a FROM Ehdokkaat a WHERE a.puolue=:puolue");
+	    query.setParameter("puolue", party);
+	    try {
+	    	ehdokas = (Ehdokkaat) query.getSingleResult();	
+	    	list.add(ehdokas);
+	    } catch (Exception e) {
+	        // Handle exception
+	    }
 
-		List<Ehdokkaat> list = em.createQuery("select a from Ehdokkaat a").getResultList();
+		//List<Ehdokkaat> list = em.createQuery("select a from Ehdokkaat a").getResultList();
 		
 		return list;
 	}

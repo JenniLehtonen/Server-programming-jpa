@@ -28,20 +28,20 @@
 </div>
 <br><br>
 
-<c:forEach var="candidate" items="${requestScope.candidateslist}" >
-<h2><b>${candidate.ehdokasId}:</b> ${candidate.etunimi} ${candidate.sukunimi} </h2>
+<c:forEach var="Ehdokkaat" items="${requestScope.candidateslist}" >
+<h2><b>${Ehdokkaat.ehdokasId}:</b> ${Ehdokkaat.etunimi} ${Ehdokkaat.sukunimi} </h2>
 <b>Puolue: </b><br>
-${candidate.puolue} <br>
+${Ehdokkaat.puolue} <br>
 <b>Kotipaikkakunta:</b><br>
-${candidate.kotipaikkakunta}<br>
+${Ehdokkaat.kotipaikkakunta}<br>
 <b>Ikä: </b><br>
-${candidate.ika}<br>
+${Ehdokkaat.ika}<br>
 <b>Ammatti:</b><br>
-${candidate.ammatti}<br>
+${Ehdokkaat.ammatti}<br>
 <b>Miksi haluat eduskuntaan?</b><br>
-${candidate.miksiEduskuntaan}<br>
+${Ehdokkaat.miksiEduskuntaan}<br>
 <b>Mitä asioita haluat edistää?</b><br>
-${candidate.mitaAsioitaHaluatEdistaa}<br>
+${Ehdokkaat.mitaAsioitaHaluatEdistaa}<br>
 <br> <br>
 
 </c:forEach>
