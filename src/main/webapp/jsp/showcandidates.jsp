@@ -8,13 +8,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
     
 
-<c:import url="../header.html" charEncoding="UTF-8"/>
+<c:import url="../header.html" charEncoding="UTF-8"/> 
 
 
   <div class="dropdown">
   	<button class="dropbtn">Valitse puolue</button>
   	<div class="dropdown-content">
-<!--  
+ 
     <a href="/readparty?party='Vasemmistoliitto'">Vasemmistoliitto</a>
     <a href="/readparty?party='Suomen Sosialidemokraattinen Puolue'">Suomen Sosialidemokraattinen Puolue</a>
     <a href="/readparty?party='Vihrea liitto'">Vihreä liitto</a>
@@ -24,14 +24,13 @@
     <a href="/readparty?party='Suomen Kristillisdemokraatit (KD)'">Suomen Kristillisdemokraatit (KD)</a>
     <a href="/readparty?party='Kansallinen Kokoomus'">Kansallinen Kokoomus</a>
     <a href="/readparty?party='Itsenaisyyspuolue'">Itsenäisyyspuolue</a>
-    -->
+   
   </div>
 </div>
 <br><br>
 
-
-<c:forEach var="candidate" items="${requestScope.candidateList}" >
-<h2><b>${Ehdokkaat.ehdokas_id}:</b> ${Ehdokkaat.etunimi} ${Ehdokkaat.sukunimi} </h2>
+<c:forEach var="Ehdokkaat" items="${requestScope.candidateList}" >
+<h2><b>${Ehdokkaat.ehdokasId}:</b> ${Ehdokkaat.etunimi} ${Ehdokkaat.sukunimi} </h2>
 <b>Puolue: </b><br>
 ${Ehdokkaat.puolue} <br>
 <b>Kotipaikkakunta:</b><br>
@@ -41,9 +40,9 @@ ${Ehdokkaat.ika}<br>
 <b>Ammatti:</b><br>
 ${Ehdokkaat.ammatti}<br>
 <b>Miksi haluat eduskuntaan?</b><br>
-${Ehdokkaat.miksi_eduskuntaan}<br>
+${Ehdokkaat.miksiEduskuntaan}<br>
 <b>Mitä asioita haluat edistää?</b><br>
-${Ehdokkaat.mita_asioita_haluat_edistaa}<br>
+${Ehdokkaat.mitaAsioitaHaluatEdistaa}<br>
 <br> <br>
 
 </c:forEach>
