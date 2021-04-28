@@ -29,8 +29,6 @@
 </div>
 <br><br>
 
-<h2>Tadaa</h2>
-
 <c:forEach var="Ehdokkaat" items="${requestScope.candidateList}" >
 <h2><b>${Ehdokkaat.ehdokasId}:</b> ${Ehdokkaat.etunimi} ${Ehdokkaat.sukunimi} </h2>
 <b>Puolue: </b><br>
