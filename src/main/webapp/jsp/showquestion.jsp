@@ -15,8 +15,8 @@
 <br>
 <form method="post" action="/rest/candidaterest/bestcandidates">
 	<c:forEach var="Kysymykset" items="${requestScope.questionlist}">
-		<b>${Kysymykset.kysymysId}: </b>${question.whatquestion} <br> <br>
-			<input type="radio" id="${Kysymykset.kysymysId}1" name="${question.id}"
+		<b>${Kysymykset.kysymysId}: </b>${Kysymykset.kysymys} <br> <br>
+			<input type="radio" id="${Kysymykset.kysymysId}1" name="${Kysymykset.kysymysId}"
 			value="1"><label for="${Kysymykset.kysymysId}1"> 1. Täysin
 				eri mieltä</label><br> <input type="radio" id="${Kysymykset.kysymysId}2"
 			name="${Kysymykset.kysymysId}" value="2"><label for="${Kysymykset.kysymysId}2"> 2. Jokseenkin eri mieltä</label>
