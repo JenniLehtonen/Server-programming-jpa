@@ -14,7 +14,7 @@
   <div class="dropdown">
   	<button class="dropbtn">Valitse puolue</button>
   	<div class="dropdown-content">
-<!--  
+ 
     <a href="/readparty?party='Vasemmistoliitto'">Vasemmistoliitto</a>
     <a href="/readparty?party='Suomen Sosialidemokraattinen Puolue'">Suomen Sosialidemokraattinen Puolue</a>
     <a href="/readparty?party='Vihrea liitto'">Vihreä liitto</a>
@@ -24,7 +24,7 @@
     <a href="/readparty?party='Suomen Kristillisdemokraatit (KD)'">Suomen Kristillisdemokraatit (KD)</a>
     <a href="/readparty?party='Kansallinen Kokoomus'">Kansallinen Kokoomus</a>
     <a href="/readparty?party='Itsenaisyyspuolue'">Itsenäisyyspuolue</a>
-    -->
+   
   </div>
 </div>
 <br><br>
