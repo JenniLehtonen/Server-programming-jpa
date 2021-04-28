@@ -12,7 +12,7 @@ import javax.persistence.EntityManagerFactory;
 
 public class Dao {
 
-	
+
 	public List<Ehdokkaat> getAllCandidates()
 	{
 		EntityManagerFactory emf=Persistence.createEntityManagerFactory("Server-programming-jpa");
