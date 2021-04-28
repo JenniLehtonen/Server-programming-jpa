@@ -70,5 +70,23 @@ public class CandidateRest {
 		
 	} //getAllCandidates-sulje
 
+	@POST
+	@Path("/addcandidate")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void addCandidate(@FormParam("etunimi") String etunimi, @FormParam("sukunimi") String sukunimi, @FormParam("puolue") String puolue, @FormParam("kotipaikkakunta") String kotipaikkakunta, @FormParam("ika") String ika, @FormParam("miksi_eduskuntaan") String miksi_eduskuntaan, @FormParam("mita_asioita_haluat_edistaa") String mita_asioita_haluat_edistaa, @FormParam("ammatti") String ammatti) {
+		Ehdokkaat e = new Ehdokkaat();
+		e.setEtunimi(etunimi);
+		e.setSukunimi(sukunimi);
+		e.setPuolue(puolue);
+		e.setKotipaikkakunta(kotipaikkakunta);
+		e.setIka(Integer.valueOf(ika));
+		e.setMiksiEduskuntaan(miksi_eduskuntaan);
+		e.setMitaAsioitaHaluatEdistaa(mita_asioita_haluat_edistaa);
+		e.setAmmatti(ammatti);
+		
+		Dao dao = new Dao();
+		
+		dao.addCandidate(e);
+	}
 
 } // class sulje

@@ -13,7 +13,7 @@
 
 <h2>Syötä uusi ehdokas</h2>
 
-<form method="post" action="addCandidate">
+<form method="post" action="/rest/candidaterest/addcandidate">
 <label for="etunimi">Etunimi</label> <br>
 <input type="text" id="etunimi" name="etunimi"> <br><br>
 <label for="sukunimi">Sukunimi</label> <br>

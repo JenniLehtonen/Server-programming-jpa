@@ -37,4 +37,12 @@ public class Dao {
 		
 		return list;
 	}
+	
+	public void addCandidate(Ehdokkaat e) {
+		EntityManagerFactory emf=Persistence.createEntityManagerFactory("Server-programming-jpa");
+		EntityManager em=emf.createEntityManager();
+		em.getTransaction().begin();
+		em.persist(e);
+		em.getTransaction().commit();
+	}
 }
