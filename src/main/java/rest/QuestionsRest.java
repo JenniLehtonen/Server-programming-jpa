@@ -35,7 +35,7 @@ public class QuestionsRest {
 	@POST
 	@Path("/getallquestions")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void getAllCandidates() //throws ServletException, IOException
+	public void getAllQuestions() //throws ServletException, IOException
 	{
 		List<Kysymykset> questionlist = new ArrayList<Kysymykset>();
 		Dao dao = new Dao();
