@@ -45,12 +45,7 @@ public class CandidateRest {
 	@Path("/getallcandidates")
 	@Produces(MediaType.APPLICATION_JSON)
 	public void getAllCandidates() //throws ServletException, IOException
-	{ /*
-		EntityManagerFactory emf=Persistence.createEntityManagerFactory("Server-programming-jpa");
-		EntityManager em=emf.createEntityManager();
-		
-		List<Ehdokkaat> list=em.createQuery("select a from Ehdokkaat a").getResultList();
-		*/
+	{
 		List<Ehdokkaat> candidateList = new ArrayList<Ehdokkaat>();
 		Dao dao = new Dao();
 
@@ -59,6 +54,30 @@ public class CandidateRest {
 		
 		request.setAttribute("candidateList", candidateList);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/showcandidates.jsp");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		//return candidateList;
+		
+	} //getAllCandidates-sulje
+	
+	@GET
+	@Path("/getcandidatesbyparty/{party}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void getCandidatesByParty(@PathParam("number") String party) //throws ServletException, IOException
+	{ 
+		List<Ehdokkaat> candidateList = new ArrayList<Ehdokkaat>();
+		Dao dao = new Dao();
+
+		candidateList = dao.getCandidatesByParty(party);
+		
+		
+		request.setAttribute("candidateList", candidateList);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/showcandidatesbyparty.jsp");
 		try {
 			rd.forward(request, response);
 		} catch (ServletException | IOException e) {

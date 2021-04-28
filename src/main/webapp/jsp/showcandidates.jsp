@@ -14,17 +14,15 @@
   <div class="dropdown">
   	<button class="dropbtn">Valitse puolue</button>
   	<div class="dropdown-content">
-<!--  
-    <a href="/readparty?party='Vasemmistoliitto'">Vasemmistoliitto</a>
-    <a href="/readparty?party='Suomen Sosialidemokraattinen Puolue'">Suomen Sosialidemokraattinen Puolue</a>
-    <a href="/readparty?party='Vihrea liitto'">Vihreä liitto</a>
-    <a href="/readparty?party='Suomen Kommunistinen Puolue'">Suomen Kommunistinen Puolue</a>
-    <a href="/readparty?party='Suomen Keskusta'">Suomen Keskusta</a>
-    <a href="/readparty?party='Suomen ruotsalainen kansanpuolue'">Suomen ruotsalainen kansanpuolue</a>
-    <a href="/readparty?party='Suomen Kristillisdemokraatit (KD)'">Suomen Kristillisdemokraatit (KD)</a>
-    <a href="/readparty?party='Kansallinen Kokoomus'">Kansallinen Kokoomus</a>
-    <a href="/readparty?party='Itsenaisyyspuolue'">Itsenäisyyspuolue</a>
-    -->
+    <a href="/rest/candidaterest/getcandidatesbyparty/Vasemmistoliitto">Vasemmistoliitto</a>
+    <a href="/rest/candidaterest/getcandidatesbyparty/Suomen Sosialidemokraattinen Puolue">Suomen Sosialidemokraattinen Puolue</a>
+    <a href="/rest/candidaterest/getcandidatesbyparty/Vihrea liitto">Vihreä liitto</a>
+    <a href="/rest/candidaterest/getcandidatesbyparty/Suomen Kommunistinen Puolue">Suomen Kommunistinen Puolue</a>
+    <a href="/rest/candidaterest/getcandidatesbyparty/Suomen Keskusta">Suomen Keskusta</a>
+    <a href="/rest/candidaterest/getcandidatesbyparty/Suomen ruotsalainen kansanpuolue">Suomen ruotsalainen kansanpuolue</a>
+    <a href="/rest/candidaterest/getcandidatesbyparty/Suomen Kristillisdemokraatit (KD)">Suomen Kristillisdemokraatit (KD)</a>
+    <a href="/rest/candidaterest/getcandidatesbyparty/Kansallinen Kokoomus">Kansallinen Kokoomus</a>
+    <a href="/rest/candidaterest/getcandidatesbyparty/Itsenaisyyspuolue">Itsenäisyyspuolue</a>
   </div>
 </div>
 <br><br>
