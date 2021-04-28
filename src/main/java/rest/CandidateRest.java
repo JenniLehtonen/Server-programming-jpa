@@ -44,24 +44,29 @@ public class CandidateRest {
 	@GET
 	@Path("/getallcandidates")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Ehdokkaat> getAllCandidates() //throws ServletException, IOException
-	{
+	public void getAllCandidates() //throws ServletException, IOException
+	{ /*
 		EntityManagerFactory emf=Persistence.createEntityManagerFactory("Server-programming-jpa");
 		EntityManager em=emf.createEntityManager();
 		
 		List<Ehdokkaat> list=em.createQuery("select a from Ehdokkaat a").getResultList();
-		
-		//List<Ehdokkaat> candidateList = new ArrayList<Ehdokkaat>();
-		//Dao dao = new Dao();
+		*/
+		List<Ehdokkaat> candidateList = new ArrayList<Ehdokkaat>();
+		Dao dao = new Dao();
 
-		//candidateList = dao.getAllCandidates();
+		candidateList = dao.getAllCandidates();
 		
-		/*
+		
 		request.setAttribute("candidateList", candidateList);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/showcandidates.jsp");
-		rd.forward(request, response); */
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 		
-		return list;
+		//return candidateList;
 		
 	} //getAllCandidates-sulje
 

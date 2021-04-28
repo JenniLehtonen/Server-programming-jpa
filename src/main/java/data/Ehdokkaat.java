@@ -2,7 +2,6 @@ package data;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
@@ -36,10 +35,6 @@ public class Ehdokkaat implements Serializable {
 	private String puolue;
 
 	private String sukunimi;
-
-	//bi-directional many-to-one association to Vastaukset
-	@OneToMany(mappedBy="ehdokkaat")
-	private List<Vastaukset> vastauksets;
 
 	public Ehdokkaat() {
 	}
@@ -114,28 +109,6 @@ public class Ehdokkaat implements Serializable {
 
 	public void setSukunimi(String sukunimi) {
 		this.sukunimi = sukunimi;
-	}
-
-	public List<Vastaukset> getVastauksets() {
-		return this.vastauksets;
-	}
-
-	public void setVastauksets(List<Vastaukset> vastauksets) {
-		this.vastauksets = vastauksets;
-	}
-
-	public Vastaukset addVastaukset(Vastaukset vastaukset) {
-		getVastauksets().add(vastaukset);
-		vastaukset.setEhdokkaat(this);
-
-		return vastaukset;
-	}
-
-	public Vastaukset removeVastaukset(Vastaukset vastaukset) {
-		getVastauksets().remove(vastaukset);
-		vastaukset.setEhdokkaat(null);
-
-		return vastaukset;
 	}
 
 }
