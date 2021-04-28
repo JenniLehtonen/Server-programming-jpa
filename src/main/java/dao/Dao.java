@@ -24,4 +24,17 @@ public class Dao {
 		
 		return list;
 	}
+	
+	public List<Kysymykset> getAllQuestions()
+	{
+		EntityManagerFactory emf=Persistence.createEntityManagerFactory("Server-programming-jpa");
+
+		EntityManager em=emf.createEntityManager();
+		
+
+		
+		List<Kysymykset> list = em.createQuery("select a from Kysymykset a").getResultList();
+		
+		return list;
+	}
 }
