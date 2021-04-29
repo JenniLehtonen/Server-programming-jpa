@@ -87,6 +87,14 @@ public class CandidateRest {
 		Dao dao = new Dao();
 		
 		dao.addCandidate(e);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/success.jsp");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException exception) {
+			// TODO Auto-generated catch block
+			exception.printStackTrace();
+		} 
 	}
 
 } // class sulje
