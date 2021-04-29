@@ -136,15 +136,17 @@ public class CandidateRest {
 	} //getCandidatesByParty-sulje
 	
 	@PUT 
-	@Path("/editcandidate/{id}")
+	@Path("/editcandidate")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void editCandidate(@PathParam("id") int id)
+	public void editCandidate(@FormParam("id") int id, @FormParam("sukunimi") String sukunimi, @FormParam("etunimi") String etunimi, @FormParam("puolue") String puolue, @FormParam("kotipaikkakunta") String kotipaikkakunta,@FormParam("ika") int ika, @FormParam("ammatti") String ammatti, @FormParam("miksiEduskuntaan") String miksiEduskuntaan, @FormParam("mitaAsioitaHaluatEdistaa") String mitaAsioitaHaluatEdistaa)
 	{
+		
 		List<Ehdokkaat> candidateList = new ArrayList<Ehdokkaat>();
 		Dao dao = new Dao();
+		Ehdokkaat ehdokas = new Ehdokkaat(id, sukunimi, etunimi, puolue, kotipaikkakunta, ika, miksiEduskuntaan, mitaAsioitaHaluatEdistaa, ammatti);
 
-		candidateList = dao.editCandidate(id);
+		candidateList = dao.editCandidate(ehdokas);
 
 		request.setAttribute("candidateList", candidateList);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/showshort.jsp");

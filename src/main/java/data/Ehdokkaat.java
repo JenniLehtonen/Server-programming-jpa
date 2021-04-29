@@ -12,6 +12,18 @@ import javax.persistence.*;
 @NamedQuery(name="Ehdokkaat.findAll", query="SELECT e FROM Ehdokkaat e")
 public class Ehdokkaat implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	public Ehdokkaat(int id,String sukunimi, String etunimi, String puolue, String koti, int ika, String miksi, String mita, String ammatti)
+	{
+		this.sukunimi = sukunimi;
+		this.etunimi = etunimi;
+		this.puolue = puolue;
+		this.kotipaikkakunta = koti;
+		setIka(ika);
+		this.miksiEduskuntaan = miksi;
+		this.mitaAsioitaHaluatEdistaa = mita;
+		this.ammatti = ammatti;
+	}
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

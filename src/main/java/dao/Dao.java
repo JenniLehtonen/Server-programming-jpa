@@ -87,20 +87,23 @@ public class Dao {
 		em.getTransaction().begin();
 		Ehdokkaat ehdokas = em.find(Ehdokkaat.class, id);
 		em.getTransaction().commit();
+		
+		em.close();
 		return ehdokas;
 		
 	}//getCandidateById-sulje
 	
-	public List<Ehdokkaat> editCandidate(int id)
+	public List<Ehdokkaat> editCandidate(Ehdokkaat ehdokas)
 	{
 		EntityManager em=emf.createEntityManager();
+		
 		em.getTransaction().begin();
-		Ehdokkaat f=em.find(Ehdokkaat.class, ehdokas.getEhdokasId());
-		if (f!=null) {
-			em.merge(ehdokkaat);//The actual update line
+		Ehdokkaat e = em.find(Ehdokkaat.class, ehdokas.getEhdokasId());
+		if (e!=null) {
+			em.merge(ehdokas); //This line does the update
 		}
 		em.getTransaction().commit();
-		//Calling the method readFish() of this service
+
 		List<Ehdokkaat> list=getAllCandidates();		
 		return list;
 		
