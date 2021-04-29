@@ -86,6 +86,26 @@ public class CandidateRest {
 		}
 	}
 
+	@GET
+	@Path("/showshort")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void showShort() {
+		List<Ehdokkaat> candidateList = new ArrayList<Ehdokkaat>();
+		Dao dao = new Dao();
+
+		candidateList = dao.getAllCandidates();
+		
+		
+		request.setAttribute("candidateList", candidateList);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/showshort.jsp");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	}
+	
 	@POST
 	@Path("/addcandidate")
 	@Produces(MediaType.APPLICATION_JSON)
