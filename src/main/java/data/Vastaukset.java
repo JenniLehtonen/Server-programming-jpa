@@ -22,12 +22,12 @@ public class Vastaukset implements Serializable {
 
 	//bi-directional many-to-one association to Ehdokkaat
 	@ManyToOne
-	@JoinColumn(name="EHDOKAS_ID")
+	@JoinColumn(name="EHDOKAS_ID", insertable=false, updatable=false)
 	private Ehdokkaat ehdokkaat;
 
 	//bi-directional many-to-one association to Kysymykset
 	@ManyToOne
-	@JoinColumn(name="KYSYMYS_ID")
+	@JoinColumn(name="KYSYMYS_ID", insertable=false, updatable=false)
 	private Kysymykset kysymykset;
 
 	public Vastaukset() {

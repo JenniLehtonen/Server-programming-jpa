@@ -1,6 +1,7 @@
 package rest;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -26,7 +27,8 @@ public class Login {
 	@Context HttpServletResponse response;
 	String username;
 	String password;
-	
+	String adminUsername;
+	String adminPassword;
 	@GET
 	@Path("/loginpage")
 	public void goToLoginPage() throws ServletException, IOException {
@@ -43,6 +45,7 @@ public class Login {
 		/**
 	     * Username and password that the user has provided. The information comes from login.jsp
 	     */
+		//List<Admin> list = new ArrayList<>();
 		this.username=username;
 		this.password=password;
 		System.out.println(username + password);
@@ -52,11 +55,22 @@ public class Login {
 		em.getTransaction().begin();
 		List<Admin> list=em.createQuery("SELECT a FROM Admin a").getResultList();
 		em.getTransaction().commit();
-		System.out.println(list);
+		
+		for (Admin admin : list) {
+			   adminUsername = admin.getUsername();
+			   adminPassword = admin.getPassword();
+			   System.out.println(adminUsername + ", " + adminPassword);
+			}
+		
+
+		//String[] array = list.toArray(new String[list.size()]); 
+		//System.out.println("Printing Array: "+Arrays.toString(array));  
+		//System.out.println(array);
+
+
 		
 		//request.setAttribute("booklist", list); //Lähetetään arraylist bookform.jsp-tiedostolle näytettäväksi
 	    RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/login.jsp");
 		dispatcher.forward(request, response); 
 	}
-
 }
