@@ -58,24 +58,51 @@ public class Dao {
 	public List<Ehdokkaat> getCandidatesByParty(String party)
 	{
 
-		Ehdokkaat ehdokas = null;
 		List<Ehdokkaat> list = new ArrayList<Ehdokkaat>();
 		EntityManager em=emf.createEntityManager();
-//		Query query = em.createQuery("SELECT a FROM Ehdokkaat a WHERE a.puolue=:puolue");
-//	    query.setParameter("puolue", party);
-		//Query query = null;
+
 	    try {
-//	    	ehdokas = (Ehdokkaat) query.getResultList();	
-//	    	list.add(ehdokas);
+
 	    	
 	    	list = em.createQuery("SELECT a FROM Ehdokkaat a WHERE a.puolue=?1").setParameter(1, party).getResultList();
-	    	//query.setParameter("puolue", party);
+
 	    } catch (Exception e) {
 	        // Handle exception
 	    }
 
-		//List<Ehdokkaat> list = em.createQuery("select a from Ehdokkaat a").getResultList();
 	    em.close();
 		return list;
+	} //getCandidateByParty-sulje
+	
+	
+	/**
+	 * @author Sanna Nieminen-Vuorio
+	 * Method gets one candidate based on id
+	 * @param id
+	 * @return Ehdokkaat-object
+	 */
+	public Ehdokkaat getCandidateById(int id)
+	{
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Ehdokkaat ehdokas = em.find(Ehdokkaat.class, id);
+		em.getTransaction().commit();
+		return ehdokas;
+		
+	}//getCandidateById-sulje
+	
+	public List<Ehdokkaat> editCandidate(int id)
+	{
+		EntityManager em=emf.createEntityManager();
+		em.getTransaction().begin();
+		Ehdokkaat f=em.find(Ehdokkaat.class, ehdokas.getEhdokasId());
+		if (f!=null) {
+			em.merge(ehdokkaat);//The actual update line
+		}
+		em.getTransaction().commit();
+		//Calling the method readFish() of this service
+		List<Ehdokkaat> list=getAllCandidates();		
+		return list;
+		
 	}
 }

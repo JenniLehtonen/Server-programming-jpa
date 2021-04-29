@@ -15,6 +15,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -64,6 +65,26 @@ public class CandidateRest {
 		//return candidateList;
 		
 	} //getAllCandidates-sulje
+	
+	@GET
+	@Path("/getcandidatebyid/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void getCandidateById(@PathParam("id") int id) //throws ServletException, IOException
+	{ 
+		Ehdokkaat candidate = new Ehdokkaat();
+		Dao dao = new Dao();
+
+		candidate = dao.getCandidateById(id);
+
+		request.setAttribute("candidate", candidate);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/updateCandidate.jsp");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	@POST
 	@Path("/addcandidate")
@@ -113,5 +134,26 @@ public class CandidateRest {
 		
 
 	} //getCandidatesByParty-sulje
+	
+	@PUT 
+	@Path("/editcandidate/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void editCandidate(@PathParam("id") int id)
+	{
+		List<Ehdokkaat> candidateList = new ArrayList<Ehdokkaat>();
+		Dao dao = new Dao();
+
+		candidateList = dao.editCandidate(id);
+
+		request.setAttribute("candidateList", candidateList);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/showshort.jsp");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	}
 
 } // class sulje
