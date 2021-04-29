@@ -3,7 +3,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <c:import url="../header.html" charEncoding="UTF-8"/>
-<link rel="stylesheet" href="center.css">
+<link rel="stylesheet" href="/center.css">
 
 
 				<h2>Kirjaudu sisään</h2>
