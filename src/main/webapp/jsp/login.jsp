@@ -16,28 +16,28 @@
 				</form>
 				<%
 					//Get the variables that were sent from Login.java
-					/*String userProvidedUsername = (String)request.getAttribute("userProvidedUsername");
+					String userProvidedUsername = (String)request.getAttribute("userProvidedUsername");
 					String username = (String)request.getAttribute("username");
 					String password = (String)request.getAttribute("password");
-					String MD5Password = (String)request.getAttribute("MD5Password");*/
+					String MD5Password = (String)request.getAttribute("MD5Password");
 				%>
 				<%
-				//Check that the user has providedt the correct username and password. If the username and the password are correct,
+				//Check that the user has provided the correct username and password. If the username and the password are correct,
 				//admin page will be shown, otherwise there will be an error message in the user interface.
-					/*if(data.LoginData.CheckPasswords(MD5Password, password)==true && userProvidedUsername.equals(username)){
+					if(data.LoginData.CheckPasswords(MD5Password, password)==true && userProvidedUsername.equals(username)){
 						response.sendRedirect("/jsp/adminPage.jsp");
 					}
 					else if(MD5Password==null || password==null || userProvidedUsername==null)
-					{*/
+					{
 				%>
 					<div id="loginFailed" hidden>Käyttäjätunnus tai salasana väärin!</div> <!-- Hide this if MD5Password or password is null -->
 				<%
-					/*} else if (data.LoginData.CheckPasswords(MD5Password, password)==false || userProvidedUsername!=username)
-					{*/
+					} else if (data.LoginData.CheckPasswords(MD5Password, password)==false || userProvidedUsername!=username)
+					{
 				%>
 						<div id="loginFailed">Käyttäjätunnus tai salasana väärin!</div> <!-- if the password is incorrect, show this -->
 				<%
-					//}
+					}
 				%>
 				
 <%@ include file="../footer.html" %>

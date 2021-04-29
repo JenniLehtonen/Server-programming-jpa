@@ -25,10 +25,11 @@ import data.Admin;
 public class Login {
 	@Context HttpServletRequest request;
 	@Context HttpServletResponse response;
-	String username;
-	String password;
+
 	String adminUsername;
 	String adminPassword;
+	String MD5Password;
+	
 	@GET
 	@Path("/loginpage")
 	public void goToLoginPage() throws ServletException, IOException {
@@ -43,33 +44,40 @@ public class Login {
 	public void login(@FormParam("username") String username, @FormParam("password") String password) throws ServletException, IOException{
 		
 		/**
-	     * Username and password that the user has provided. The information comes from login.jsp
-	     */
-		//List<Admin> list = new ArrayList<>();
-		this.username=username;
-		this.password=password;
-		System.out.println(username + password);
-		
+		 * Get admin's username and password from the database
+		 */
 		EntityManagerFactory emf=Persistence.createEntityManagerFactory("Server-programming-jpa");
 		EntityManager em=emf.createEntityManager();
 		em.getTransaction().begin();
 		List<Admin> list=em.createQuery("SELECT a FROM Admin a").getResultList();
 		em.getTransaction().commit();
 		
+		/**
+		 * Save admin's username and password to variables
+		 */
 		for (Admin admin : list) {
 			   adminUsername = admin.getUsername();
 			   adminPassword = admin.getPassword();
 			   System.out.println(adminUsername + ", " + adminPassword);
 			}
 		
-
-		//String[] array = list.toArray(new String[list.size()]); 
-		//System.out.println("Printing Array: "+Arrays.toString(array));  
-		//System.out.println(array);
-
-
+		/**
+		 * Send admin's real password and the password provided by the user to the method that creates crypts them
+		 */
+		try {
+			MD5Password = data.LoginData.crypt(adminPassword);
+			password = data.LoginData.crypt(password);
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		}
 		
-		//request.setAttribute("booklist", list); //Lähetetään arraylist bookform.jsp-tiedostolle näytettäväksi
+		/**
+		 * Send variables to login.jsp that checks if the username and password that the user has provided are correct or not
+		 */
+		request.setAttribute("userProvidedUsername", username);
+		request.setAttribute("password", password); 
+		request.setAttribute("username", adminUsername);
+		request.setAttribute("MD5Password", MD5Password);
 	    RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/login.jsp");
 		dispatcher.forward(request, response); 
 	}

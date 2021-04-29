@@ -18,7 +18,7 @@ public class LoginData {
 	 */
 	public static Boolean CheckPasswords (String password1, String password2) {
 		boolean passwordCorrect = false;
-		
+		try {
 		if(password1.equals(password2)) {
 			System.out.println("Password correct");
 			passwordCorrect = true;
@@ -26,7 +26,9 @@ public class LoginData {
 			System.out.println("Password incorrect");
 			passwordCorrect = false;
 		}
-		
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		}
 		return passwordCorrect;
 		
 	}
