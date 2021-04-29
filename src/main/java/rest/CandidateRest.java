@@ -134,6 +134,25 @@ public class CandidateRest {
 	}
 	
 	@GET
+	@Path("/deletecandidate/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void deleteCandidate(@PathParam("id") int id) {
+		Dao dao = new Dao();
+		
+		int idnum = Integer.valueOf(id);
+		
+		dao.deleteCandidate(idnum);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/success.jsp");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException exception) {
+			// TODO Auto-generated catch block
+			exception.printStackTrace();
+		} 
+	}
+	
+	@GET
 	@Path("/getcandidatesbyparty/{party}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public void getCandidatesByParty(@PathParam("party") String party) //throws ServletException, IOException
