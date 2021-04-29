@@ -32,7 +32,7 @@ public class QuestionsRest {
 	@Context HttpServletRequest request;
 	@Context HttpServletResponse response;
 	
-	@POST
+	@GET
 	@Path("/getallquestions")
 	@Produces(MediaType.APPLICATION_JSON)
 	public void getAllQuestions() //throws ServletException, IOException
