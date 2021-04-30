@@ -49,6 +49,24 @@ public class Dao {
 		em.getTransaction().commit();
 	}
 	
+	public void deleteCandidate(int id) {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		
+		Object ehdokas = em.createQuery("SELECT a FROM Ehdokkaat a WHERE a.ehdokasId=?1").setParameter(1, id).getSingleResult();
+		
+		try {
+			em.remove(ehdokas);
+		} catch (Exception e) {
+			
+		}
+		
+		em.getTransaction().commit();
+		
+		em.close();
+		
+	}
+	
 	/**
 	 * @author Sanna Nieminen-Vuorio
 	 * 
