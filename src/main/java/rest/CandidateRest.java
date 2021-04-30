@@ -135,11 +135,11 @@ public class CandidateRest {
 
 	} //getCandidatesByParty-sulje
 	
-	@PUT 
+	@PUT
 	@Path("/editcandidate")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void editCandidate(@FormParam("id") int id, @FormParam("sukunimi") String sukunimi, @FormParam("etunimi") String etunimi, @FormParam("puolue") String puolue, @FormParam("kotipaikkakunta") String kotipaikkakunta,@FormParam("ika") int ika, @FormParam("ammatti") String ammatti, @FormParam("miksiEduskuntaan") String miksiEduskuntaan, @FormParam("mitaAsioitaHaluatEdistaa") String mitaAsioitaHaluatEdistaa)
+	public void editCandidate(@FormParam("ehdokasId") int id, @FormParam("sukunimi") String sukunimi, @FormParam("etunimi") String etunimi, @FormParam("puolue") String puolue, @FormParam("kotipaikkakunta") String kotipaikkakunta, @FormParam("ika") int ika, @FormParam("ammatti") String ammatti, @FormParam("miksiEduskuntaan") String miksiEduskuntaan, @FormParam("mitaAsioitaHaluatEdistaa") String mitaAsioitaHaluatEdistaa)
 	{
 		
 		List<Ehdokkaat> candidateList = new ArrayList<Ehdokkaat>();

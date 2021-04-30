@@ -19,7 +19,5 @@
     <property name="cloudsqlinstance" value="mysqlfishpool:europe-west6:mysqlfishpooldb"/>
     <property name="usessl" value="false"/>
   </system-properties>
-  
-  
 
 </appengine-web-app>

@@ -104,7 +104,10 @@ public class Dao {
 		}
 		em.getTransaction().commit();
 
-		List<Ehdokkaat> list=getAllCandidates();		
+		List<Ehdokkaat> list=getAllCandidates();
+		
+		em.close();
+		
 		return list;
 		
 	}
