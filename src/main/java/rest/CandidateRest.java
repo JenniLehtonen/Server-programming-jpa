@@ -174,10 +174,10 @@ public class CandidateRest {
 
 	} //getCandidatesByParty-sulje
 	
-	@POST
+	@POST //have to be post, because the info comes from form
 	@Path("/editcandidate")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes("application/x-www-form-urlencoded")
+	@Consumes("application/x-www-form-urlencoded") //!!!!
 	public void editCandidate(@FormParam("ehdokasId") int id, @FormParam("sukunimi") String sukunimi, @FormParam("etunimi") String etunimi, @FormParam("puolue") String puolue, @FormParam("kotipaikkakunta") String kotipaikkakunta, @FormParam("ika") int ika, @FormParam("ammatti") String ammatti, @FormParam("miksiEduskuntaan") String miksiEduskuntaan, @FormParam("mitaAsioitaHaluatEdistaa") String mitaAsioitaHaluatEdistaa)
 	{
 		
