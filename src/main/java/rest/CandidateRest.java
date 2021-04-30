@@ -174,10 +174,10 @@ public class CandidateRest {
 
 	} //getCandidatesByParty-sulje
 	
-	@PUT
+	@POST
 	@Path("/editcandidate")
-	@Produces({"application/json", "text/plain"})
-	@Consumes("application/json")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes("application/x-www-form-urlencoded")
 	public void editCandidate(@FormParam("ehdokasId") int id, @FormParam("sukunimi") String sukunimi, @FormParam("etunimi") String etunimi, @FormParam("puolue") String puolue, @FormParam("kotipaikkakunta") String kotipaikkakunta, @FormParam("ika") int ika, @FormParam("ammatti") String ammatti, @FormParam("miksiEduskuntaan") String miksiEduskuntaan, @FormParam("mitaAsioitaHaluatEdistaa") String mitaAsioitaHaluatEdistaa)
 	{
 		

@@ -12,7 +12,7 @@
 <br>
 <form action='/rest/candidaterest/editcandidate' method='post'>
 <b> Ehdokasnumero </b> <br>
-<input type="text" name='ehdokasId' value='${requestScope.candidate.ehdokasId}' readonly class='input'> <br>
+<input type="number" name='ehdokasId' value='${requestScope.candidate.ehdokasId}' readonly class='input'> <br>
 <b> Sukunimi </b> <br>
 <input type="text" name='sukunimi' value='${requestScope.candidate.sukunimi}' class='input'> <br>
 <b> Etunimi </b> <br>
@@ -22,7 +22,7 @@
 <b>Kotipaikkakunta </b> <br>
 <input type="text" name='kotipaikkakunta' value='${requestScope.candidate.kotipaikkakunta}' class='input'> <br>
 <b>Ikä</b> <br>
-<input type="text" name='ika' value='${requestScope.candidate.ika}' class='input'> <br>
+<input type="number" name='ika' value='${requestScope.candidate.ika}' class='input'> <br>
 <b> Ammatti </b> <br>
 <input type="text" name='ammatti' value='${requestScope.candidate.ammatti}' class='input'> <br> 
 <b>Miksi sinut tulisi valita eduskuntaan? </b><br>

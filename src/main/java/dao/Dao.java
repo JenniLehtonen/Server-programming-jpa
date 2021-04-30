@@ -111,7 +111,7 @@ public class Dao {
 		
 	}//getCandidateById-sulje
 	
-	
+
 	/**
 	 * @author Sanna Nieminen-Vuorio
 	 * Edit candidate by candidate's id and return list of all candidates
