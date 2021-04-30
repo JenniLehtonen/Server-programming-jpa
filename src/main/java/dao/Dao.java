@@ -111,6 +111,13 @@ public class Dao {
 		
 	}//getCandidateById-sulje
 	
+	
+	/**
+	 * @author Sanna Nieminen-Vuorio
+	 * Edit candidate by candidate's id and return list of all candidates
+	 * @param ehdokas
+	 * @return list of candidates
+	 */
 	public List<Ehdokkaat> editCandidate(Ehdokkaat ehdokas)
 	{
 		EntityManager em=emf.createEntityManager();

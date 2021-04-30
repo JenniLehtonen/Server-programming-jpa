@@ -13,8 +13,9 @@ import javax.persistence.*;
 public class Ehdokkaat implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	public Ehdokkaat(int id,String sukunimi, String etunimi, String puolue, String koti, int ika, String miksi, String mita, String ammatti)
+	public Ehdokkaat(int id, String sukunimi, String etunimi, String puolue, String koti, int ika, String miksi, String mita, String ammatti)
 	{
+		setEhdokasId(id);
 		this.sukunimi = sukunimi;
 		this.etunimi = etunimi;
 		this.puolue = puolue;
