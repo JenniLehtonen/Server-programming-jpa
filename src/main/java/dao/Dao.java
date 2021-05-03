@@ -136,4 +136,35 @@ public class Dao {
 		return list;
 		
 	}
+	
+	/**
+	 * @author Sanna Nieminen-Vuorio
+	 * @param vastaus
+	 * @return done
+	 */
+	public String addCandidateAnswers(VastauksetPK vastaus)
+	{
+		String done = "Jotain meni vikaan";
+		EntityManager em=emf.createEntityManager();
+		
+		try
+		{
+			em.getTransaction().begin();
+			Vastaukset v = em.find(Vastaukset.class, vastaus.getEhdokasId());
+			if (v!=null) {
+				em.merge(vastaus); //This line does the update
+			}
+			em.getTransaction().commit();
+			em.close();
+			done = "Vastaukset päivitetty onnistuneesti";
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+			done = "Tietojen päivittäminen ei onnistunut";
+		}
+		
+		
+		return done;
+	}
 }
