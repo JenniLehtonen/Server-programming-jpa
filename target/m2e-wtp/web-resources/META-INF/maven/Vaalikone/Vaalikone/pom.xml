@@ -195,9 +195,7 @@ These are moved to servlet api and not any more in Java SE API
 
 <!-- .....Added by Koodarivelhot ends -->
           
-          
-          
-          
+
     </dependencies>
       
     <build>

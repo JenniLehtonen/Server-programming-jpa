@@ -174,11 +174,11 @@ public class CandidateRest {
 
 	} //getCandidatesByParty-sulje
 	
-	@PUT 
+	@POST //have to be post, because the info comes from form
 	@Path("/editcandidate")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public void editCandidate(@FormParam("id") int id, @FormParam("sukunimi") String sukunimi, @FormParam("etunimi") String etunimi, @FormParam("puolue") String puolue, @FormParam("kotipaikkakunta") String kotipaikkakunta,@FormParam("ika") int ika, @FormParam("ammatti") String ammatti, @FormParam("miksiEduskuntaan") String miksiEduskuntaan, @FormParam("mitaAsioitaHaluatEdistaa") String mitaAsioitaHaluatEdistaa)
+	@Consumes("application/x-www-form-urlencoded") //!!!!
+	public void editCandidate(@FormParam("ehdokasId") int id, @FormParam("sukunimi") String sukunimi, @FormParam("etunimi") String etunimi, @FormParam("puolue") String puolue, @FormParam("kotipaikkakunta") String kotipaikkakunta, @FormParam("ika") int ika, @FormParam("ammatti") String ammatti, @FormParam("miksiEduskuntaan") String miksiEduskuntaan, @FormParam("mitaAsioitaHaluatEdistaa") String mitaAsioitaHaluatEdistaa)
 	{
 		
 		List<Ehdokkaat> candidateList = new ArrayList<Ehdokkaat>();
@@ -195,6 +195,29 @@ public class CandidateRest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-	}
+	} //EditCandidate-sulje
+	
+	@POST //have to be post, because the info comes from form
+	@Path("/addcandidateanswers")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes("application/x-www-form-urlencoded") //!!!!
+	public void addCandidateAnswers()
+	{
+		
+		String done;
+		Dao dao = new Dao();
+		VastauksetPK vastaus = new VastauksetPK();
+
+		done = dao.addCandidateAnswers(vastaus);
+
+		request.setAttribute("success", done);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/success.jps");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	} //addCandidateanswers-sulje
 
 } // class sulje
