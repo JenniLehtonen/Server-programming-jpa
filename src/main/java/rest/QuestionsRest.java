@@ -74,7 +74,6 @@ public class QuestionsRest {
 	@POST
 	@Path("/addNewQuestions")
 	public void addNewQuestions(@FormParam("kysymys") String kysymys) throws ServletException, IOException, SQLException{
-		
 		try {
 		/**
 		 * Send the new question to dao class's addQuestion method that will add it to the database
@@ -98,9 +97,7 @@ public class QuestionsRest {
 	 */
 	@GET
 	@Path("/getallquestionstodelete")
-	public void getAllQuestionsToDelete() throws ServletException, IOException //throws ServletException, IOException
-	{
-		
+	public void getAllQuestionsToDelete() throws ServletException, IOException {
 		try {
 		List<Kysymykset> questionlist = new ArrayList<Kysymykset>();
 		Dao dao = new Dao();
