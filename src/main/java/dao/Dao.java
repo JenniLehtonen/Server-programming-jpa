@@ -1,5 +1,7 @@
 package dao;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +16,7 @@ import javax.persistence.EntityManagerFactory;
 public class Dao {
 
 	EntityManagerFactory emf=Persistence.createEntityManagerFactory("Server-programming-jpa");
+	
 	public List<Ehdokkaat> getAllCandidates()
 	{
 
@@ -39,6 +42,44 @@ public class Dao {
 		List<Kysymykset> list = em.createQuery("select a from Kysymykset a").getResultList();
 
 		return list;
+	}
+	/**
+	 * @author Jenni Lehtonen
+	 * Method for adding new questions to the database
+	 * @param New question to be added
+	 * @throws SQLException
+	 */
+	public void addQuestion(Kysymykset kysymys) throws SQLException {
+		try {
+			EntityManager em=emf.createEntityManager();
+			em.getTransaction().begin();
+			em.persist(kysymys);
+			em.getTransaction().commit();
+			
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * @author Jenni Lehtonen
+	 * Method for removing questions from the database
+	 * @param Question id for the question that needs to be removed from the database
+	 */
+	public void removeQuestion(int id) {
+		
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+
+		Object kysymys = em.createQuery("SELECT a FROM Kysymykset a WHERE a.kysymysId=?1").setParameter(1, id).getSingleResult();
+
+		try {
+			em.remove(kysymys);
+			em.getTransaction().commit();
+			em.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void addCandidate(Ehdokkaat e) {

@@ -33,7 +33,6 @@ public class Login {
 	@GET
 	@Path("/loginpage")
 	public void goToLoginPage() throws ServletException, IOException {
-		//request.setAttribute("testi", "testi");
 		 RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/login.jsp");
 		 dispatcher.forward(request, response); 
 	}
