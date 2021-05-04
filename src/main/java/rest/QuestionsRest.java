@@ -74,9 +74,38 @@ public class QuestionsRest {
 		k.setKysymys(kysymys);
 		dao.addQuestion(k);
 		
-		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/editOkQuestions.jsp");
 		dispatcher.forward(request, response);
 	} 
+	
+	@GET
+	@Path("/getallquestionstodelete")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void getAllQuestionsToDelete() throws ServletException, IOException //throws ServletException, IOException
+	{
+		/**
+		 * Get all questions and send them to jsp
+		 */
+		List<Kysymykset> questionlist = new ArrayList<Kysymykset>();
+		Dao dao = new Dao();
+		questionlist = dao.getAllQuestions();
+		
+		request.setAttribute("questionlist", questionlist);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/removeQuestions.jsp"); 
+		dispatcher.forward(request, response);
+	} 
+	
+	@GET
+	@Path("/deleteQuestions/{id}")
+	public void deleteQuestions(@PathParam("id") int id) throws ServletException, IOException {
+		Dao dao = new Dao();
+		
+		/**
+		 * Send question id to dao class's removeQuestion method that will delete it from the database
+		 */
+		ArrayList<Kysymykset> list=dao.removeQuestion(id);
+		RequestDispatcher rd=request.getRequestDispatcher("/jsp/editOkQuestions.jsp");
+		rd.forward(request, response);
+	}
 
 }

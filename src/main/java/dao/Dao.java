@@ -58,6 +58,24 @@ public class Dao {
 			return null;
 		}
 	}
+	
+	public ArrayList<Kysymykset> removeQuestion(int id) {
+		
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+
+		Object kysymys = em.createQuery("SELECT a FROM Kysymykset a WHERE a.kysymysId=?1").setParameter(1, id).getSingleResult();
+
+		try {
+			em.remove(kysymys);
+			em.getTransaction().commit();
+			em.close();
+			return (ArrayList<Kysymykset>) getAllQuestions();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 	public void addCandidate(Ehdokkaat e) {
 
