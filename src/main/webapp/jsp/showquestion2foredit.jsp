@@ -14,8 +14,8 @@
 <h2>Muokkaa kysymyksiä</h2>
 
 <ol>
-<c:forEach var="question" items="${requestScope.questionlist}" >
-<li>${question.whatquestion} <a href='/readquestiontoupdate?id=${question.id}'>Muokkaa</a>
+<c:forEach var="question" items="${requestScope.questionlist2}" >
+<li>${question.kysymys} <a href="/rest/questionrest/getquestionbyid/=${question.kysymysId}">Muokkaa</a>
 
 </c:forEach>
 </ol>

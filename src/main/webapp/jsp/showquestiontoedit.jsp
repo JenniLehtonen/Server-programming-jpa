@@ -5,11 +5,11 @@
 <c:import url="../adminHeader.html" charEncoding="UTF-8"/>
 
 <h2>Muokkaa kysymyksiä</h2>
-<form action='/saveupdatedquestion' method='post'>
+<form action='/rest/questionrest/editquestion2' method='post'>
 <label>Kysymysid:</label><br>
-<input type='text' name='id' value='${requestScope.question.id}' readonly><br> 
+<input type='text' name='id' value='${requestScope.Kysymykset.kysymysId}' readonly><br> 
 <label>Kysymys:</label><br>
-<textarea rows="5" cols="80" name='whatquestion'style="width:24rem; margin-top: 10px;">${requestScope.question.whatquestion}</textarea><br><br>
+<textarea rows="5" cols="80" name='whatquestion'style="width:24rem; margin-top: 10px;">${requestScope.Kysymykset.kysymys}</textarea><br><br>
 <input type='submit' name='ok' value='Muokkaa' class="button"> 
 </form>
 </body>

@@ -23,6 +23,14 @@ public class Kysymykset implements Serializable {
 	public Kysymykset() {
 	}
 
+	
+	public Kysymykset(int kysymysId, String kysymys) {
+		super();
+		this.kysymysId = kysymysId;
+		this.kysymys = kysymys;
+	}
+
+
 	public int getKysymysId() {
 		return this.kysymysId;
 	}
