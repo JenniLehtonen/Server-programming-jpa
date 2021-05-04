@@ -1,5 +1,7 @@
 package dao;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +16,7 @@ import javax.persistence.EntityManagerFactory;
 public class Dao {
 
 	EntityManagerFactory emf=Persistence.createEntityManagerFactory("Server-programming-jpa");
+	
 	public List<Ehdokkaat> getAllCandidates()
 	{
 
@@ -39,6 +42,21 @@ public class Dao {
 		List<Kysymykset> list = em.createQuery("select a from Kysymykset a").getResultList();
 
 		return list;
+	}
+	
+	public List<Kysymykset> addQuestion(Kysymykset kysymys) throws SQLException {
+		try {
+			EntityManager em=emf.createEntityManager();
+			em.getTransaction().begin();
+			em.persist(kysymys);
+			em.getTransaction().commit();
+			List<Kysymykset> list=getAllQuestions();		
+			return list;
+			
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public void addCandidate(Ehdokkaat e) {

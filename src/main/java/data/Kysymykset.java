@@ -27,6 +27,10 @@ public class Kysymykset implements Serializable {
 
 	public Kysymykset() {
 	}
+	
+	public Kysymykset(String kysymys) {
+		// TODO Auto-generated constructor stub
+	}
 
 	public int getKysymysId() {
 		return this.kysymysId;

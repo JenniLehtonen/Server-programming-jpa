@@ -1,6 +1,7 @@
 package rest;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +55,28 @@ public class QuestionsRest {
 		
 		
 		
+	} 
+	
+	@GET
+	@Path("/addQuestionPage")
+	public void addQuestionPage() throws ServletException, IOException {
+		 RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/addNewQuestions.jsp");
+		 dispatcher.forward(request, response); 
+	}
+	
+	@POST
+	@Path("/addNewQuestions")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void addNewQuestions(@FormParam("kysymys") String kysymys) throws ServletException, IOException, SQLException{
+		
+		Dao dao = new Dao();
+		Kysymykset k = new Kysymykset();
+		k.setKysymys(kysymys);
+		dao.addQuestion(k);
+		
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/editOkQuestions.jsp");
+		dispatcher.forward(request, response);
 	} 
 
 }
