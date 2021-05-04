@@ -2,16 +2,30 @@ package data;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
  * The persistent class for the ehdokkaat database table.
- * 
+ *
  */
 @Entity
 @NamedQuery(name="Ehdokkaat.findAll", query="SELECT e FROM Ehdokkaat e")
 public class Ehdokkaat implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	public Ehdokkaat(int id, String sukunimi, String etunimi, String puolue, String koti, int ika, String miksi, String mita, String ammatti)
+	{
+		setEhdokasId(id);
+		this.sukunimi = sukunimi;
+		this.etunimi = etunimi;
+		this.puolue = puolue;
+		this.kotipaikkakunta = koti;
+		setIka(ika);
+		this.miksiEduskuntaan = miksi;
+		this.mitaAsioitaHaluatEdistaa = mita;
+		this.ammatti = ammatti;
+	}
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -26,6 +40,8 @@ public class Ehdokkaat implements Serializable {
 
 	private String kotipaikkakunta;
 
+	private String kuva;
+
 	@Column(name="MIKSI_EDUSKUNTAAN")
 	private String miksiEduskuntaan;
 
@@ -35,6 +51,10 @@ public class Ehdokkaat implements Serializable {
 	private String puolue;
 
 	private String sukunimi;
+
+	//bi-directional many-to-one association to Vastaukset
+	@OneToMany(mappedBy="ehdokkaat")
+	private List<Vastaukset> vastauksets;
 
 	public Ehdokkaat() {
 	}
@@ -79,6 +99,14 @@ public class Ehdokkaat implements Serializable {
 		this.kotipaikkakunta = kotipaikkakunta;
 	}
 
+	public String getKuva() {
+		return this.kuva;
+	}
+
+	public void setKuva(String kuva) {
+		this.kuva = kuva;
+	}
+
 	public String getMiksiEduskuntaan() {
 		return this.miksiEduskuntaan;
 	}
@@ -109,6 +137,28 @@ public class Ehdokkaat implements Serializable {
 
 	public void setSukunimi(String sukunimi) {
 		this.sukunimi = sukunimi;
+	}
+
+	public List<Vastaukset> getVastauksets() {
+		return this.vastauksets;
+	}
+
+	public void setVastauksets(List<Vastaukset> vastauksets) {
+		this.vastauksets = vastauksets;
+	}
+
+	public Vastaukset addVastaukset(Vastaukset vastaukset) {
+		getVastauksets().add(vastaukset);
+		vastaukset.setEhdokkaat(this);
+
+		return vastaukset;
+	}
+
+	public Vastaukset removeVastaukset(Vastaukset vastaukset) {
+		getVastauksets().remove(vastaukset);
+		vastaukset.setEhdokkaat(null);
+
+		return vastaukset;
 	}
 
 }

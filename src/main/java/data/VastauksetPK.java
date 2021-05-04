@@ -12,10 +12,10 @@ public class VastauksetPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="EHDOKAS_ID")
+	@Column(name="EHDOKAS_ID", insertable=false, updatable=false)
 	private int ehdokasId;
 
-	@Column(name="KYSYMYS_ID")
+	@Column(name="KYSYMYS_ID", insertable=false, updatable=false)
 	private int kysymysId;
 
 	public VastauksetPK() {

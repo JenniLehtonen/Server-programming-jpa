@@ -2,6 +2,7 @@ package data;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -20,6 +21,10 @@ public class Kysymykset implements Serializable {
 
 	private String kysymys;
 
+	//bi-directional many-to-one association to Vastaukset
+	@OneToMany(mappedBy="kysymykset")
+	private List<Vastaukset> vastauksets;
+
 	public Kysymykset() {
 	}
 
@@ -37,6 +42,28 @@ public class Kysymykset implements Serializable {
 
 	public void setKysymys(String kysymys) {
 		this.kysymys = kysymys;
+	}
+
+	public List<Vastaukset> getVastauksets() {
+		return this.vastauksets;
+	}
+
+	public void setVastauksets(List<Vastaukset> vastauksets) {
+		this.vastauksets = vastauksets;
+	}
+
+	public Vastaukset addVastaukset(Vastaukset vastaukset) {
+		getVastauksets().add(vastaukset);
+		vastaukset.setKysymykset(this);
+
+		return vastaukset;
+	}
+
+	public Vastaukset removeVastaukset(Vastaukset vastaukset) {
+		getVastauksets().remove(vastaukset);
+		vastaukset.setKysymykset(null);
+
+		return vastaukset;
 	}
 
 }

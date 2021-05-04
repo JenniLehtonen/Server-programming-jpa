@@ -13,7 +13,7 @@
 <h2>Vastaa kysymyksiin:</h2>
 <br>
 <br>
-<form method="post" action="/addcandidateanswer">
+<form method="post" action="/addcandidateanswers">
 
 	<c:forEach var="question" items="${requestScope.questionlist}">
 		<b>${question.id}: </b>${question.whatquestion} <br> <br>

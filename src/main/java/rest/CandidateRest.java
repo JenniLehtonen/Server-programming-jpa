@@ -15,6 +15,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -64,7 +65,47 @@ public class CandidateRest {
 		//return candidateList;
 		
 	} //getAllCandidates-sulje
+	
+	@GET
+	@Path("/getcandidatebyid/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void getCandidateById(@PathParam("id") int id) //throws ServletException, IOException
+	{ 
+		Ehdokkaat candidate = new Ehdokkaat();
+		Dao dao = new Dao();
 
+		candidate = dao.getCandidateById(id);
+
+		request.setAttribute("candidate", candidate);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/updateCandidate.jsp");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@GET
+	@Path("/showshort")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void showShort() {
+		List<Ehdokkaat> candidateList = new ArrayList<Ehdokkaat>();
+		Dao dao = new Dao();
+
+		candidateList = dao.getAllCandidates();
+		
+		
+		request.setAttribute("candidateList", candidateList);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/showshort.jsp");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	}
+	
 	@POST
 	@Path("/addcandidate")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -82,6 +123,25 @@ public class CandidateRest {
 		Dao dao = new Dao();
 		
 		dao.addCandidate(e);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/success.jsp");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException exception) {
+			// TODO Auto-generated catch block
+			exception.printStackTrace();
+		} 
+	}
+	
+	@GET
+	@Path("/deletecandidate/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void deleteCandidate(@PathParam("id") int id) {
+		Dao dao = new Dao();
+		
+		int idnum = Integer.valueOf(id);
+		
+		dao.deleteCandidate(idnum);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/success.jsp");
 		try {
@@ -113,5 +173,51 @@ public class CandidateRest {
 		
 
 	} //getCandidatesByParty-sulje
+	
+	@POST //have to be post, because the info comes from form
+	@Path("/editcandidate")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes("application/x-www-form-urlencoded") //!!!!
+	public void editCandidate(@FormParam("ehdokasId") int id, @FormParam("sukunimi") String sukunimi, @FormParam("etunimi") String etunimi, @FormParam("puolue") String puolue, @FormParam("kotipaikkakunta") String kotipaikkakunta, @FormParam("ika") int ika, @FormParam("ammatti") String ammatti, @FormParam("miksiEduskuntaan") String miksiEduskuntaan, @FormParam("mitaAsioitaHaluatEdistaa") String mitaAsioitaHaluatEdistaa)
+	{
+		
+		List<Ehdokkaat> candidateList = new ArrayList<Ehdokkaat>();
+		Dao dao = new Dao();
+		Ehdokkaat ehdokas = new Ehdokkaat(id, sukunimi, etunimi, puolue, kotipaikkakunta, ika, miksiEduskuntaan, mitaAsioitaHaluatEdistaa, ammatti);
+
+		candidateList = dao.editCandidate(ehdokas);
+
+		request.setAttribute("candidateList", candidateList);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/showshort.jsp");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	} //EditCandidate-sulje
+	
+	@POST //have to be post, because the info comes from form
+	@Path("/addcandidateanswers")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes("application/x-www-form-urlencoded") //!!!!
+	public void addCandidateAnswers()
+	{
+		
+		String done;
+		Dao dao = new Dao();
+		VastauksetPK vastaus = new VastauksetPK();
+
+		done = dao.addCandidateAnswers(vastaus);
+
+		request.setAttribute("success", done);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/success.jps");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	} //addCandidateanswers-sulje
 
 } // class sulje
