@@ -13,6 +13,6 @@
 <center>Tietojen muuttaminen onnistui! <br>
 <a href="http://localhost:8080/jsp/adminPage.jsp" class="btn">Palaa etusivulle</a><br>
 <a href="/updateQuestion" class="btn">Palaa muokkaamaan kysymyksiä</a><br>
-<a href="/addNewQuestions" class="btn">Palaa lisäämään uusia kysymyksiä</a>
+<a href="http://localhost:8080/rest/questionrest/addQuestionPage" class="btn">Palaa lisäämään uusia kysymyksiä</a>
 </center>
 <%@ include file="../footer.html" %>
