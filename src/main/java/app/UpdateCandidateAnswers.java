@@ -35,6 +35,10 @@ private static final long serialVersionUID = 1L;
 				response.sendRedirect("index.html");
 		     }
 	
+	
+	/**
+	 * Tämä kesken, miten toimii?
+	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 	     throws IOException, ServletException {
 	
@@ -61,8 +65,6 @@ private static final long serialVersionUID = 1L;
 		List<Vastaukset> returned=b.post(e, genericList); //Kirjat listana. Tässä tehdään haku
 		
 		return returned;
-		
-		
 
 	}
 
