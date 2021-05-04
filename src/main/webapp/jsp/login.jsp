@@ -3,11 +3,11 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <c:import url="../header.html" charEncoding="UTF-8"/>
-<link rel="stylesheet" href="center.css">
+<link rel="stylesheet" href="/center.css">
 
 
 				<h2>Kirjaudu sisään</h2>
-				<form action="/login" method="GET">
+				<form action="/rest/loginrest/login" method="POST">
 					<label>Käyttäjätunnus : </label><br>
 		            <input type="text" placeholder="Syötä käyttäjätunnus" name="username"><br> 
 		            <label>Salasana : </label><br>
@@ -22,7 +22,7 @@
 					String MD5Password = (String)request.getAttribute("MD5Password");
 				%>
 				<%
-				//Check that the user has providedt the correct username and password. If the username and the password are correct,
+				//Check that the user has provided the correct username and password. If the username and the password are correct,
 				//admin page will be shown, otherwise there will be an error message in the user interface.
 					if(data.LoginData.CheckPasswords(MD5Password, password)==true && userProvidedUsername.equals(username)){
 						response.sendRedirect("/jsp/adminPage.jsp");
