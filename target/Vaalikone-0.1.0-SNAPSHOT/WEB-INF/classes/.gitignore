@@ -1,4 +1,5 @@
-/META-INF/
-/dao/
 /rest/
 /data/
+/dao/
+/app/
+/conn/

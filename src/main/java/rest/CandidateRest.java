@@ -152,6 +152,10 @@ public class CandidateRest {
 		} 
 	}
 	
+	
+	/**
+	 * @author Sanna Nieminen-Vuorio
+	 */
 	@GET
 	@Path("/getcandidatesbyparty/{party}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -174,6 +178,10 @@ public class CandidateRest {
 
 	} //getCandidatesByParty-sulje
 	
+	
+	/**
+	 * @author Sanna Nieminen-Vuorio
+	 */
 	@POST //have to be post, because the info comes from form
 	@Path("/editcandidate")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -197,27 +205,6 @@ public class CandidateRest {
 		} 
 	} //EditCandidate-sulje
 	
-	@POST //have to be post, because the info comes from form
-	@Path("/addcandidateanswers")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes("application/x-www-form-urlencoded") //!!!!
-	public void addCandidateAnswers()
-	{
-		
-		String done;
-		Dao dao = new Dao();
-		VastauksetPK vastaus = new VastauksetPK();
 
-		done = dao.addCandidateAnswers(vastaus);
-
-		request.setAttribute("success", done);
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/success.jps");
-		try {
-			rd.forward(request, response);
-		} catch (ServletException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-	} //addCandidateanswers-sulje
 
 } // class sulje

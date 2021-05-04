@@ -141,5 +141,34 @@ public class QuestionsRest {
 			dispatcher.forward(request, response);
 		}
 	}
+	
+	
+	/**
+	 * @author Sanna Nieminen-Vuorio
+	 * Gets all questions and redirect page where candidate can answer to them
+	 */
+	@GET
+	@Path("/getquestionsforcandidate")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void getQuestionsForCandidate() //throws ServletException, IOException
+	{
+		
+		System.out.println("Toimii");
+		List<Kysymykset> questionlist = new ArrayList<Kysymykset>();
+		Dao dao = new Dao();
+
+		questionlist = dao.getAllQuestions();
+		
+		
+		request.setAttribute("questionlist", questionlist);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/candidateAnswer.jsp");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+
+	} 
 
 }

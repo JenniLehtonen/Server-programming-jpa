@@ -7,25 +7,12 @@ import java.util.List;
 
 /**
  * The persistent class for the ehdokkaat database table.
- *
+ * 
  */
 @Entity
 @NamedQuery(name="Ehdokkaat.findAll", query="SELECT e FROM Ehdokkaat e")
 public class Ehdokkaat implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	public Ehdokkaat(int id, String sukunimi, String etunimi, String puolue, String koti, int ika, String miksi, String mita, String ammatti)
-	{
-		setEhdokasId(id);
-		this.sukunimi = sukunimi;
-		this.etunimi = etunimi;
-		this.puolue = puolue;
-		this.kotipaikkakunta = koti;
-		setIka(ika);
-		this.miksiEduskuntaan = miksi;
-		this.mitaAsioitaHaluatEdistaa = mita;
-		this.ammatti = ammatti;
-	}
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -59,6 +46,45 @@ public class Ehdokkaat implements Serializable {
 	public Ehdokkaat() {
 	}
 
+	public Ehdokkaat(String sukunimi, String etunimi, String puolue, String koti, int ika, String miksi, String mita, String ammatti)
+	{
+		this.sukunimi = sukunimi;
+		this.etunimi = etunimi;
+		this.puolue = puolue;
+		this.kotipaikkakunta = koti;
+		setIka(ika);
+		this.miksiEduskuntaan = miksi;
+		this.mitaAsioitaHaluatEdistaa = mita;
+		this.ammatti = ammatti;
+	}
+	
+	public Ehdokkaat(int id, String sukunimi, String etunimi, String puolue, String koti, int ika, String miksi, String mita, String ammatti)
+	{
+		setEhdokasId(id);
+		this.sukunimi = sukunimi;
+		this.etunimi = etunimi;
+		this.puolue = puolue;
+		this.kotipaikkakunta = koti;
+		setIka(ika);
+		this.miksiEduskuntaan = miksi;
+		this.mitaAsioitaHaluatEdistaa = mita;
+		this.ammatti = ammatti;
+	}
+	
+	public Ehdokkaat(int id, String sukunimi, String etunimi, String puolue, String koti, int ika, String miksi, String mita, String ammatti, String kuva)
+	{
+		setEhdokasId(id);
+		this.sukunimi = sukunimi;
+		this.etunimi = etunimi;
+		this.puolue = puolue;
+		this.kotipaikkakunta = koti;
+		setIka(ika);
+		this.miksiEduskuntaan = miksi;
+		this.mitaAsioitaHaluatEdistaa = mita;
+		this.ammatti = ammatti;
+		this.kuva = kuva;
+	}
+	
 	public int getEhdokasId() {
 		return this.ehdokasId;
 	}

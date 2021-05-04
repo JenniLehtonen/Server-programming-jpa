@@ -183,7 +183,7 @@ public class Dao {
 	 * @param vastaus
 	 * @return done
 	 */
-	public String addCandidateAnswers(VastauksetPK vastaus)
+	public String addCandidateAnswers(List<Vastaukset> list, Ehdokkaat ehdokas)
 	{
 		String done = "Jotain meni vikaan";
 		EntityManager em=emf.createEntityManager();
@@ -191,17 +191,24 @@ public class Dao {
 		try
 		{
 			em.getTransaction().begin();
-			Vastaukset v = em.find(Vastaukset.class, vastaus.getEhdokasId());
-			if (v!=null) {
-				em.merge(vastaus); //This line does the update
+			Vastaukset v = em.find(Vastaukset.class, ehdokas.getEhdokasId());
+			if (v!=null) 
+			{
+				em.merge(list); //This line does the update
+			}
+			else if(v==null)
+			{
+				em.persist(list);
 			}
 			em.getTransaction().commit();
 			em.close();
+			System.out.println("Ehdokkaan vastaukset päivitetty");
 			done = "Vastaukset päivitetty onnistuneesti";
 		}
 		catch(Exception e)
 		{
 			System.out.println(e);
+			System.out.println("Jotain meni vikaan vastausten päivittämisessä");
 			done = "Tietojen päivittäminen ei onnistunut";
 		}
 
