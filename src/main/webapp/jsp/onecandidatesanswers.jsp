@@ -4,14 +4,19 @@
 <%@ page import="java.util.ArrayList"%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:import url="../adminHeader.html" charEncoding="UTF-8" />
+<c:import url="../header.html" charEncoding="UTF-8" />
 
-Candidate: ${requestScope.ehdokas.etunimi}
-${requestScope.ehdokas.sukunimi}
+<h2>${requestScope.ehdokas.etunimi}
+${requestScope.ehdokas.sukunimi}</h2><br>
+<b>Puolue:</b> ${requestScope.ehdokas.puolue} <br>
+<b>Kotipaikkakunta:</b> ${requestScope.ehdokas.kotipaikkakunta} <br>
+<b>Ikä:</b> ${requestScope.ehdokas.ika} <br>
+<b>Ammatti:</b> ${requestScope.ehdokas.ammatti} <br>
+<b>Miksi haluat eduskuntaan?</b><br>
+${requestScope.ehdokas.miksiEduskuntaan} <br>
+<b>Mitä asioita haluat edistää?</b> <br>
+${requestScope.ehdokas.mitaAsioitaHaluatEdistaa}
 <br>
-<br>
-
-Questions and answers:
 <br>
 <c:forEach var="answer" items="${requestScope.ehdokas.vastauksets}">
 ${answer.kysymykset.kysymysId}: ${answer.kysymykset.kysymys} -
