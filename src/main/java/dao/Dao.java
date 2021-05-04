@@ -43,23 +43,30 @@ public class Dao {
 
 		return list;
 	}
-	
-	public List<Kysymykset> addQuestion(Kysymykset kysymys) throws SQLException {
+	/**
+	 * @author Jenni Lehtonen
+	 * Method for adding new questions to the database
+	 * @param New question to be added
+	 * @throws SQLException
+	 */
+	public void addQuestion(Kysymykset kysymys) throws SQLException {
 		try {
 			EntityManager em=emf.createEntityManager();
 			em.getTransaction().begin();
 			em.persist(kysymys);
 			em.getTransaction().commit();
-			List<Kysymykset> list=getAllQuestions();		
-			return list;
 			
 		} catch (NullPointerException e) {
 			e.printStackTrace();
-			return null;
 		}
 	}
 	
-	public ArrayList<Kysymykset> removeQuestion(int id) {
+	/**
+	 * @author Jenni Lehtonen
+	 * Method for removing questions from the database
+	 * @param Question id for the question that needs to be removed from the database
+	 */
+	public void removeQuestion(int id) {
 		
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -70,10 +77,8 @@ public class Dao {
 			em.remove(kysymys);
 			em.getTransaction().commit();
 			em.close();
-			return (ArrayList<Kysymykset>) getAllQuestions();
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
 		}
 	}
 
