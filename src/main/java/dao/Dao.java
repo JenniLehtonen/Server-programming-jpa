@@ -81,33 +81,12 @@ public class Dao {
 			e.printStackTrace();
 		}
 	}
-	
-	/*public Ehdokkaat getCandidateById(int id)
-	{
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
-		Ehdokkaat ehdokas = em.find(Ehdokkaat.class, id);
-		em.getTransaction().commit();
 
-		em.close();
-		return ehdokas;
-
-	}*/
-
-	
-	/*public List<VastauksetPK> readAllAnswers() {
-		List<VastauksetPK> list = new ArrayList<>();
-		
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
-		//list = em.createQuery("select a from Ehdokkaat a").getResultList();
-		list = em.createNativeQuery("select vastaukset.kysymys_id, vastaukset.vastaus, ehdokkaat.ehdokas_id, ehdokkaat.etunimi, ehdokkaat.sukunimi from vastaukset inner join ehdokkaat on vastaukset.ehdokas_id=ehdokkaat.ehdokas_id;").getResultList();
-		em.getTransaction().commit();
-		em.close();
-		
-		return list;
-	}*/
-
+	/**
+	 * @author Jenni Lehtonen
+	 * Get all the candidates' answers
+	 * @return List of candidates and their answers
+	 */
 	public List<Ehdokkaat> readAllAnswers() {
 		List<Ehdokkaat> list = new ArrayList<>();
 		

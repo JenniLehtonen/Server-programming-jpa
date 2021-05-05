@@ -41,7 +41,9 @@ public class AnswersRest {
 		rd.forward(request, response);
 	}
 	
-	
+	/**
+	 * This is for getting candidates' answers and showing them next to user's answers so the user can compare their answers to candidates' answers
+	 */
 	@GET
 	@Path("/compareUserAnswersToCandidateAnswers")
 	public void compareUserAnswersToCandidateAnswers() throws ServletException, IOException {

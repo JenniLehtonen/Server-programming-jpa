@@ -1,11 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-
- <%@ page import="java.util.ArrayList" %>
- <%@ page import="data.*" %>
- <%@ page import="dao.Dao" %>
- <%@ page import="app.*" %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <c:import url="../header.html" charEncoding="UTF-8"/>
@@ -30,9 +24,10 @@
 					<br>
 				</c:when>
 			</c:choose>
-
-<%-- Kysymys: <span>${answer.kysymysId}</span>,
-Vastaus: <span><b>${answer.vastaus}</b></span>--%>
+			<c:forEach var="answers" items="${answer.vastauksets}">
+				Kysymys: <span>${answers.kysymykset.kysymysId}</span>,
+				Vastaus: <span><b>${answers.vastaus}</b></span><br><br>
+			</c:forEach>
 
 			<br>
 			<br>
