@@ -1,5 +1,4 @@
 package dao;
-
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -9,7 +8,6 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import data.Ehdokkaat;
-import data.Kysymykset;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
