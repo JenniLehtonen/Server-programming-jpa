@@ -7,7 +7,7 @@ import java.util.List;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import data.Ehdokkaat;
+import data.*;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
