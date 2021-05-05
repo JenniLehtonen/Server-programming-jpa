@@ -216,11 +216,12 @@ public class Dao {
 				{
 					em.merge(v); //This line does the update
 				}
+				/*
 				else if(vastaus == null)
 				{
 					em.persist(v);
 
-				}
+				} */
 				
 				System.out.println("Ehdokkaan vastaukset päivitetty");
 				done = "Vastaukset päivitetty onnistuneesti";
