@@ -193,6 +193,13 @@ These are moved to servlet api and not any more in Java SE API
     <version>1.1.1</version>
 </dependency>
 
+<!--  This is because of Upload -->
+<dependency>
+    <groupId>org.glassfish.jersey.media</groupId>
+    <artifactId>jersey-media-multipart</artifactId>
+    <version>2.27</version>
+</dependency>
+
 <!-- .....Added by Koodarivelhot ends -->
           
 

@@ -17,7 +17,7 @@
 <c:forEach var="pointsAndCandidates"
 	items="${requestScope.pointsAndCandidates}">
 
-<h3>${pointsAndCandidates.candidate_id}  ${pointsAndCandidates.candidateFirstname} ${pointsAndCandidates.candidateSurname} </h3> <a href="/readformore?ehdokas_id=${pointsAndCandidates.candidate_id}">Lisätietoja</a> <br>
+<h3>${pointsAndCandidates.candidate_id}  ${pointsAndCandidates.candidateFirstName} ${pointsAndCandidates.candidateLastName} </h3> <a href="/rest/answersrest/getanswersbycandidate/${pointsAndCandidates.candidate_id}">Lisätietoja</a> <br>
 	<br>
 
 </c:forEach>
