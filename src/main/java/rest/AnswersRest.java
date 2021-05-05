@@ -3,6 +3,7 @@ package rest;
 import data.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -37,6 +38,26 @@ public class AnswersRest {
 		
 		request.setAttribute("ehdokas", ehdokas);
 	    RequestDispatcher rd=request.getRequestDispatcher("/jsp/onecandidatesanswers.jsp");
+		rd.forward(request, response);
+	}
+	
+	
+	@GET
+	@Path("/compareUserAnswersToCandidateAnswers")
+	public void compareUserAnswersToCandidateAnswers() throws ServletException, IOException {
+		Dao dao = new Dao();
+		/**
+		 * Get candidates' answers from the database
+		 */
+		List<Ehdokkaat> list = new ArrayList<Ehdokkaat>();
+		list=dao.readAllAnswers();
+		
+		/**
+		 * Send user's and candidates' answers to jsp
+		 */
+		request.setAttribute("candidatesAndAnswersList", list);
+		//request.setAttribute("useranswers", useranswers);
+		RequestDispatcher rd=request.getRequestDispatcher("/jsp/compareUserAnswersToCandidateAnswers.jsp");
 		rd.forward(request, response);
 	}
 
