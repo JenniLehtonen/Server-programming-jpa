@@ -8,6 +8,8 @@
 
 <h2>${requestScope.ehdokas.etunimi}
 ${requestScope.ehdokas.sukunimi}</h2><br>
+<div class="flex-container">
+<div class="flex-child">
 <b>Puolue:</b> ${requestScope.ehdokas.puolue} <br>
 <b>Kotipaikkakunta:</b> ${requestScope.ehdokas.kotipaikkakunta} <br>
 <b>Ikä:</b> ${requestScope.ehdokas.ika} <br>
@@ -16,6 +18,20 @@ ${requestScope.ehdokas.sukunimi}</h2><br>
 ${requestScope.ehdokas.miksiEduskuntaan} <br>
 <b>Mitä asioita haluat edistää?</b> <br>
 ${requestScope.ehdokas.mitaAsioitaHaluatEdistaa}
+
+</div>
+
+<div class="flex-child">
+
+<c:choose>
+	<c:when test="${requestScope.ehdokas.kuva}.!equals(null)">
+	<img src="file:///C:/Vaalikoneimages/${requestScope.ehdokas.kuva}">
+	</c:when>
+	<c:otherwise>
+	<img src="file:///C:/Vaalikoneimages/default.jpg">
+	</c:otherwise>
+</c:choose>
+</div></div>
 <br>
 <br>
 <c:forEach var="answer" items="${requestScope.ehdokas.vastauksets}">

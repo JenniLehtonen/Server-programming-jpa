@@ -13,7 +13,7 @@
 <h2>Vastaa kysymyksiin</h2>
 <br>
 <br>
-<form method="post" action="/rest/candidaterest/bestcandidates">
+<form method="post" action="/bestcandidates">
 	<c:forEach var="Kysymykset" items="${requestScope.questionlist}">
 		<b>${Kysymykset.kysymysId}: </b>${Kysymykset.kysymys} <br> <br>
 			<input type="radio" id="${Kysymykset.kysymysId}1" name="${Kysymykset.kysymysId}"

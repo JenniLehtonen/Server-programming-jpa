@@ -1,6 +1,10 @@
 package rest;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,11 +25,16 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
+
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+import org.glassfish.jersey.media.multipart.FormDataParam;
+
 import data.*;
 import dao.*;
 
@@ -108,8 +118,9 @@ public class CandidateRest {
 	
 	@POST
 	@Path("/addcandidate")
-	@Produces(MediaType.APPLICATION_JSON)
-	public void addCandidate(@FormParam("etunimi") String etunimi, @FormParam("sukunimi") String sukunimi, @FormParam("puolue") String puolue, @FormParam("kotipaikkakunta") String kotipaikkakunta, @FormParam("ika") String ika, @FormParam("miksi_eduskuntaan") String miksi_eduskuntaan, @FormParam("mita_asioita_haluat_edistaa") String mita_asioita_haluat_edistaa, @FormParam("ammatti") String ammatti) {
+	//@Produces(MediaType.APPLICATION_JSON)
+	@Consumes({MediaType.MULTIPART_FORM_DATA})
+	public void addCandidate(@FormDataParam("etunimi") String etunimi, @FormDataParam("sukunimi") String sukunimi, @FormDataParam("puolue") String puolue, @FormDataParam("kotipaikkakunta") String kotipaikkakunta, @FormDataParam("ika") String ika, @FormDataParam("miksi_eduskuntaan") String miksi_eduskuntaan, @FormDataParam("mita_asioita_haluat_edistaa") String mita_asioita_haluat_edistaa, @FormDataParam("ammatti") String ammatti, @FormDataParam("kuva") InputStream fileInputStream, @FormDataParam("kuva") FormDataContentDisposition fileMetaData, @Context ServletContext sc) {
 		Ehdokkaat e = new Ehdokkaat();
 		e.setEtunimi(etunimi);
 		e.setSukunimi(sukunimi);
@@ -119,6 +130,25 @@ public class CandidateRest {
 		e.setMiksiEduskuntaan(miksi_eduskuntaan);
 		e.setMitaAsioitaHaluatEdistaa(mita_asioita_haluat_edistaa);
 		e.setAmmatti(ammatti);
+		e.setKuva(fileMetaData.getFileName());
+		
+		String UPLOAD_PATH="C:/Vaalikoneimages";
+	    try{
+	        int read = 0;
+	        byte[] bytes = new byte[1024];
+	 
+	        OutputStream out = new FileOutputStream(new File(UPLOAD_PATH + "/"+fileMetaData.getFileName()));
+	        while ((read = fileInputStream.read(bytes)) != -1) 
+	        {
+	            out.write(bytes, 0, read);
+	        }
+	        out.flush();
+	        out.close();
+	        
+	    } 
+	    catch (IOException exception){
+	        throw new WebApplicationException("Error while uploading file. Please try again !!");
+	    }
 		
 		Dao dao = new Dao();
 		
