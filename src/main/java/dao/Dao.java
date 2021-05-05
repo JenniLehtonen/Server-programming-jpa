@@ -213,7 +213,7 @@ public class Dao {
 			try
 			{
 				
-				Vastaukset vastaus = em.find(Vastaukset.class, v.getId().getEhdokasId());
+				Vastaukset vastaus = em.find(Vastaukset.class, vastaukset.getId().getEhdokasId());
 
 				if (vastaus != null) 
 				{
