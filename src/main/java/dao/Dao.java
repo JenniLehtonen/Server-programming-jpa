@@ -208,7 +208,7 @@ public class Dao {
 		try
 		{
 			em.getTransaction().begin();
-			Vastaukset v = em.find(Vastaukset.class, ehdokas.getVastauksets());
+			Vastaukset v = em.find(Vastaukset.class, v.getId().getEhdokasId());
 
 			if (v!=null) 
 			{
