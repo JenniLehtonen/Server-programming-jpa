@@ -73,16 +73,13 @@ public class AnswersRest {
 	@Path("/addcandidateanswers")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes("application/x-www-form-urlencoded") //!!!!
-	public void addCandidateAnswers()
+	public void addCandidateAnswers(List<Vastaukset> list)
 	{
 		
 		String done;
 		Dao dao = new Dao();
-		Ehdokkaat ehdokas = new Ehdokkaat();
-		List<Vastaukset> list = new ArrayList<>();
-		ehdokas.setVastauksets(list);
 
-		done = dao.addCandidateAnswers(list, ehdokas);
+		done = dao.addCandidateAnswers(list);
 
 		request.setAttribute("success", done);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/success.jps");
@@ -93,21 +90,5 @@ public class AnswersRest {
 			e.printStackTrace();
 		} 
 	} //addCandidateanswers-sulje
-	
-	
-	/**
-	 * Testausta varten
-	 * @param list
-	 * @return
-	 */
-	@POST
-	@Path("/test")
-	@Produces(MediaType.TEXT_XML)
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public String testMethodForList(@FormParam("${question.kysymysId}") List<String> list){
-
-	    return "The list has " + list.size() + " entries: " 
-	           + list.get(0) + ", " + list.get(1) + ", " + list.get(2) +".";
-	}
 
 }

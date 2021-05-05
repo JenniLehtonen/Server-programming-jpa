@@ -8,7 +8,9 @@ import java.util.List;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import data.*;
+import data.Ehdokkaat;
+import data.Kysymykset;
+
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -200,38 +202,43 @@ public class Dao {
 	 * @param vastaus
 	 * @return done
 	 */
-	public String addCandidateAnswers(List<Vastaukset> list, Ehdokkaat ehdokas)
+	public String addCandidateAnswers(List<Vastaukset> list)
 	{
 		String done = "Jotain meni vikaan";
 		EntityManager em=emf.createEntityManager();
 
-		try
+		em.getTransaction().begin();
+		for(Vastaukset v : list)
 		{
-			em.getTransaction().begin();
-			Vastaukset v = em.find(Vastaukset.class, v.getId().getEhdokasId());
-
-			if (v!=null) 
+			try
 			{
-				em.merge(list); //This line does the update
-			}
-			else if(v == null)
-			{
-				em.persist(list);
+				
+				Vastaukset vastaus = em.find(Vastaukset.class, v.getId().getEhdokasId());
 
+				if (vastaus != null) 
+				{
+					em.merge(v); //This line does the update
+				}
+				else if(vastaus == null)
+				{
+					em.persist(v);
+
+				}
+				
+				System.out.println("Ehdokkaan vastaukset päivitetty");
+				done = "Vastaukset päivitetty onnistuneesti";
 			}
+			catch(Exception e)
+			{
+				System.out.println(e);
+				System.out.println("Jotain meni vikaan vastausten päivittämisessä");
+				done = "Tietojen päivittäminen ei onnistunut";
+			}
+
+		}
 			em.getTransaction().commit();
 			em.close();
-			System.out.println("Ehdokkaan vastaukset päivitetty");
-			done = "Vastaukset päivitetty onnistuneesti";
-		}
-		catch(Exception e)
-		{
-			System.out.println(e);
-			System.out.println("Jotain meni vikaan vastausten päivittämisessä");
-			done = "Tietojen päivittäminen ei onnistunut";
-		}
 
-
-		return done;
+			return done;
 	}
 }

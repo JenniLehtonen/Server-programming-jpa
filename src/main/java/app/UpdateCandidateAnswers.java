@@ -18,7 +18,10 @@ import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.core.MediaType;
 
 import dao.Dao;
-import data.*;
+import data.Ehdokkaat;
+import data.Kysymykset;
+import data.Vastaukset;
+import data.VastauksetPK;
 
 
 @WebServlet("/updatecandidateanswer")
