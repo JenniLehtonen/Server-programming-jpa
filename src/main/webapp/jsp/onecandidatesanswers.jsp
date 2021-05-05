@@ -7,31 +7,29 @@
 <c:import url="../header.html" charEncoding="UTF-8" />
 
 <h2>${requestScope.ehdokas.etunimi}
-${requestScope.ehdokas.sukunimi}</h2><br>
+	${requestScope.ehdokas.sukunimi}</h2>
+<br>
 <div class="flex-container">
-<div class="flex-child">
-<b>Puolue:</b> ${requestScope.ehdokas.puolue} <br>
-<b>Kotipaikkakunta:</b> ${requestScope.ehdokas.kotipaikkakunta} <br>
-<b>Ikä:</b> ${requestScope.ehdokas.ika} <br>
-<b>Ammatti:</b> ${requestScope.ehdokas.ammatti} <br>
-<b>Miksi haluat eduskuntaan?</b><br>
-${requestScope.ehdokas.miksiEduskuntaan} <br>
-<b>Mitä asioita haluat edistää?</b> <br>
-${requestScope.ehdokas.mitaAsioitaHaluatEdistaa}
-
+	<div class="flex-child">
+		<b>Puolue:</b> ${requestScope.ehdokas.puolue} <br> <b>Kotipaikkakunta:</b>
+		${requestScope.ehdokas.kotipaikkakunta} <br> <b>Ikä:</b>
+		${requestScope.ehdokas.ika} <br> <b>Ammatti:</b>
+		${requestScope.ehdokas.ammatti} <br> <b>Miksi haluat
+			eduskuntaan?</b><br> ${requestScope.ehdokas.miksiEduskuntaan} <br>
+		<b>Mitä asioita haluat edistää?</b> <br>
+		${requestScope.ehdokas.mitaAsioitaHaluatEdistaa}
+	</div>
+	<div class="flex-child">
+		<c:choose>
+			<c:when test="${not empty requestScope.ehdokas.kuva}">
+				<img src="http://127.0.0.1:8080/img/${requestScope.ehdokas.kuva}">
+			</c:when>
+			<c:otherwise>
+				<img src="http://127.0.0.1:8080/img/default.jpg">
+			</c:otherwise>
+		</c:choose>
+	</div>
 </div>
-
-<div class="flex-child">
-
-<c:choose>
-	<c:when test="${requestScope.ehdokas.kuva}.!equals(null)">
-	<img src="file:///C:/Vaalikoneimages/${requestScope.ehdokas.kuva}">
-	</c:when>
-	<c:otherwise>
-	<img src="file:///C:/Vaalikoneimages/default.jpg">
-	</c:otherwise>
-</c:choose>
-</div></div>
 <br>
 <br>
 <c:forEach var="answer" items="${requestScope.ehdokas.vastauksets}">

@@ -132,7 +132,7 @@ public class CandidateRest {
 		e.setAmmatti(ammatti);
 		e.setKuva(fileMetaData.getFileName());
 		
-		String UPLOAD_PATH="C:/Vaalikoneimages";
+		String UPLOAD_PATH="./img";
 	    try{
 	        int read = 0;
 	        byte[] bytes = new byte[1024];
