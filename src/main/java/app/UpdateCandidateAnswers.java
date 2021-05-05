@@ -52,6 +52,7 @@ private static final long serialVersionUID = 1L;
 		String answer_string = null;
 		int answer = 0;
 		List<Kysymykset> questionslist = dao.getAllQuestions();
+		Ehdokkaat ehdokas = new Ehdokkaat();
 		
 		for (Kysymykset k : questionslist) {
 			
@@ -60,7 +61,9 @@ private static final long serialVersionUID = 1L;
 			Vastaukset v = new Vastaukset(answer);
 			v.setId(vpk);
 			v.setKommentti("Ehdokkaan "+v.getId() + " vastaus");
+			k.setKysymysId(answer);
 			candidateanswerlist.add(v);
+			ehdokas.setEhdokasId(ehdokasId);
 			System.out.println(v.getVastaus() + " on vastaus. Ehdokas on numero " + v.getId());
 		}
 
@@ -81,5 +84,4 @@ private static final long serialVersionUID = 1L;
 			ex.printStackTrace();
 		}
 	}
-
 }

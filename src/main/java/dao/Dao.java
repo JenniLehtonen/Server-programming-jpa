@@ -210,20 +210,23 @@ public class Dao {
 		{
 			try
 			{
-				Vastaukset vastaus = em.find(Vastaukset.class, v.getId());
+				Vastaukset vastaus = em.find(Vastaukset.class, v.getId().getEhdokasId());
 
 				if (vastaus != null) 
 				{
 					em.merge(v); //This line does the update
+					System.out.println("Merge tehty, eli ei ollut tyhjä");
+					System.out.println("Ehdokkaan vastaukset päivitetty");
 				}
-				/*
-				else if(vastaus == null)
-				{
-					em.persist(v);
-
-				} */
+//				
+//				ehdokkaan vastausten lisäys ei vielä toimi
+//				else if(vastaus == null)
+//				{
+//					em.persist(v);
+//
+//				} 
 				
-				System.out.println("Ehdokkaan vastaukset päivitetty");
+				
 				done = "Vastaukset päivitetty onnistuneesti";
 			}
 			catch(Exception e)
