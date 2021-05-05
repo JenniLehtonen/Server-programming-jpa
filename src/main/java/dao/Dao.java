@@ -191,14 +191,16 @@ public class Dao {
 		try
 		{
 			em.getTransaction().begin();
-			Vastaukset v = em.find(Vastaukset.class, ehdokas.getEhdokasId());
+			Vastaukset v = em.find(Vastaukset.class, ehdokas.getVastauksets());
+
 			if (v!=null) 
 			{
 				em.merge(list); //This line does the update
 			}
-			else if(v==null)
+			else if(v == null)
 			{
 				em.persist(list);
+
 			}
 			em.getTransaction().commit();
 			em.close();

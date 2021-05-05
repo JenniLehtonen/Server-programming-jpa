@@ -20,6 +20,7 @@ import javax.ws.rs.core.MediaType;
 
 import dao.Dao;
 import data.Book;
+import data.Ehdokkaat;
 import data.Question;
 import data.Vastaukset;
 
@@ -42,9 +43,9 @@ private static final long serialVersionUID = 1L;
 	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 	     throws IOException, ServletException {
 	
-		String kohde = "http://127.0.0.1:8080/rest/questionrest/test";
+		String kohde = "http://127.0.0.1:8080/rest/answersrest/test";
 		
-		String name=request.getParameter("name");
+		String ehdokasId = request.getParameter("ehdokasId");
 		ArrayList<Integer> candidateanswerlist = new ArrayList<>();
 		
 		String answer_string = null;
@@ -56,15 +57,18 @@ private static final long serialVersionUID = 1L;
 			candidateanswerlist.add(answer);
 		}
 		
+		Ehdokkaat ehdokas = new Ehdokkaat();
+		ehdokas.addVastaukset(candidateanswerlist);
+		
 		GenericType<List<Vastaukset>> genericList = new GenericType<List<Vastaukset>>() {}; //Lista pitää ottaa genericinä vastaan
 		Client c= ClientBuilder.newClient();
-		WebTarget wt=c.target(kohde); // haetaan metodi, joka lisää kirjan ja tulostaa kaikki kirjat
+		WebTarget wt=c.target(kohde); // haetaan metodi, joka lisää kirjan ja tulostaa kaikki 
 		Builder b=wt.request();
-		Entity<Integer> e = Entity.entity(candidateanswerlist, MediaType.APPLICATION_JSON); //Muutetaan Entityllä kirja oikeaan muotoon, 
+		Entity<ArrayList<Integer>> e = Entity.entity(candidateanswerlist, MediaType.APPLICATION_JSON); //Muutetaan Entityllä oikeaan muotoon, 
 
-		List<Vastaukset> returned=b.post(e, genericList); //Kirjat listana. Tässä tehdään haku
+		List<Vastaukset> returned=b.post(e, genericList); 
 		
-		return returned;
+		//return returned;
 
 	}
 
