@@ -31,7 +31,7 @@
 	</c:forEach>
 
 	<label style="font-weight: bold"> Vaalinumerosi:</label> <br>
-	<input type="text" name="ehdokas_id" placeholder="Syötä tähän vaalinumerosi"><br>
+	<input type="text" name="ehdokasId" placeholder="Syötä tähän vaalinumerosi"><br>
 	<input type="submit" value="Tallenna vastaukset" class='button'>
 
 </form>
