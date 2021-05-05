@@ -61,7 +61,7 @@ private static final long serialVersionUID = 1L;
 			v.setId(vpk);
 			v.setKommentti("Ehdokkaan "+v.getId() + " vastaus");
 			candidateanswerlist.add(v);
-			System.out.println(v.getVastaus());
+			System.out.println(v.getVastaus() + " on vastaus. Ehdokas on numero " + v.getId());
 		}
 
 		Client c= ClientBuilder.newClient();

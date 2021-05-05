@@ -200,7 +200,7 @@ public class Dao {
 	 * @param vastaus
 	 * @return done
 	 */
-	public String addCandidateAnswers(List<Vastaukset> list)
+	public String addCandidateAnswers(ArrayList<Vastaukset> list)
 	{
 		String done = "Jotain meni vikaan";
 		EntityManager em=emf.createEntityManager();
@@ -210,8 +210,7 @@ public class Dao {
 		{
 			try
 			{
-				
-				Vastaukset vastaus = em.find(Vastaukset.class, vastaukset.getId().getEhdokasId());
+				Vastaukset vastaus = em.find(Vastaukset.class, v.getId());
 
 				if (vastaus != null) 
 				{

@@ -68,27 +68,23 @@ public class AnswersRest {
 	
 	/**
 	 * @author Sanna Nieminen-Vuorio
+	 * @param list
+	 * @return
 	 */
 	@POST //have to be post, because the info comes from form
 	@Path("/addcandidateanswers")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes("application/x-www-form-urlencoded") //!!!!
-	public void addCandidateAnswers(List<Vastaukset> list)
+	@Consumes(MediaType.APPLICATION_JSON) 
+	public String addCandidateAnswers(ArrayList<Vastaukset> list)
 	{
-		
+		System.out.println("Käyty restillä");
 		String done;
 		Dao dao = new Dao();
 
 		done = dao.addCandidateAnswers(list);
+		
+		return done;
 
-		request.setAttribute("success", done);
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/success.jps");
-		try {
-			rd.forward(request, response);
-		} catch (ServletException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-	} //addCandidateanswers-sulje
+	}
 
 }

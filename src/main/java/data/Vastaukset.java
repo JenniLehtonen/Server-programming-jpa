@@ -32,6 +32,12 @@ public class Vastaukset implements Serializable {
 
 	public Vastaukset() {
 	}
+	
+	public Vastaukset(int vastaus) {
+		
+		this.vastaus = vastaus;
+	}
+	
 
 	public VastauksetPK getId() {
 		return this.id;
