@@ -44,6 +44,27 @@ public class AnswersRest {
 		rd.forward(request, response);
 	}
 	
+	/**
+	 * This is for getting candidates' answers and showing them next to user's answers so the user can compare their answers to candidates' answers
+	 */
+	@GET
+	@Path("/compareUserAnswersToCandidateAnswers")
+	public void compareUserAnswersToCandidateAnswers() throws ServletException, IOException {
+		Dao dao = new Dao();
+		/**
+		 * Get candidates' answers from the database
+		 */
+		List<Ehdokkaat> list = new ArrayList<Ehdokkaat>();
+		list=dao.readAllAnswers();
+		
+		/**
+		 * Send user's and candidates' answers to jsp
+		 */
+		request.setAttribute("candidatesAndAnswersList", list);
+		//request.setAttribute("useranswers", useranswers);
+		RequestDispatcher rd=request.getRequestDispatcher("/jsp/compareUserAnswersToCandidateAnswers.jsp");
+		rd.forward(request, response);
+	}
 	
 	/**
 	 * @author Sanna Nieminen-Vuorio

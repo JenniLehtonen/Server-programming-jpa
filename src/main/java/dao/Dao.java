@@ -82,6 +82,23 @@ public class Dao {
 		}
 	}
 
+	/**
+	 * @author Jenni Lehtonen
+	 * Get all the candidates' answers
+	 * @return List of candidates and their answers
+	 */
+	public List<Ehdokkaat> readAllAnswers() {
+		List<Ehdokkaat> list = new ArrayList<>();
+		
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		list = em.createQuery("select e from Ehdokkaat e").getResultList();
+		em.getTransaction().commit();
+		em.close();
+		
+		return list;
+	}
+	
 	public void addCandidate(Ehdokkaat e) {
 
 		EntityManager em=emf.createEntityManager();
