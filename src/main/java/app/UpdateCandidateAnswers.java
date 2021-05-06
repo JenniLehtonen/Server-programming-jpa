@@ -44,35 +44,56 @@ private static final long serialVersionUID = 1L;
 		VastauksetPK vpk = new VastauksetPK();
 		vpk.setEhdokasId(ehdokasId);
 		ArrayList<Vastaukset> candidateanswerlist = new ArrayList<>();
-		String kohde = "http://127.0.0.1:8080/rest/answersrest/addcandidateanswers";
+		String kohde = null;
 		String done = "Ei onnistunut";
 		Dao dao = new Dao();
-		
-		
+
 		String answer_string = null;
 		int answer = 0;
 		List<Kysymykset> questionslist = dao.getAllQuestions();
-		Ehdokkaat ehdokas = new Ehdokkaat();
+
+		
+		//ehdokas = dao.getCandidateById(Integer.valueOf(ehdokasId));
+
+//		if(ehdokas.getVastauksets() != null)
+//		{
+//			
+//			kohde = "http://127.0.0.1:8080/rest/answersrest/editcandidateanswers";
+//		}
+//		else
+//		{
+//			kohde = "http://127.0.0.1:8080/rest/answersrest/addcandidateanswers";
+//		}
+		
+		//kohde = "http://127.0.0.1:8080/rest/answersrest/addcandidateanswers";
+		//kohde = "http://127.0.0.1:8080/rest/answersrest/editcandidateanswers";
 		
 		for (Kysymykset k : questionslist) {
 			
+			Ehdokkaat ehdokas = new Ehdokkaat();
+			Kysymykset kysymys = new Kysymykset();
 			answer_string = request.getParameter("" + k.getKysymysId());
+			kysymys.setKysymysId(k.getKysymysId());
 			answer = Integer.valueOf(answer_string);
 			Vastaukset v = new Vastaukset(answer);
 			v.setId(vpk);
-			v.setKommentti("Ehdokkaan "+v.getId() + " vastaus");
+			v.setKommentti("Ehdokkaan "+v.getId().getEhdokasId() + " vastaus");
+			v.setEhdokkaat(ehdokas);
+			v.setKysymykset(kysymys);
 			k.setKysymysId(answer);
 			candidateanswerlist.add(v);
 			ehdokas.setEhdokasId(ehdokasId);
-			System.out.println(v.getVastaus() + " on vastaus. Ehdokas on numero " + v.getId());
+			System.out.println(v.getVastaus() + " on vastaus. Ehdokas on numero " + v.getId().getEhdokasId());
 		}
 
-		Client c= ClientBuilder.newClient();
-		WebTarget wt=c.target(kohde); 
-		Builder b=wt.request();
-		Entity<ArrayList<Vastaukset>> e = Entity.entity(candidateanswerlist, MediaType.APPLICATION_JSON); //Muutetaan Entityllä oikeaan muotoon, 
-
-		 done = b.post(e, String.class); 
+//		Client c= ClientBuilder.newClient();
+//		WebTarget wt=c.target(kohde); 
+//		Builder b=wt.request();
+//		Entity<ArrayList<Vastaukset>> e = Entity.entity(candidateanswerlist, MediaType.APPLICATION_JSON); //Muutetaan Entityllä oikeaan muotoon, 
+//
+//		 done = b.post(e, String.class); 
+		
+		done = dao.editCandidateAnswers(candidateanswerlist);
 
 		 //Ohjataan kertomaan menikö ok 
 		request.setAttribute("success", done);

@@ -72,16 +72,16 @@ public class AnswersRest {
 	 * @return
 	 */
 	@POST //have to be post, because the info comes from form
-	@Path("/addcandidateanswers")
+	@Path("/editcandidateanswers")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON) 
-	public String addCandidateAnswers(ArrayList<Vastaukset> list)
+	public String editCandidateAnswers(ArrayList<Vastaukset> list)
 	{
 		System.out.println("Käyty restillä");
 		String done;
 		Dao dao = new Dao();
 
-		done = dao.addCandidateAnswers(list);
+		done = dao.editCandidateAnswers(list);
 		
 		return done;
 
