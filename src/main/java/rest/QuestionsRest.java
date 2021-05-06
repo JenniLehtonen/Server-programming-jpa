@@ -55,7 +55,83 @@ public class QuestionsRest {
 		
 		
 		
+	}
+	
+	/**
+	 * Edit Questions start from this
+	 */
+	
+	@GET
+	@Path("/editquestion")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void getAllQuestions2() //throws ServletException, IOException
+	{
+		List<Kysymykset> questionlist2 = new ArrayList<Kysymykset>();
+		Dao dao = new Dao();
+
+		questionlist2 = dao.getAllQuestions();
+		
+		
+		request.setAttribute("questionlist2", questionlist2);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/showquestion2foredit.jsp");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		
+		
 	} 
+
+
+
+@GET
+	@Path("/getquestionbyid/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void getQuestionById(@PathParam("id") int id) //throws ServletException, IOException
+	{ 
+		Kysymykset kysymys = new Kysymykset();
+		Dao dao = new Dao();
+
+		kysymys = dao.getQuestionById(id);
+
+		request.setAttribute("kysymys", kysymys);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/showquestiontoedit.jsp");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+@POST 
+	@Path("/editquestion2")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes("application/x-www-form-urlencoded") //Method can receive POSTed data from a html form
+	public void editQuestion(@FormParam("kysymysId") int id, @FormParam("kysymys") String kysymys)
+	{
+		
+		List<Kysymykset> questionlist = new ArrayList<Kysymykset>();
+		Dao dao = new Dao();
+		Kysymykset kysymykset = new Kysymykset(id, kysymys);
+
+		questionlist = dao.editQuestion(kysymykset);
+
+		request.setAttribute("questionlist", questionlist);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/showquestiontoedit.jsp");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	}
+
+
+
 	
 	/**
 	 * This method is used for directing to addNewQuestions.jsp
