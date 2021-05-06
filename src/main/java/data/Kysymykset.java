@@ -22,9 +22,10 @@ public class Kysymykset implements Serializable {
 	private String kysymys;
 	
 	
-	public Kysymykset(int kysymysId, String kysymys) {
-		super();
-		this.kysymysId = kysymysId;
+	public Kysymykset(int id, String kysymys) {
+		
+		setKysymysId(id);
+		
 		this.kysymys = kysymys;
 	}
 	//bi-directional many-to-one association to Vastaukset

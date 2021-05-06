@@ -269,6 +269,7 @@ public List<Kysymykset> editQuestion(Kysymykset kysymys)
 		Kysymykset e = em.find(Kysymykset.class, kysymys.getKysymysId());
 		if (e!=null) {
 			em.merge(kysymys); 
+			System.out.println("Merge tehty, eli ei ollut tyhjä");
 		}
 		em.getTransaction().commit();
 
