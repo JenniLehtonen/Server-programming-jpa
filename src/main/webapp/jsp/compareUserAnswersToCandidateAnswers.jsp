@@ -44,14 +44,15 @@
 
 			<% for (int j=0; j<21;j++) {
 			 i=1; %> 
-
+<% %>
 	<b>Sinä:</b><br><br>
+	
 		 <c:forEach var="useranswer" items="${requestScope.useranswers_string}">
 
-		<c:set var="realAnswer" value="${useranswer-48}"/>
+		<!--<c:set var="realAnswer" value="${useranswer-48}"/>-->
 
 Kysymys: <span>	<%= i %></span>,
-Vastaus: <span><b>${realAnswer}</b></span><br><br>
+Vastaus: <span><b>${useranswer}</b></span><br><br>
 
 
 <% i++; %>
