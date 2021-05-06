@@ -26,6 +26,11 @@ public class VastauksetPK implements Serializable {
 	public void setEhdokasId(int ehdokasId) {
 		this.ehdokasId = ehdokasId;
 	}
+	
+	public void setEhdokasId(String ehdokasId) {
+		this.ehdokasId = Integer.valueOf(ehdokasId);
+	}
+	
 	public int getKysymysId() {
 		return this.kysymysId;
 	}

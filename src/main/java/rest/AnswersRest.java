@@ -48,8 +48,8 @@ public class AnswersRest {
 	 * This is for getting candidates' answers and showing them next to user's answers so the user can compare their answers to candidates' answers
 	 */
 	@GET
-	@Path("/compareUserAnswersToCandidateAnswers")
-	public void compareUserAnswersToCandidateAnswers() throws ServletException, IOException {
+	@Path("/compareUserAnswersToCandidateAnswers/{useranswers_string}")
+	public void compareUserAnswersToCandidateAnswers(@PathParam("useranswers_string") String useranswers_string) throws ServletException, IOException {
 		Dao dao = new Dao();
 		/**
 		 * Get candidates' answers from the database
@@ -61,34 +61,30 @@ public class AnswersRest {
 		 * Send user's and candidates' answers to jsp
 		 */
 		request.setAttribute("candidatesAndAnswersList", list);
-		//request.setAttribute("useranswers", useranswers);
+		request.setAttribute("useranswers_string", useranswers_string);
 		RequestDispatcher rd=request.getRequestDispatcher("/jsp/compareUserAnswersToCandidateAnswers.jsp");
 		rd.forward(request, response);
 	}
 	
 	/**
 	 * @author Sanna Nieminen-Vuorio
+	 * @param list
+	 * @return
 	 */
 	@POST //have to be post, because the info comes from form
-	@Path("/addcandidateanswers")
+	@Path("/editcandidateanswers")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes("application/x-www-form-urlencoded") //!!!!
-	public void addCandidateAnswers(List<Vastaukset> list)
+	@Consumes(MediaType.APPLICATION_JSON) 
+	public String editCandidateAnswers(ArrayList<Vastaukset> list)
 	{
-		
+		System.out.println("Käyty restillä");
 		String done;
 		Dao dao = new Dao();
 
-		done = dao.addCandidateAnswers(list);
+		done = dao.editCandidateAnswers(list);
+		
+		return done;
 
-		request.setAttribute("success", done);
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/success.jps");
-		try {
-			rd.forward(request, response);
-		} catch (ServletException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-	} //addCandidateanswers-sulje
+	}
 
 }

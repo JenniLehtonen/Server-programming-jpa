@@ -236,20 +236,4 @@ public class CandidateRest {
 	} //EditCandidate-sulje
 	
 
-	@POST //have to be post, because the info comes from form
-	@Path("/addcandidateanswers")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes("application/x-www-form-urlencoded") //!!!!
-	public void addCandidateAnswers()
-	{
-		
-		String done;
-		Dao dao = new Dao();
-		Ehdokkaat ehdokas = new Ehdokkaat();
-		List<Vastaukset> list = new ArrayList<>();
-		ehdokas.setVastauksets(list);
-
-		done = dao.addCandidateAnswers(list, ehdokas);
-
-	}
 } // class sulje

@@ -92,6 +92,10 @@ public class Ehdokkaat implements Serializable {
 	public void setEhdokasId(int ehdokasId) {
 		this.ehdokasId = ehdokasId;
 	}
+	
+	public void setEhdokasId(String ehdokasId) {
+		this.ehdokasId = Integer.valueOf(ehdokasId);
+	}
 
 	public String getAmmatti() {
 		return this.ammatti;
