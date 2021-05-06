@@ -244,5 +244,36 @@ public class Dao {
 
 			return done;
 	}
+/**
+ * edit questions alkaa tästä
+ */
+	public Kysymykset getQuestionById(int id)
+	{
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Kysymykset kysymys = em.find(Kysymykset.class, id);
+		em.getTransaction().commit();
+		
+		em.close();
+		return kysymys;
+		
+	}
 
+
+
+public List<Kysymykset> editQuestion(Kysymykset kysymys)
+	{
+		EntityManager em=emf.createEntityManager();
+		
+		em.getTransaction().begin();
+		Kysymykset e = em.find(Kysymykset.class, kysymys.getKysymysId());
+		if (e!=null) {
+			em.merge(kysymys); //This line does the update
+		}
+		em.getTransaction().commit();
+
+		List<Kysymykset> list=getAllQuestions();		
+		return list;
+		
+	}
 }
