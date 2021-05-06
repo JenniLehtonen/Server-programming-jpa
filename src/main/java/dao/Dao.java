@@ -99,14 +99,26 @@ public class Dao {
 		return list;
 	}
 	
+	/**
+	 * @author Riikka Siukola
+	 * Adds a new candidate to the database
+	 * @param e for Ehdokkaat
+	 */
+	
 	public void addCandidate(Ehdokkaat e) {
 
 		EntityManager em=emf.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(e);
 		em.getTransaction().commit();
+		em.close();
 	}
 
+	/**
+	 * @author Riikka Siukola
+	 * Removed a candidate from the database
+	 * @param id
+	 */
 	public void deleteCandidate(int id) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
