@@ -37,16 +37,16 @@
 
 	</div>
 
-	<%--<% int i = 1; --%>
+	<% int i = 1; %>
 
 
 <div style="flex:50%;">
 
-			<%--<% for (int j=0; j<21;j++) {
-			<% i=1; %> --%>
+			<% for (int j=0; j<21;j++) {
+			 i=1; %> 
 
 	<b>Sinä:</b><br><br>
-		<%-- <c:forEach var="useranswer" items="${requestScope.useranswers}">
+		 <c:forEach var="useranswer" items="${requestScope.useranswers_string}">
 
 		<c:set var="realAnswer" value="${useranswer-48}"/>
 
@@ -58,7 +58,7 @@ Vastaus: <span><b>${realAnswer}</b></span><br><br>
 
 		</c:forEach>
 
-		<% } %>--%>
+		<% } %>
 
 
 	</div>
