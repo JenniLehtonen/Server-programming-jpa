@@ -28,7 +28,7 @@
 
 </c:forEach>
 
-<a href="/compareUserAnswersToCandidateAnswers?answers=${useranswers_string}" class="btn">Vertaa vastauksiasi</a> <br>
+<a href="rest/compareUserAnswersToCandidateAnswers/${useranswers_string}" class="btn">Vertaa vastauksiasi</a> <br>
 
 
 <%@ include file="../footer.html"%>

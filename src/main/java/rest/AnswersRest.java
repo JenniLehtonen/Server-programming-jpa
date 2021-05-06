@@ -48,8 +48,8 @@ public class AnswersRest {
 	 * This is for getting candidates' answers and showing them next to user's answers so the user can compare their answers to candidates' answers
 	 */
 	@GET
-	@Path("/compareUserAnswersToCandidateAnswers")
-	public void compareUserAnswersToCandidateAnswers() throws ServletException, IOException {
+	@Path("/compareUserAnswersToCandidateAnswers/{useranswers_string}")
+	public void compareUserAnswersToCandidateAnswers(@PathParam("useranswers_string") String useranswers_string) throws ServletException, IOException {
 		Dao dao = new Dao();
 		/**
 		 * Get candidates' answers from the database
@@ -61,7 +61,7 @@ public class AnswersRest {
 		 * Send user's and candidates' answers to jsp
 		 */
 		request.setAttribute("candidatesAndAnswersList", list);
-		//request.setAttribute("useranswers", useranswers);
+		request.setAttribute("useranswers_string", useranswers_string);
 		RequestDispatcher rd=request.getRequestDispatcher("/jsp/compareUserAnswersToCandidateAnswers.jsp");
 		rd.forward(request, response);
 	}
