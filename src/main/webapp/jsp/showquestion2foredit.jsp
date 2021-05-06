@@ -14,7 +14,7 @@
 
 <ol>
 <c:forEach var="question" items="${requestScope.questionlist2}" >
-<li>${question.kysymys} <a href="/rest/questionrest/getquestionbyid/=${question.kysymysId}">Muokkaa</a>
+<li>${question.kysymys} <a href="/rest/questionrest/getquestionbyid/${question.kysymysId}">Muokkaa</a>
 
 </c:forEach>
 </ol>
