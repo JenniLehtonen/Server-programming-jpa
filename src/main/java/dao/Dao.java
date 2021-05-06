@@ -268,7 +268,7 @@ public List<Kysymykset> editQuestion(Kysymykset kysymys)
 		em.getTransaction().begin();
 		Kysymykset e = em.find(Kysymykset.class, kysymys.getKysymysId());
 		if (e!=null) {
-			em.merge(kysymys); //This line does the update
+			em.merge(kysymys); 
 		}
 		em.getTransaction().commit();
 
