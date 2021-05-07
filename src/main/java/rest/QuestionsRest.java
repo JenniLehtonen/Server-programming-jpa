@@ -121,7 +121,7 @@ public class QuestionsRest {
 		questionlist = dao.editQuestion(kysymykset);
 
 		request.setAttribute("questionlist", questionlist);
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/showquestiontoedit.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/editOkQuestions.jsp");
 		try {
 			rd.forward(request, response);
 		} catch (ServletException | IOException e) {

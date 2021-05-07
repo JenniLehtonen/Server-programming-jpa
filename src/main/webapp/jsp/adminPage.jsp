@@ -7,7 +7,7 @@
 <a class="adminButtons" href="/addCandidate">Lisää uusi ehdokas</a><br>
 <a class="adminButtons" href="/rest/questionrest/addQuestionPage">Lisää kysymys</a>
 <a class="adminButtons" href='/rest/questionrest/getallquestionstodelete'>Poista kysymyksiä</a> 
-<a class="adminButtons" href="/updateQuestion">Muokkaa kysymyksiä</a> <br>
+<a class="adminButtons" href='/rest/questionrest/editquestion'>Muokkaa kysymyksiä</a> <br>
 <a class="adminButtons" href="/candidateaddanswer">Ehdokas vastaa kysymyksiin</a>
 <a class="adminButtons" href="/candidateupdateanswer">Ehdokas muokkaa vastauksia</a>
  	
