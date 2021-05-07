@@ -173,12 +173,12 @@ input {
 	border-radius: 5px;
 }
 .button{
-	background-color: white;
-	color: black;
-	border: 2px solid #589696;
-	padding: 16px 32px;
-	text-align: center;
-	text-decoration: none;
+	background-color: white !important; 
+  	color: black; 
+  	border: 2px solid #589696;
+  	padding: 16px 32px;
+ 	text-align: center;
+ 	text-decoration: none;
 	display: inline-block;
 	font-size: 16px;
 	margin: 4px 2px;
@@ -186,8 +186,8 @@ input {
 	cursor: pointer;
 }
 .button:hover{
-	background-color: #589696;
-    color: white;
+	 background-color: #589696 !important;
+  	 color: white !important;
 }
 button {
 	background-color: white;
@@ -232,22 +232,22 @@ button:hover {
 }
 
 .btn {
-	background-color : white;
-	color: black;
-	border: 2px solid #589696;
-	padding: 16px 32px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 16px;
-	margin: 4px 2px;
-	transition-duration: 0.4s;
-	cursor: pointer;
+  background-color: white !important; 
+  color: black; 
+  border: 2px solid #589696;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none !important;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
 }
 
 .btn:hover {
-	background-color: #589696;
-	color: white;
+  background-color: #589696 !important;
+  color: white !important;
 }
 
 .flex-container {
