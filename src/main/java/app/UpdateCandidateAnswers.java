@@ -52,27 +52,14 @@ private static final long serialVersionUID = 1L;
 		int answer = 0;
 		List<Kysymykset> questionslist = dao.getAllQuestions();
 
-		
-		//ehdokas = dao.getCandidateById(Integer.valueOf(ehdokasId));
-
-//		if(ehdokas.getVastauksets() != null)
-//		{
-//			
-//			kohde = "http://127.0.0.1:8080/rest/answersrest/editcandidateanswers";
-//		}
-//		else
-//		{
-//			kohde = "http://127.0.0.1:8080/rest/answersrest/addcandidateanswers";
-//		}
-		
-		//kohde = "http://127.0.0.1:8080/rest/answersrest/addcandidateanswers";
-		//kohde = "http://127.0.0.1:8080/rest/answersrest/editcandidateanswers";
-		
 		for (Kysymykset k : questionslist) {
 			
 			Ehdokkaat ehdokas = new Ehdokkaat();
 			Kysymykset kysymys = new Kysymykset();
 			answer_string = request.getParameter("" + k.getKysymysId());
+			if (answer_string == null) {
+				answer_string = "0";
+			}
 			kysymys.setKysymysId(k.getKysymysId());
 			answer = Integer.valueOf(answer_string);
 			Vastaukset v = new Vastaukset(answer);
