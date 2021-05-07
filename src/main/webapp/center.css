@@ -79,6 +79,7 @@ input {
   box-sizing: border-box;
 }
 .adminButtons{
+  font-family: Arial, Helvetica, sans-serif;
   background-color: white; 
   color: black; 
   border: 2px solid #589696;
@@ -87,7 +88,7 @@ input {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 15px;
   margin: 4px 2px;
   transition-duration: 0.4s;
   cursor: pointer;
@@ -95,7 +96,8 @@ input {
 
 .adminButtons:hover {
   background-color: #589696;
-  color: white;
+  color: white !important;
+  text-decoration: none !important;
 }
 
 button {
@@ -111,13 +113,13 @@ button {
   transition-duration: 0.4s;
   cursor: pointer;
 }
-
 button:hover {
   background-color: #589696 !important;
-  color: white;
+  color: white !important;
 }
-
-
+#removeButton{
+	padding: 12px 18px !important;
+}
 .footer {
 	width:70%;
 	padding:5px 0;
