@@ -118,6 +118,7 @@ public class CandidateRest {
 	
 	/**
 	 * @author Riikka Siukola
+	 * 
 	 * @param etunimi
 	 * @param sukunimi
 	 * @param puolue
@@ -179,6 +180,7 @@ public class CandidateRest {
 	
 	/**
 	 * @author Riikka Siukola
+	 * 
 	 * @param id
 	 */
 	@GET
