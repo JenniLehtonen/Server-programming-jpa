@@ -21,12 +21,12 @@ public class Vastaukset implements Serializable {
 	private int vastaus;
 
 	//bi-directional many-to-one association to Ehdokkaat
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = {CascadeType.PERSIST})
 	@JoinColumn(name="EHDOKAS_ID")
 	private Ehdokkaat ehdokkaat;
 
 	//bi-directional many-to-one association to Kysymykset
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = {CascadeType.PERSIST})
 	@JoinColumn(name="KYSYMYS_ID")
 	private Kysymykset kysymykset;
 
