@@ -133,7 +133,6 @@ public class CandidateRest {
 	 */
 	@POST
 	@Path("/addcandidate")
-	//@Produces(MediaType.APPLICATION_JSON)
 	@Consumes({MediaType.MULTIPART_FORM_DATA})
 	public void addCandidate(@FormDataParam("etunimi") String etunimi, @FormDataParam("sukunimi") String sukunimi, @FormDataParam("puolue") String puolue, @FormDataParam("kotipaikkakunta") String kotipaikkakunta, @FormDataParam("ika") String ika, @FormDataParam("miksi_eduskuntaan") String miksi_eduskuntaan, @FormDataParam("mita_asioita_haluat_edistaa") String mita_asioita_haluat_edistaa, @FormDataParam("ammatti") String ammatti, @FormDataParam("kuva") InputStream fileInputStream, @FormDataParam("kuva") FormDataContentDisposition fileMetaData, @Context ServletContext sc) {
 		Ehdokkaat e = new Ehdokkaat();
