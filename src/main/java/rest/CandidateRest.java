@@ -276,9 +276,7 @@ public class CandidateRest {
 			System.out.println("Error on "+ e);
 			ehdokas.setKuva(dao.getCandidateById(id).getKuva());
 		}
-		
-		
-		
+
 		candidateList = dao.editCandidate(ehdokas);
 
 		request.setAttribute("candidateList", candidateList);
@@ -290,7 +288,5 @@ public class CandidateRest {
 			e.printStackTrace();
 		} 
 	} //EditCandidate-sulje
-	
-
 	
 } // class sulje
