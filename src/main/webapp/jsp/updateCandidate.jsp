@@ -29,7 +29,7 @@
 <textarea rows="5" cols="80" name='miksiEduskuntaan' class='input' style="width:24rem;">${requestScope.candidate.miksiEduskuntaan}</textarea><br>
 <b>Mitä asioita haluaisit edistää?</b> <br>
 <textarea rows="5" cols="80" name='mitaAsioitaHaluatEdistaa' class='input' style="width:24rem;">${requestScope.candidate.mitaAsioitaHaluatEdistaa}</textarea><br>
-<input type="file" id="kuva" name="kuva" accept=".jpg" /> <br><br>
+<input type="file" id="kuva" name="kuva" accept=".jpg"/> <br><br>
 <input type='Submit' name='ok' value='Tallenna' class="btn"> 
 </form>
 
