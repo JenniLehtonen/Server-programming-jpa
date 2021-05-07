@@ -128,7 +128,7 @@ public class BestCandidates extends HttpServlet {
 					/**
 					 * Check if the user has answered a particular question. If not, skip.
 					 */
-					if (useranswerlist.get(j) != 0) {
+					if (useranswerlist.get(j) != 0 && candidatesAnswers.get(j).getVastaus() != 0) {
 						candidateAnswer = candidatesAnswers.get(j);
 						difference = useranswerlist.get(j) - candidateAnswer.getVastaus();
 						differenceSum = differenceSum + Math.abs(difference);
