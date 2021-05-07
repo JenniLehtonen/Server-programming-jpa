@@ -20,11 +20,12 @@
 	<button class="dropbtn" type="button" disabled>Valitse ehdokas:</button>
 	<div class="dropdown-content">
 	<select name="ehdokasId">
-	<option>Valitse </option>
+	<option></option>
 	<c:forEach var="candidate" items="${requestScope.candidatelist}">
 	
 		<option value='${candidate.ehdokasId}'>${candidate.etunimi} ${candidate.sukunimi}</option>
 		</c:forEach> 
+		
 		</select>
 
 	</div>

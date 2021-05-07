@@ -42,10 +42,16 @@ private static final long serialVersionUID = 1L;
 
 		String ehdokasId = request.getParameter("ehdokasId");
 		VastauksetPK vpk = new VastauksetPK();
+		String done = "";
+		
+		try {
+			
+		
+		if(ehdokasId != null) {
+			
 		vpk.setEhdokasId(ehdokasId);
 		ArrayList<Vastaukset> candidateanswerlist = new ArrayList<>();
 		String kohde = "http://127.0.0.1:8080/rest/answersrest/editcandidateanswers";
-		String done = "Ei onnistunut";
 		Dao dao = new Dao();
 
 		String answer_string = null;
@@ -79,8 +85,17 @@ private static final long serialVersionUID = 1L;
 		Entity<ArrayList<Vastaukset>> e = Entity.entity(candidateanswerlist, MediaType.APPLICATION_JSON); //Muutetaan Entityllä oikeaan muotoon, 
 
 		 done = b.post(e, String.class); 
-		
-		//done = dao.editCandidateAnswers(candidateanswerlist);
+		}
+		else
+		{
+			done = "Ehdokasta ei löytynyt, joten vastauksia ei voitu tallentaa";
+		}
+		}
+		catch(Exception e)
+		{
+			System.out.println("Ehdokkaan vastausten tallennus ei onnistunut, koska virhe "+ e);
+			done = "Ehdokasta ei löytynyt, joten vastauksia ei voitu tallentaa";
+		}
 
 		 //Ohjataan kertomaan menikö ok 
 		request.setAttribute("success", done);
