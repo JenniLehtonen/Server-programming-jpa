@@ -53,8 +53,8 @@
 		</div>
 		<div class="flex-child">
 			<c:choose>
-				<c:when test="${not empty Ehdokkaat.kuva}">
-					<img src="http://127.0.0.1:8080/img/${Ehdokkaat.kuva}">
+				<c:when test="${not empty candidate.kuva}">
+					<img src="http://127.0.0.1:8080/img/${candidate.kuva}">
 				</c:when>
 				<c:otherwise>
 					<img src="http://127.0.0.1:8080/img/default.jpg">
