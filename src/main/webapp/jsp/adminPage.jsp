@@ -8,7 +8,6 @@
 	<a class="adminButtons" class="grid-item" href="/rest/questionrest/addQuestionPage">Lisää kysymys</a>
 	<a class="adminButtons" class="grid-item" href='/rest/questionrest/getallquestionstodelete'>Poista kysymyksiä</a> 
 	<a class="adminButtons" class="grid-item" href="/rest/questionrest/editquestion">Muokkaa kysymyksiä</a>
-	<a class="adminButtons" class="grid-item" href="/candidateaddanswer">Ehdokas vastaa kysymyksiin</a>
-	<a class="adminButtons" class="grid-item" href="/candidateaddanswer">Ehdokas lisää tai muokkaa vastauksia</a>
+	<a class="adminButtons" class="grid-item" href="/rest/questionrest/getquestionsforcandidate">Ehdokas lisää tai muokkaa vastauksia</a>
 </div>
 <%@ include file="../footer.html" %>
