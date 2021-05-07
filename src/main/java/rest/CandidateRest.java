@@ -116,6 +116,20 @@ public class CandidateRest {
 		} 
 	}
 	
+	/**
+	 * @author Riikka Siukola
+	 * @param etunimi
+	 * @param sukunimi
+	 * @param puolue
+	 * @param kotipaikkakunta
+	 * @param ika
+	 * @param miksi_eduskuntaan
+	 * @param mita_asioita_haluat_edistaa
+	 * @param ammatti
+	 * @param fileInputStream
+	 * @param fileMetaData
+	 * @param sc
+	 */
 	@POST
 	@Path("/addcandidate")
 	//@Produces(MediaType.APPLICATION_JSON)
@@ -163,6 +177,10 @@ public class CandidateRest {
 		} 
 	}
 	
+	/**
+	 * @author Riikka Siukola
+	 * @param id
+	 */
 	@GET
 	@Path("/deletecandidate/{id}")
 	@Produces(MediaType.APPLICATION_JSON)

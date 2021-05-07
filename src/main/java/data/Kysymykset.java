@@ -20,7 +20,13 @@ public class Kysymykset implements Serializable {
 	private int kysymysId;
 
 	private String kysymys;
-
+	
+	
+	public Kysymykset(int kysymysId, String kysymys) {
+		super();
+		this.kysymysId = kysymysId;
+		this.kysymys = kysymys;
+	}
 	//bi-directional many-to-one association to Vastaukset
 	@OneToMany(mappedBy="kysymykset")
 	private List<Vastaukset> vastauksets;

@@ -99,14 +99,26 @@ public class Dao {
 		return list;
 	}
 	
+	/**
+	 * @author Riikka Siukola
+	 * Adds a new candidate to the database
+	 * @param e for Ehdokkaat
+	 */
+	
 	public void addCandidate(Ehdokkaat e) {
 
 		EntityManager em=emf.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(e);
 		em.getTransaction().commit();
+		em.close();
 	}
 
+	/**
+	 * @author Riikka Siukola
+	 * Removed a candidate from the database
+	 * @param id
+	 */
 	public void deleteCandidate(int id) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -232,5 +244,36 @@ public class Dao {
 
 			return done;
 	}
+/**
+ * edit questions alkaa tästä
+ */
+	public Kysymykset getQuestionById(int id)
+	{
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Kysymykset kysymys = em.find(Kysymykset.class, id);
+		em.getTransaction().commit();
+		
+		em.close();
+		return kysymys;
+		
+	}
 
+
+
+public List<Kysymykset> editQuestion(Kysymykset kysymys)
+	{
+		EntityManager em=emf.createEntityManager();
+		
+		em.getTransaction().begin();
+		Kysymykset e = em.find(Kysymykset.class, kysymys.getKysymysId());
+		if (e!=null) {
+			em.merge(kysymys); 
+		}
+		em.getTransaction().commit();
+
+		List<Kysymykset> list=getAllQuestions();		
+		return list;
+		
+	}
 }
