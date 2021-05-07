@@ -44,7 +44,7 @@ private static final long serialVersionUID = 1L;
 		VastauksetPK vpk = new VastauksetPK();
 		vpk.setEhdokasId(ehdokasId);
 		ArrayList<Vastaukset> candidateanswerlist = new ArrayList<>();
-		String kohde = null;
+		String kohde = "http://127.0.0.1:8080/rest/answersrest/editcandidateanswers";
 		String done = "Ei onnistunut";
 		Dao dao = new Dao();
 
@@ -73,18 +73,18 @@ private static final long serialVersionUID = 1L;
 			System.out.println(v.getVastaus() + " on vastaus. Ehdokas on numero " + v.getId().getEhdokasId());
 		}
 
-//		Client c= ClientBuilder.newClient();
-//		WebTarget wt=c.target(kohde); 
-//		Builder b=wt.request();
-//		Entity<ArrayList<Vastaukset>> e = Entity.entity(candidateanswerlist, MediaType.APPLICATION_JSON); //Muutetaan Entityllä oikeaan muotoon, 
-//
-//		 done = b.post(e, String.class); 
+		Client c= ClientBuilder.newClient();
+		WebTarget wt=c.target(kohde); 
+		Builder b=wt.request();
+		Entity<ArrayList<Vastaukset>> e = Entity.entity(candidateanswerlist, MediaType.APPLICATION_JSON); //Muutetaan Entityllä oikeaan muotoon, 
+
+		 done = b.post(e, String.class); 
 		
-		done = dao.editCandidateAnswers(candidateanswerlist);
+		//done = dao.editCandidateAnswers(candidateanswerlist);
 
 		 //Ohjataan kertomaan menikö ok 
 		request.setAttribute("success", done);
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/success.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/success2.jsp");
 		try {
 			rd.forward(request, response);
 		} catch (ServletException | IOException ex) {

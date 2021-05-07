@@ -96,6 +96,10 @@ public class CandidateRest {
 		}
 	}
 
+	/**
+	 * @author Sanna Nieminen-Vuorio
+	 * Selects everything from Ehdokkaat and redirect to showshort.jsp, which shows all the candidates' names.
+	 */
 	@GET
 	@Path("/showshort")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -140,7 +144,7 @@ public class CandidateRest {
 		e.setSukunimi(sukunimi);
 		e.setPuolue(puolue);
 		e.setKotipaikkakunta(kotipaikkakunta);
-		e.setIka(Integer.valueOf(ika));
+		e.setIka(ika);
 		e.setMiksiEduskuntaan(miksi_eduskuntaan);
 		e.setMitaAsioitaHaluatEdistaa(mita_asioita_haluat_edistaa);
 		e.setAmmatti(ammatti);
@@ -277,9 +281,10 @@ public class CandidateRest {
 		}
 
 		candidateList = dao.editCandidate(ehdokas);
+		String done = "Ehdokkaan tiedot päivitetty";
 
-		request.setAttribute("candidateList", candidateList);
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/showshort.jsp");
+		request.setAttribute("success", done);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/success2.jsp");
 		try {
 			rd.forward(request, response);
 		} catch (ServletException | IOException e) {

@@ -11,8 +11,7 @@
 <c:import url="../adminHeader.html" charEncoding="UTF-8"/>
 
 <center>
-<b>Ehdokkaan lisääminen onnistui</b> <br><br>
-<a href="/rest/questionrest/getquestionsforcandidate" class="btn">Lisää ehdokkaan vastaukset</a>
+<b>${requestScope.success}</b> <br><br>
 <a href="http://localhost:8080/jsp/adminPage.jsp" class="btn">Palaa etusivulle</a>
 </center>
 <%@ include file="../footer.html" %>
