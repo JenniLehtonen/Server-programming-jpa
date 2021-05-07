@@ -87,7 +87,7 @@ public class QuestionsRest {
 
 
 
-@GET
+	@GET
 	@Path("/getquestionbyid/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public void getQuestionById(@PathParam("id") int id) //throws ServletException, IOException
@@ -111,17 +111,19 @@ public class QuestionsRest {
 	@Path("/editquestion2")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes("application/x-www-form-urlencoded") //Method can receive POSTed data from a html form
-	public void editQuestion(@FormParam("kysymysId") int id, @FormParam("kysymys") String kysymys)
+	public void editQuestion(@FormParam("kysymysId") int kysymysId, @FormParam("kysymys") String mikakysymys)
 	{
 		
-		List<Kysymykset> questionlist = new ArrayList<Kysymykset>();
+		List<Kysymykset> questionlist2 = new ArrayList<Kysymykset>();
 		Dao dao = new Dao();
-		Kysymykset kysymykset = new Kysymykset(id, kysymys);
+		Kysymykset kysymys = new Kysymykset(kysymysId, mikakysymys);
+		System.out.println(kysymys.getKysymysId());
+		questionlist2 = dao.editQuestion(kysymys);
 
-		questionlist = dao.editQuestion(kysymykset);
 
-		request.setAttribute("questionlist", questionlist);
+		request.setAttribute("questionlist2", questionlist2);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/editOkQuestions.jsp");
+
 		try {
 			rd.forward(request, response);
 		} catch (ServletException | IOException e) {
