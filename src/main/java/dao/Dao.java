@@ -40,6 +40,7 @@ public class Dao {
 
 
 		List<Kysymykset> list = em.createQuery("select a from Kysymykset a").getResultList();
+		em.close();
 
 		return list;
 	}
@@ -55,6 +56,7 @@ public class Dao {
 			em.getTransaction().begin();
 			em.persist(kysymys);
 			em.getTransaction().commit();
+			em.close();
 			
 		} catch (NullPointerException e) {
 			e.printStackTrace();
@@ -116,14 +118,16 @@ public class Dao {
 
 	/**
 	 * @author Riikka Siukola
-	 * Removed a candidate from the database
+	 * Removes a candidate and their answers from the database
 	 * @param id
 	 */
 	public void deleteCandidate(int id) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-
-		Object ehdokas = em.createQuery("SELECT a FROM Ehdokkaat a WHERE a.ehdokasId=?1").setParameter(1, id).getSingleResult();
+				
+		em.createNativeQuery("delete from vastaukset where ehdokas_id="+id).executeUpdate();
+		
+		Object ehdokas = em.createQuery("SELECT e FROM Ehdokkaat e WHERE e.ehdokasId=?1").setParameter(1, id).getSingleResult();
 
 		try {
 			em.remove(ehdokas);
@@ -132,7 +136,6 @@ public class Dao {
 		}
 
 		em.getTransaction().commit();
-
 		em.close();
 
 	}
@@ -276,12 +279,14 @@ public List<Kysymykset> editQuestion(Kysymykset kysymys)
 		try {
 			em.merge(kysymys); 
 			
+			
 		}
 		catch(Exception exception) {
 			
 			System.out.println("ei toimi");
 		}
 		em.getTransaction().commit();
+		em.close();
 
 		List<Kysymykset> list=getAllQuestions();		
 		return list;
