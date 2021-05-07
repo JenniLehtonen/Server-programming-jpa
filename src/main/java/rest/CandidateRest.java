@@ -118,6 +118,7 @@ public class CandidateRest {
 	
 	/**
 	 * @author Riikka Siukola
+	 * 
 	 * @param etunimi
 	 * @param sukunimi
 	 * @param puolue
@@ -179,6 +180,7 @@ public class CandidateRest {
 	
 	/**
 	 * @author Riikka Siukola
+	 * 
 	 * @param id
 	 */
 	@GET
@@ -233,14 +235,31 @@ public class CandidateRest {
 	@POST //have to be post, because the info comes from form
 	@Path("/editcandidate")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes("application/x-www-form-urlencoded") //!!!!
-	public void editCandidate(@FormParam("ehdokasId") int id, @FormParam("sukunimi") String sukunimi, @FormParam("etunimi") String etunimi, @FormParam("puolue") String puolue, @FormParam("kotipaikkakunta") String kotipaikkakunta, @FormParam("ika") int ika, @FormParam("ammatti") String ammatti, @FormParam("miksiEduskuntaan") String miksiEduskuntaan, @FormParam("mitaAsioitaHaluatEdistaa") String mitaAsioitaHaluatEdistaa)
+	@Consumes({MediaType.MULTIPART_FORM_DATA}) 
+	public void editCandidate(@FormDataParam("ehdokasId") int id, @FormDataParam("sukunimi") String sukunimi, @FormDataParam("etunimi") String etunimi, @FormDataParam("puolue") String puolue, @FormDataParam("kotipaikkakunta") String kotipaikkakunta, @FormDataParam("ika") int ika, @FormDataParam("ammatti") String ammatti, @FormDataParam("miksiEduskuntaan") String miksiEduskuntaan, @FormDataParam("mitaAsioitaHaluatEdistaa") String mitaAsioitaHaluatEdistaa, @FormDataParam("kuva") InputStream fileInputStream, @FormDataParam("kuva") FormDataContentDisposition fileMetaData, @Context ServletContext sc)
 	{
 		
 		List<Ehdokkaat> candidateList = new ArrayList<Ehdokkaat>();
 		Dao dao = new Dao();
 		Ehdokkaat ehdokas = new Ehdokkaat(id, sukunimi, etunimi, puolue, kotipaikkakunta, ika, miksiEduskuntaan, mitaAsioitaHaluatEdistaa, ammatti);
-
+		ehdokas.setKuva(fileMetaData.getFileName());
+		
+		String UPLOAD_PATH="./img";
+	    try{
+	        int read = 0;
+	        byte[] bytes = new byte[1024];
+	 
+	        OutputStream out = new FileOutputStream(new File(UPLOAD_PATH + "/"+fileMetaData.getFileName()));
+	        while ((read = fileInputStream.read(bytes)) != -1) 
+	        {
+	            out.write(bytes, 0, read);
+	        }
+	        out.flush();
+	        out.close();
+	    } 
+	    catch (IOException exception){
+	        throw new WebApplicationException("Error while uploading file. Please try again !!");
+	    }
 		candidateList = dao.editCandidate(ehdokas);
 
 		request.setAttribute("candidateList", candidateList);
