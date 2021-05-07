@@ -95,7 +95,8 @@ input {
 
 .adminButtons:hover {
   background-color: #589696;
-  color: white;
+  color: white !important;
+  text-decoration: none !important;
 }
 
 button {
@@ -114,7 +115,7 @@ button {
 
 button:hover {
   background-color: #589696 !important;
-  color: white;
+  color: white !important;
 }
 
 
