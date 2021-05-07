@@ -128,3 +128,17 @@ button:hover {
 	border-radius:0 0 10px 10px;
 	color:white;
 }
+.grid-container {
+  align-items:center;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+}
+
+.grid-item {
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
