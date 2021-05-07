@@ -120,8 +120,10 @@ public class QuestionsRest {
 		System.out.println(kysymys.getKysymysId());
 		questionlist2 = dao.editQuestion(kysymys);
 
+
 		request.setAttribute("questionlist2", questionlist2);
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/showquestion2foredit.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/editOkQuestions.jsp");
+
 		try {
 			rd.forward(request, response);
 		} catch (ServletException | IOException e) {
