@@ -246,6 +246,8 @@ public class Dao {
 	}
 /**
  * edit questions alkaa tästä
+ * @param kysymys
+ * @return done
  */
 	public Kysymykset getQuestionById(int id)
 	{
@@ -259,7 +261,11 @@ public class Dao {
 		
 	}
 
-
+	/**
+	 * edit questions alkaa tästä
+	 * @param kysymys
+	 * @return list
+	 */
 
 public List<Kysymykset> editQuestion(Kysymykset kysymys)
 	{
@@ -267,9 +273,13 @@ public List<Kysymykset> editQuestion(Kysymykset kysymys)
 		
 		em.getTransaction().begin();
 		Kysymykset e = em.find(Kysymykset.class, kysymys.getKysymysId());
-		if (e!=null) {
+		try {
 			em.merge(kysymys); 
-			System.out.println("Merge tehty, eli ei ollut tyhjä");
+			
+		}
+		catch(Exception exception) {
+			
+			System.out.println("ei toimi");
 		}
 		em.getTransaction().commit();
 

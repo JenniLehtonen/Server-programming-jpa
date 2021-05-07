@@ -111,13 +111,13 @@ public class QuestionsRest {
 	@Path("/editquestion2")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes("application/x-www-form-urlencoded") //Method can receive POSTed data from a html form
-	public void editQuestion(@FormParam("kysymysId") int id, @FormParam("kysymys") String mikakysymys)
+	public void editQuestion(@FormParam("kysymysId") int kysymysId, @FormParam("kysymys") String mikakysymys)
 	{
 		
 		List<Kysymykset> questionlist2 = new ArrayList<Kysymykset>();
 		Dao dao = new Dao();
-		Kysymykset kysymys = new Kysymykset(id, mikakysymys);
-
+		Kysymykset kysymys = new Kysymykset(kysymysId, mikakysymys);
+		System.out.println(kysymys.getKysymysId());
 		questionlist2 = dao.editQuestion(kysymys);
 
 		request.setAttribute("questionlist2", questionlist2);
