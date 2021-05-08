@@ -241,9 +241,7 @@ public class Dao {
 		for(Vastaukset v : list)
 		{
 			try
-			{
-				Vastaukset vastaus = em.find(Vastaukset.class, v.getId());
-				
+			{				
 					em.merge(v); //This line does the update
 					System.out.println("Merge tehty, eli ei ollut tyhjä");
 					System.out.println("Ehdokkaan vastaukset päivitetty");
