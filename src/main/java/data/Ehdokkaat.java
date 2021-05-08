@@ -122,6 +122,7 @@ public class Ehdokkaat implements Serializable {
 	}
 	
 	public void setIka(String ika) {
+		//If user gives string and not number, set age to zero
 		try
 		{
 			this.ika = Integer.valueOf(ika);

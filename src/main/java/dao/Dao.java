@@ -13,16 +13,28 @@ import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
+/**
+ * 
+ * @author Jenni Lehtonen, Liisa Vuorenmaa, Riikka Siukola, Sanna Nieminen-Vuorio
+ * All JPA-methods
+ *
+ */
 public class Dao {
 
+	/**
+	 * Entity manager factory, that been used in all methods
+	 */
 	EntityManagerFactory emf=Persistence.createEntityManagerFactory("Server-programming-jpa");
 	
+	
+	/**
+	 * @author Sanna Nieminen-Vuorio
+	 * Reads all candidates from database
+	 * @return list List of all candidates
+	 */
 	public List<Ehdokkaat> getAllCandidates()
 	{
-
-
 		EntityManager em=emf.createEntityManager();
-
 
 		List<Ehdokkaat> list = em.createQuery("select a from Ehdokkaat a").getResultList();
 
@@ -31,14 +43,14 @@ public class Dao {
 		return list;
 	}
 
+	
+	/**
+	 * Reads all questions from database
+	 * @return list List of questions
+	 */
 	public List<Kysymykset> getAllQuestions()
 	{
-
-
 		EntityManager em=emf.createEntityManager();
-
-
-
 		List<Kysymykset> list = em.createQuery("select a from Kysymykset a").getResultList();
 		em.close();
 
@@ -142,7 +154,8 @@ public class Dao {
 
 	/**
 	 * @author Sanna Nieminen-Vuorio
-	 *
+	 * Reads candidates from database based on party
+	 * @param party
 	 * @return list List, where is all the data of one candidate based on party
 	 */
 
@@ -170,7 +183,7 @@ public class Dao {
 	 * @author Sanna Nieminen-Vuorio
 	 * Method gets one candidate based on id
 	 * @param id
-	 * @return Ehdokkaat-object
+	 * @return ehdokas, Ehdokkaat-object
 	 */
 	public Ehdokkaat getCandidateById(int id)
 	{
@@ -208,12 +221,15 @@ public class Dao {
 
 		return list;
 
-	}
+	} // editCandidate-sulje
 
 	/**
 	 * @author Sanna Nieminen-Vuorio
-	 * @param vastaus
+	 * Edit candidate answers to database. Can be used also if there is no answers, but candidate is created.
+	 * Gets a list of candidate's answers as a parameter.
+	 * @param list
 	 * @return done
+	 * Returns string that tells if the method was success or not
 	 */
 	public String editCandidateAnswers(ArrayList<Vastaukset> list)
 	{
@@ -246,7 +262,9 @@ public class Dao {
 			em.close();
 
 			return done;
-	}
+	} //editCandidateAnswers-sulje
+	
+	
 /**
  * edit questions alkaa tästä
  * @param kysymys
