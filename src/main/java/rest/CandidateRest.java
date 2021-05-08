@@ -38,6 +38,12 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 import data.*;
 import dao.*;
 
+/**
+ * 
+ * @author Riikka Siukola, Sanna Nieminen-Vuorio
+ * This is a restful for handling candidates, for example add and edit
+ *
+ */
 @Path("/candidaterest")
 public class CandidateRest {
 	
@@ -50,7 +56,7 @@ public class CandidateRest {
 	/**
 	 * @Sanna Nieminen-Vuorio
 	 * Method gets all the candidates from database, using Dao-class method
-	 * @return candidateList, list of all candidates
+	 * Redirect to jsp, to show all candidates information
 	 */
 	@GET
 	@Path("/getallcandidates")
@@ -71,11 +77,17 @@ public class CandidateRest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-		
-		//return candidateList;
-		
+
 	} //getAllCandidates-sulje
 	
+	
+	/**
+	 * @author Sanna Nieminen-Vuorio
+	 * Gets one candidate based on id, from database, using Dao-class method
+	 * Gets candidate's id as a path parameter
+	 * Redirects to jsp-page, where user can update candidate's information
+	 * @param id
+	 */
 	@GET
 	@Path("/getcandidatebyid/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -205,9 +217,12 @@ public class CandidateRest {
 		} 
 	}
 	
-	
 	/**
 	 * @author Sanna Nieminen-Vuorio
+	 * Gets candidates based on party
+	 * Gets party as a path parameter
+	 * Redirect to jsp, to show candidates from specific party 
+	 * @param party
 	 */
 	@GET
 	@Path("/getcandidatesbyparty/{party}")
@@ -234,6 +249,20 @@ public class CandidateRest {
 	
 	/**
 	 * @author Sanna Nieminen-Vuorio
+	 * Edit candidate's information to database
+	 * Use Dao-class method, to do the merge
+	 * @param id
+	 * @param sukunimi
+	 * @param etunimi
+	 * @param puolue
+	 * @param kotipaikkakunta
+	 * @param ika
+	 * @param ammatti
+	 * @param miksiEduskuntaan
+	 * @param mitaAsioitaHaluatEdistaa
+	 * @param fileInputStream
+	 * @param fileMetaData
+	 * @param sc
 	 */
 	@POST //have to be post, because the info comes from form
 	@Path("/editcandidate")
@@ -250,6 +279,9 @@ public class CandidateRest {
 			
 			if(fileMetaData != null && fileInputStream != null)
 			{
+				/**
+				 * Upload new photo, if user sets it
+				 */
 				ehdokas.setKuva(fileMetaData.getFileName());
 				
 				String UPLOAD_PATH="./img";
@@ -271,11 +303,18 @@ public class CandidateRest {
 			}
 			else
 			{
+				/**
+				 * If user don't set new photo, get last photo used
+				 */
 				ehdokas.setKuva(dao.getCandidateById(id).getKuva());
 			}
 		}
 		catch(Exception e)
 		{
+			/**
+			 * Gets error, if photo is not set,but it doesn't get null value
+			 * If user don't set new photo, get last photo used
+			 */
 			System.out.println("Error on "+ e);
 			ehdokas.setKuva(dao.getCandidateById(id).getKuva());
 		}
