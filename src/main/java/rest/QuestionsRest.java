@@ -28,6 +28,11 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 import data.*;
 import dao.*;
 
+/**
+ * 
+ * @author Jenni Lehtonen, Liisa Vuorenmaa, Sanna Nieminen-Vuorio
+ *
+ */
 @Path("/questionrest")
 public class QuestionsRest {
 	@Context HttpServletRequest request;
@@ -36,6 +41,13 @@ public class QuestionsRest {
 	@GET
 	@Path("/getallquestions")
 	@Produces(MediaType.APPLICATION_JSON)
+	
+	/**
+	 * @author liisa
+	 * 
+	 * Method get all questions from database and show them to user for answering
+	 * @param questionlist
+	 */
 	public void getAllQuestions() //throws ServletException, IOException
 	{
 		List<Kysymykset> questionlist = new ArrayList<Kysymykset>();
@@ -53,12 +65,13 @@ public class QuestionsRest {
 			e.printStackTrace();
 		} 
 		
-		
-		
 	}
 	
 	/**
-	 * Edit Questions start from this
+	 * @author liisa
+	 * 
+	 * Method get all questions from database and show them to user for editing
+	 * @param questionlist2
 	 */
 	
 	@GET
@@ -80,13 +93,14 @@ public class QuestionsRest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-		
-		
-		
+			
 	} 
-
-
-
+	/**
+	 * @author liisa
+	 * 
+	 * Method get  question from database by id
+	 * @param id
+	 */
 	@GET
 	@Path("/getquestionbyid/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -106,7 +120,13 @@ public class QuestionsRest {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * @author liisa
+	 * 
+	 * Method connect to database using Dao- class and edit question
+	 * @param kysymysID
+	 * @param kysymys
+	 */
 	@POST 
 	@Path("/editquestion2")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -132,12 +152,12 @@ public class QuestionsRest {
 		} 
 	}
 
-
-
-	
-	/**
-	 * This method is used for directing to addNewQuestions.jsp
-	 */
+/**
+ * @author Jenni Lehtonen
+ * This method is used for directing to addNewQuestions.jsp
+ * @throws ServletException
+ * @throws IOException
+ */
 	@GET
 	@Path("/addQuestionPage")
 	public void addQuestionPage() throws ServletException, IOException {
@@ -146,8 +166,9 @@ public class QuestionsRest {
 	}
 	
 	/**
+	 * @author Jenni Lehtonen
 	 * This method is for adding new questions to database
-	 * @param kysymys, gotten from addNewQuestions.jsp
+	 * @param kysymys, comes from addNewQuestions.jsp
 	 */
 	@POST
 	@Path("/addNewQuestions")
@@ -161,6 +182,9 @@ public class QuestionsRest {
 		k.setKysymys(kysymys);
 		dao.addQuestion(k);
 		
+		/**
+		 * After adding the question, show success-page
+		 */
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/editOkQuestions.jsp");
 		dispatcher.forward(request, response);
 		} catch (Exception e) {
@@ -171,7 +195,11 @@ public class QuestionsRest {
 	} 
 	
 	/**
-	 * This method is for getting all the questions from the database and showing them in jsp where user can choose which of the questions they want to delete
+	 * @author Jenni Lehtonen
+	 * This method is for getting all the questions from the database and showing them in jsp where the user can 
+	 * choose which of the questions they want to delete
+	 * @throws ServletException
+	 * @throws IOException
 	 */
 	@GET
 	@Path("/getallquestionstodelete")
@@ -198,8 +226,9 @@ public class QuestionsRest {
 	} 
 	
 	/**
+	 * @author Jenni Lehtonen
 	 * This method is for deleting the selected question from the database
-	 * @param id, gotten from removeQuestions.jsp
+	 * @param id, comes from removeQuestions.jsp
 	 */
 	@GET
 	@Path("/deleteQuestions/{id}")
@@ -211,6 +240,9 @@ public class QuestionsRest {
 		 */
 		try {
 		dao.removeQuestion(id);
+		/**
+		 * After removing the question, success-page is showed
+		 */
 		RequestDispatcher rd=request.getRequestDispatcher("/jsp/editOkQuestions.jsp");
 		rd.forward(request, response);
 		} catch (Exception e) {

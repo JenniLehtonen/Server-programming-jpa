@@ -24,7 +24,7 @@ import dao.*;
 
 /**
  * 
- * @author Riikka Siukola, Sanna Nieminen-Vuorio
+ * @author Riikka Siukola, Sanna Nieminen-Vuorio, Jenni Lehtonen
  * Restful for handling candidate's and user's answers
  *
  */
@@ -61,7 +61,11 @@ public class AnswersRest {
 	}
 	
 	/**
+	 * @author Jenni Lehtonen, Liisa Vuorenmaa, Riikka Siukola
 	 * This is for getting candidates' answers and showing them next to user's answers so the user can compare their answers to candidates' answers
+	 * @param useranswers_string This method gets user's answers
+	 * @throws ServletException
+	 * @throws IOException
 	 */
 	@GET
 	@Path("/compareUserAnswersToCandidateAnswers/{useranswers_string}")

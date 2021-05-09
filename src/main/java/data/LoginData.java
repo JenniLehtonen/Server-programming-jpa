@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 /**
  * 
- * @author Jenni
+ * @author Jenni Lehtonen
  * This class is used when the user wants to log in to admin's page. 
  * Here CheckPasswords method checks that the password provided by the user is correct.
  * Crypt method crypts the admin's real password and the password provided by the user and later those crypted passwords will be compared.
