@@ -233,12 +233,16 @@ public class QuestionsRest {
 		
 		System.out.println("Toimii");
 		List<Kysymykset> questionlist = new ArrayList<Kysymykset>();
+		List<Ehdokkaat> candidatelist = new ArrayList<Ehdokkaat>();
 		Dao dao = new Dao();
 
 		questionlist = dao.getAllQuestions();
+		candidatelist = dao.getAllCandidates();
+		
 		
 		
 		request.setAttribute("questionlist", questionlist);
+		request.setAttribute("candidatelist", candidatelist);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/candidateAnswer.jsp");
 		try {
 			rd.forward(request, response);

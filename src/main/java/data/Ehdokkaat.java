@@ -120,6 +120,19 @@ public class Ehdokkaat implements Serializable {
 	public void setIka(int ika) {
 		this.ika = ika;
 	}
+	
+	public void setIka(String ika) {
+		//If user gives string and not number, set age to zero
+		try
+		{
+			this.ika = Integer.valueOf(ika);
+		}
+		catch(Exception e)
+		{
+			System.out.println("Error at adding candidate's age is "+ e);
+			this.ika = 0;
+		}
+	}
 
 	public String getKotipaikkakunta() {
 		return this.kotipaikkakunta;

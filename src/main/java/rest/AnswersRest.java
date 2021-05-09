@@ -22,6 +22,12 @@ import javax.ws.rs.core.MediaType;
 
 import dao.*;
 
+/**
+ * 
+ * @author Riikka Siukola, Sanna Nieminen-Vuorio
+ * Restful for handling candidate's and user's answers
+ *
+ */
 @Path("/answersrest")
 public class AnswersRest {
 	
@@ -78,6 +84,8 @@ public class AnswersRest {
 	
 	/**
 	 * @author Sanna Nieminen-Vuorio
+	 * Gets request from UpdateCandidateAnswers-servlet.
+	 * Gets list of candidate, including 
 	 * @param list
 	 * @return
 	 */
@@ -87,7 +95,7 @@ public class AnswersRest {
 	@Consumes(MediaType.APPLICATION_JSON) 
 	public String editCandidateAnswers(ArrayList<Vastaukset> list)
 	{
-		System.out.println("Käyty restillä");
+		System.out.println("Käyty restillä"); //This is just for testing
 		String done;
 		Dao dao = new Dao();
 

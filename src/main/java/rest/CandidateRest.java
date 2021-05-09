@@ -38,6 +38,12 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 import data.*;
 import dao.*;
 
+/**
+ *
+ * @author Riikka Siukola, Sanna Nieminen-Vuorio
+ * This is a restful for handling candidates, for example add and edit
+ *
+ */
 @Path("/candidaterest")
 public class CandidateRest {
 
@@ -50,10 +56,10 @@ public class CandidateRest {
 	HttpServletResponse response;
 
 	/**
-	 * @Sanna Nieminen-Vuorio 
-	 * 
+	 * @Sanna Nieminen-Vuorio
+	 *
 	 * Method gets all the candidates from database, using Dao-class method
-	 * @return candidateList, list of all candidates
+	 * Redirect to jsp, to show all candidates information
 	 */
 	@GET
 	@Path("/getallcandidates")
@@ -74,14 +80,14 @@ public class CandidateRest {
 			e.printStackTrace();
 		}
 
-		// return candidateList;
+	} //getAllCandidates-sulje
 
-	} // getAllCandidates-sulje
 
 	/**
-	 * @author Riikka Siukola 
-	 * 
-	 * Method gets a single candidate from database using dao class by getting the id of the candidate as a path parameter.
+	 * @author Sanna Nieminen-Vuorio
+	 * Gets one candidate based on id, from database, using Dao-class method
+	 * Gets candidate's id as a path parameter
+	 * Redirects to jsp-page, where user can update candidate's information
 	 * @param id
 	 */
 	@GET
@@ -105,9 +111,8 @@ public class CandidateRest {
 	}
 
 	/**
-	 * @author Riikka Siukola 
-	 * 
-	 * Method gets all the candidates from the databases using dao class and forwards them to showshort.jsp.
+	 * @author Sanna Nieminen-Vuorio
+	 * Selects everything from Ehdokkaat and redirect to showshort.jsp, which shows all the candidates' names.
 	 */
 	@GET
 	@Path("/showshort")
@@ -129,11 +134,11 @@ public class CandidateRest {
 	}
 
 	/**
-	 * @author Riikka Siukola 
-	 * 
+	 * @author Riikka Siukola
+	 *
 	 * Method adds a new candidate to the database using dao class. Uploading a profile picture is only done if the associated
 	 * parameters aren't null.
-	 * 
+	 *
 	 * @param etunimi
 	 * @param sukunimi
 	 * @param puolue
@@ -154,13 +159,13 @@ public class CandidateRest {
 			@FormDataParam("ika") String ika, @FormDataParam("miksi_eduskuntaan") String miksi_eduskuntaan,
 			@FormDataParam("mita_asioita_haluat_edistaa") String mita_asioita_haluat_edistaa,
 			@FormDataParam("ammatti") String ammatti, @FormDataParam("kuva") InputStream fileInputStream,
-			@FormDataParam("kuva") FormDataContentDisposition fileMetaData, @Context ServletContext sc) {		
+			@FormDataParam("kuva") FormDataContentDisposition fileMetaData, @Context ServletContext sc) {
 		Ehdokkaat e = new Ehdokkaat();
 		e.setEtunimi(etunimi);
 		e.setSukunimi(sukunimi);
 		e.setPuolue(puolue);
 		e.setKotipaikkakunta(kotipaikkakunta);
-		e.setIka(Integer.valueOf(ika));
+		e.setIka(ika);
 		e.setMiksiEduskuntaan(miksi_eduskuntaan);
 		e.setMitaAsioitaHaluatEdistaa(mita_asioita_haluat_edistaa);
 		e.setAmmatti(ammatti);
@@ -208,7 +213,7 @@ public class CandidateRest {
 
 	/**
 	 * @author Riikka Siukola
-	 * 
+	 *
 	 *Method removes a candidate from the database using dao class. It receives the id as a path parameter.
 	 * @param id
 	 */
@@ -232,6 +237,10 @@ public class CandidateRest {
 
 	/**
 	 * @author Sanna Nieminen-Vuorio
+	 * Gets candidates based on party
+	 * Gets party as a path parameter
+	 * Redirect to jsp, to show candidates from specific party
+	 * @param party
 	 */
 	@GET
 	@Path("/getcandidatesbyparty/{party}")
@@ -256,6 +265,20 @@ public class CandidateRest {
 
 	/**
 	 * @author Sanna Nieminen-Vuorio
+	 * Edit candidate's information to database
+	 * Use Dao-class method, to do the merge
+	 * @param id
+	 * @param sukunimi
+	 * @param etunimi
+	 * @param puolue
+	 * @param kotipaikkakunta
+	 * @param ika
+	 * @param ammatti
+	 * @param miksiEduskuntaan
+	 * @param mitaAsioitaHaluatEdistaa
+	 * @param fileInputStream
+	 * @param fileMetaData
+	 * @param sc
 	 */
 	@POST // have to be post, because the info comes from form
 	@Path("/editcandidate")
@@ -275,35 +298,53 @@ public class CandidateRest {
 				mitaAsioitaHaluatEdistaa, ammatti);
 		try {
 
-			if (fileMetaData != null && fileInputStream != null) {
+			if(fileMetaData != null && fileInputStream != null)
+			{
+				/**
+				 * Upload new photo, if user sets it
+				 */
 				ehdokas.setKuva(fileMetaData.getFileName());
 
-				String UPLOAD_PATH = "./img";
-				try {
-					int read = 0;
-					byte[] bytes = new byte[1024];
+				String UPLOAD_PATH="./img";
+			    try{
+			        int read = 0;
+			        byte[] bytes = new byte[1024];
 
-					OutputStream out = new FileOutputStream(new File(UPLOAD_PATH + "/" + fileMetaData.getFileName()));
-					while ((read = fileInputStream.read(bytes)) != -1) {
-						out.write(bytes, 0, read);
-					}
-					out.flush();
-					out.close();
-				} catch (IOException exception) {
-					throw new WebApplicationException("Error while uploading file. Please try again !!");
-				}
-			} else {
+			        OutputStream out = new FileOutputStream(new File(UPLOAD_PATH + "/"+fileMetaData.getFileName()));
+			        while ((read = fileInputStream.read(bytes)) != -1)
+			        {
+			            out.write(bytes, 0, read);
+			        }
+			        out.flush();
+			        out.close();
+			    }
+			    catch (IOException exception){
+			        throw new WebApplicationException("Error while uploading file. Please try again !!");
+			    }
+			}
+			else
+			{
+				/**
+				 * If user don't set new photo, get last photo used
+				 */
 				ehdokas.setKuva(dao.getCandidateById(id).getKuva());
 			}
-		} catch (Exception e) {
-			System.out.println("Error on " + e);
+		}
+		catch(Exception e)
+		{
+			/**
+			 * Gets error, if photo is not set,but it doesn't get null value
+			 * If user don't set new photo, get last photo used
+			 */
+			System.out.println("Error on "+ e);
 			ehdokas.setKuva(dao.getCandidateById(id).getKuva());
 		}
 
 		candidateList = dao.editCandidate(ehdokas);
+		String done = "Ehdokkaan tiedot päivitetty";
 
-		request.setAttribute("candidateList", candidateList);
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/showshort.jsp");
+		request.setAttribute("success", done);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/success2.jsp");
 		try {
 			rd.forward(request, response);
 		} catch (ServletException | IOException e) {

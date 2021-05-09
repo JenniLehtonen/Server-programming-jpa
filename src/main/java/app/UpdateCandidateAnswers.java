@@ -23,6 +23,14 @@ import data.Kysymykset;
 import data.Vastaukset;
 import data.VastauksetPK;
 
+/**
+ * 
+ * @author Sanna Nieminen-Vuorio
+ * 
+ *This is a servlet, that sends request to restful, to edit candidate's answers.
+ *It gets back a string, which tells if the editing was done successfully or not.
+ *Redirect to jsp, that shows the string.
+ */
 
 @WebServlet("/updatecandidateanswer")
 public class UpdateCandidateAnswers extends HttpServlet{
@@ -42,10 +50,16 @@ private static final long serialVersionUID = 1L;
 
 		String ehdokasId = request.getParameter("ehdokasId");
 		VastauksetPK vpk = new VastauksetPK();
+		String done = "";
+		
+		try {
+			
+		
+		if(ehdokasId != null) {
+			
 		vpk.setEhdokasId(ehdokasId);
 		ArrayList<Vastaukset> candidateanswerlist = new ArrayList<>();
-		String kohde = null;
-		String done = "Ei onnistunut";
+		String kohde = "http://127.0.0.1:8080/rest/answersrest/editcandidateanswers"; //This will be the target
 		Dao dao = new Dao();
 
 		String answer_string = null;
@@ -68,23 +82,32 @@ private static final long serialVersionUID = 1L;
 			v.setEhdokkaat(ehdokas);
 			v.setKysymykset(kysymys);
 			k.setKysymysId(answer);
-			candidateanswerlist.add(v);
+			candidateanswerlist.add(v); //Adds the whole object to the list
 			ehdokas.setEhdokasId(ehdokasId);
 			System.out.println(v.getVastaus() + " on vastaus. Ehdokas on numero " + v.getId().getEhdokasId());
 		}
 
-//		Client c= ClientBuilder.newClient();
-//		WebTarget wt=c.target(kohde); 
-//		Builder b=wt.request();
-//		Entity<ArrayList<Vastaukset>> e = Entity.entity(candidateanswerlist, MediaType.APPLICATION_JSON); //Muutetaan Entityllä oikeaan muotoon, 
-//
-//		 done = b.post(e, String.class); 
-		
-		done = dao.editCandidateAnswers(candidateanswerlist);
+		Client c= ClientBuilder.newClient();
+		WebTarget wt=c.target(kohde); 
+		Builder b=wt.request();
+		Entity<ArrayList<Vastaukset>> e = Entity.entity(candidateanswerlist, MediaType.APPLICATION_JSON); //Transform with entity to right form 
 
-		 //Ohjataan kertomaan menikö ok 
+		 done = b.post(e, String.class); //This post the list to restful and gets back string. Defined as String.class
+		}
+		else
+		{
+			done = "Ehdokasta ei löytynyt, joten vastauksia ei voitu tallentaa";
+		}
+		}
+		catch(Exception e)
+		{
+			System.out.println("Ehdokkaan vastausten tallennus ei onnistunut, koska virhe "+ e);
+			done = "Ehdokasta ei löytynyt, joten vastauksia ei voitu tallentaa";
+		}
+
+		 //Redirect to success-page with string that tells if edit was successful or not
 		request.setAttribute("success", done);
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/success.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/success2.jsp");
 		try {
 			rd.forward(request, response);
 		} catch (ServletException | IOException ex) {

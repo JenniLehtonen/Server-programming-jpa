@@ -13,8 +13,24 @@
 <h2>Vastaa kysymyksiin:</h2>
 <br>
 <br>
-<form method="post" action="/updatecandidateanswer">
 
+<form method="post" action="/updatecandidateanswer">
+	
+	<div class="dropdown">
+	<button class="dropbtn" type="button" disabled>Valitse ehdokas:</button>
+	<div class="dropdown-content">
+	<select name="ehdokasId">
+	<option></option>
+	<c:forEach var="candidate" items="${requestScope.candidatelist}">
+	
+		<option value='${candidate.ehdokasId}'>${candidate.etunimi} ${candidate.sukunimi}</option>
+		</c:forEach> 
+		
+		</select>
+
+	</div>
+</div>
+<br><br>
 	<c:forEach var="question" items="${requestScope.questionlist}">
 		<b>${question.kysymysId}: </b>${question.kysymys} <br> <br>
 			<input type="radio" id="${question.kysymysId}1" name="${question.kysymysId}"
@@ -29,9 +45,6 @@
 			name="${question.kysymysId}" value="5"><label for="${question.kysymysId}5"> 5.
 				Täysin samaa mieltä</label> <br> <br>
 	</c:forEach>
-
-	<label style="font-weight: bold"> Vaalinumerosi:</label> <br>
-	<input type="text" name="ehdokasId" placeholder="Syötä tähän vaalinumerosi"><br>
 	<input type="submit" value="Tallenna vastaukset" class='button'>
 
 </form>

@@ -13,16 +13,28 @@ import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
+/**
+ *
+ * @author Jenni Lehtonen, Liisa Vuorenmaa, Riikka Siukola, Sanna Nieminen-Vuorio
+ * All JPA-methods
+ *
+ */
 public class Dao {
 
+	/**
+	 * Entity manager factory, that been used in all methods
+	 */
 	EntityManagerFactory emf=Persistence.createEntityManagerFactory("Server-programming-jpa");
-	
+
+
+	/**
+	 * @author Sanna Nieminen-Vuorio
+	 * Reads all candidates from database
+	 * @return list List of all candidates
+	 */
 	public List<Ehdokkaat> getAllCandidates()
 	{
-
-
 		EntityManager em=emf.createEntityManager();
-
 
 		List<Ehdokkaat> list = em.createQuery("select a from Ehdokkaat a").getResultList();
 
@@ -31,9 +43,10 @@ public class Dao {
 		return list;
 	}
 
+
 	/**
-	 * Method gets all questions from the database and returns a list of them.
-	 * @return
+	 * Reads all questions from database
+	 * @return list List of questions
 	 */
 	public List<Kysymykset> getAllQuestions()
 	{
@@ -56,19 +69,19 @@ public class Dao {
 			em.persist(kysymys);
 			em.getTransaction().commit();
 			em.close();
-			
+
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * @author Jenni Lehtonen
 	 * Method for removing questions from the database
 	 * @param Question id for the question that needs to be removed from the database
 	 */
 	public void removeQuestion(int id) {
-		
+
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 
@@ -90,22 +103,22 @@ public class Dao {
 	 */
 	public List<Ehdokkaat> readAllAnswers() {
 		List<Ehdokkaat> list = new ArrayList<>();
-		
+
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		list = em.createQuery("select e from Ehdokkaat e").getResultList();
 		em.getTransaction().commit();
 		em.close();
-		
+
 		return list;
 	}
-	
+
 	/**
 	 * @author Riikka Siukola
 	 * Adds a new candidate to the database
 	 * @param e for Ehdokkaat
 	 */
-	
+
 	public String addCandidate(Ehdokkaat e) {
 		String done = "";
 
@@ -119,7 +132,7 @@ public class Dao {
 		}
 		em.getTransaction().commit();
 		em.close();
-		
+
 		return done;
 
 	}
@@ -133,9 +146,9 @@ public class Dao {
 		String done = "";
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-				
+
 		em.createNativeQuery("delete from vastaukset where ehdokas_id="+id).executeUpdate();
-		
+
 		Object ehdokas = em.createQuery("SELECT e FROM Ehdokkaat e WHERE e.ehdokasId=?1").setParameter(1, id).getSingleResult();
 
 		try {
@@ -153,7 +166,8 @@ public class Dao {
 
 	/**
 	 * @author Sanna Nieminen-Vuorio
-	 *
+	 * Reads candidates from database based on party
+	 * @param party
 	 * @return list List, where is all the data of one candidate based on party
 	 */
 
@@ -181,7 +195,7 @@ public class Dao {
 	 * @author Sanna Nieminen-Vuorio
 	 * Method gets one candidate based on id
 	 * @param id
-	 * @return Ehdokkaat-object
+	 * @return ehdokas, Ehdokkaat-object
 	 */
 	public Ehdokkaat getCandidateById(int id)
 	{
@@ -219,12 +233,15 @@ public class Dao {
 
 		return list;
 
-	}
+	} // editCandidate-sulje
 
 	/**
 	 * @author Sanna Nieminen-Vuorio
-	 * @param vastaus
+	 * Edit candidate answers to database. Can be used also if there is no answers, but candidate is created.
+	 * Gets a list of candidate's answers as a parameter.
+	 * @param list
 	 * @return done
+	 * Returns string that tells if the method was success or not
 	 */
 	public String editCandidateAnswers(ArrayList<Vastaukset> list)
 	{
@@ -232,13 +249,11 @@ public class Dao {
 		EntityManager em=emf.createEntityManager();
 
 		em.getTransaction().begin();
-		
+
 		for(Vastaukset v : list)
 		{
 			try
 			{
-				Vastaukset vastaus = em.find(Vastaukset.class, v.getId());
-				
 					em.merge(v); //This line does the update
 					System.out.println("Merge tehty, eli ei ollut tyhjä");
 					System.out.println("Ehdokkaan vastaukset päivitetty");
@@ -257,7 +272,9 @@ public class Dao {
 			em.close();
 
 			return done;
-	}
+	} //editCandidateAnswers-sulje
+
+
 /**
  * edit questions alkaa tästä
  * @param kysymys
@@ -269,10 +286,10 @@ public class Dao {
 		em.getTransaction().begin();
 		Kysymykset kysymys = em.find(Kysymykset.class, id);
 		em.getTransaction().commit();
-		
+
 		em.close();
 		return kysymys;
-		
+
 	}
 
 	/**
@@ -284,23 +301,23 @@ public class Dao {
 public List<Kysymykset> editQuestion(Kysymykset kysymys)
 	{
 		EntityManager em=emf.createEntityManager();
-		
+
 		em.getTransaction().begin();
 		Kysymykset e = em.find(Kysymykset.class, kysymys.getKysymysId());
 		try {
-			em.merge(kysymys); 
-			
-			
+			em.merge(kysymys);
+
+
 		}
 		catch(Exception exception) {
-			
+
 			System.out.println("ei toimi");
 		}
 		em.getTransaction().commit();
 		em.close();
 
-		List<Kysymykset> list=getAllQuestions();		
+		List<Kysymykset> list=getAllQuestions();
 		return list;
-		
+
 	}
 }
