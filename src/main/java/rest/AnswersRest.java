@@ -40,7 +40,7 @@ public class AnswersRest {
 	/**
 	 * @author Riikka Siukola
 	 * 
-	 * Method gets a single candidate by id (given as parth parameter) and forwards the information to a page which
+	 * Method gets a single candidate by id (given as path parameter) and forwards the information to a page which
 	 * displays all info of that candidate, including their answers to all the questions.
 	 * 
 	 * @param id
