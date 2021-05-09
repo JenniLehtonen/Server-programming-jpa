@@ -45,8 +45,9 @@ public class Dao {
 
 
 	/**
+	 * @author liisa
 	 * Reads all questions from database
-	 * @return list List of questions
+	 * @return list 
 	 */
 	public List<Kysymykset> getAllQuestions()
 	{
@@ -276,9 +277,10 @@ public class Dao {
 
 
 /**
- * edit questions alkaa tästä
+ * @author liisa
+ * Method get one question from database by id
  * @param kysymys
- * @return done
+ * 
  */
 	public Kysymykset getQuestionById(int id)
 	{
@@ -293,7 +295,8 @@ public class Dao {
 	}
 
 	/**
-	 * edit questions alkaa tästä
+	 * method modifies the question in the database
+	 * @author liisa
 	 * @param kysymys
 	 * @return list
 	 */

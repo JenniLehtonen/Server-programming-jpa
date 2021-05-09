@@ -41,6 +41,13 @@ public class QuestionsRest {
 	@GET
 	@Path("/getallquestions")
 	@Produces(MediaType.APPLICATION_JSON)
+	
+	/**
+	 * @author liisa
+	 * 
+	 * Method get all questions from database and show them to user for answering
+	 * @param questionlist
+	 */
 	public void getAllQuestions() //throws ServletException, IOException
 	{
 		List<Kysymykset> questionlist = new ArrayList<Kysymykset>();
@@ -61,7 +68,10 @@ public class QuestionsRest {
 	}
 	
 	/**
-	 * Edit Questions start from this
+	 * @author liisa
+	 * 
+	 * Method get all questions from database and show them to user for editing
+	 * @param questionlist2
 	 */
 	
 	@GET
@@ -85,7 +95,12 @@ public class QuestionsRest {
 		} 
 			
 	} 
-
+	/**
+	 * @author liisa
+	 * 
+	 * Method get  question from database by id
+	 * @param id
+	 */
 	@GET
 	@Path("/getquestionbyid/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -105,7 +120,13 @@ public class QuestionsRest {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * @author liisa
+	 * 
+	 * Method connect to database using Dao- class and edit question
+	 * @param kysymysID
+	 * @param kysymys
+	 */
 	@POST 
 	@Path("/editquestion2")
 	@Produces(MediaType.APPLICATION_JSON)
