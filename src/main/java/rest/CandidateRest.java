@@ -40,29 +40,31 @@ import dao.*;
 
 @Path("/candidaterest")
 public class CandidateRest {
-	
+
 	/**
 	 * Request and response, can be used in every method
 	 */
-	@Context HttpServletRequest request;
-	@Context HttpServletResponse response;
-	
+	@Context
+	HttpServletRequest request;
+	@Context
+	HttpServletResponse response;
+
 	/**
-	 * @Sanna Nieminen-Vuorio
+	 * @Sanna Nieminen-Vuorio 
+	 * 
 	 * Method gets all the candidates from database, using Dao-class method
 	 * @return candidateList, list of all candidates
 	 */
 	@GET
 	@Path("/getallcandidates")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void getAllCandidates() //throws ServletException, IOException
-	{ 
+	public void getAllCandidates() // throws ServletException, IOException
+	{
 		List<Ehdokkaat> candidateList = new ArrayList<Ehdokkaat>();
 		Dao dao = new Dao();
 
 		candidateList = dao.getAllCandidates();
-		
-		
+
 		request.setAttribute("candidateList", candidateList);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/showcandidates.jsp");
 		try {
@@ -70,17 +72,23 @@ public class CandidateRest {
 		} catch (ServletException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
-		
-		//return candidateList;
-		
-	} //getAllCandidates-sulje
-	
+		}
+
+		// return candidateList;
+
+	} // getAllCandidates-sulje
+
+	/**
+	 * @author Riikka Siukola 
+	 * 
+	 * Method gets a single candidate from database using dao class by getting the id of the candidate as a path parameter.
+	 * @param id
+	 */
 	@GET
 	@Path("/getcandidatebyid/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void getCandidateById(@PathParam("id") int id) //throws ServletException, IOException
-	{ 
+	public void getCandidateById(@PathParam("id") int id) // throws ServletException, IOException
+	{
 		Ehdokkaat candidate = new Ehdokkaat();
 		Dao dao = new Dao();
 
@@ -96,6 +104,11 @@ public class CandidateRest {
 		}
 	}
 
+	/**
+	 * @author Riikka Siukola 
+	 * 
+	 * Method gets all the candidates from the databases using dao class and forwards them to showshort.jsp.
+	 */
 	@GET
 	@Path("/showshort")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -104,8 +117,7 @@ public class CandidateRest {
 		Dao dao = new Dao();
 
 		candidateList = dao.getAllCandidates();
-		
-		
+
 		request.setAttribute("candidateList", candidateList);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/showshort.jsp");
 		try {
@@ -113,11 +125,14 @@ public class CandidateRest {
 		} catch (ServletException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
 	}
-	
+
 	/**
-	 * @author Riikka Siukola
+	 * @author Riikka Siukola 
+	 * 
+	 * Method adds a new candidate to the database using dao class. Uploading a profile picture is only done if the associated
+	 * parameters aren't null.
 	 * 
 	 * @param etunimi
 	 * @param sukunimi
@@ -133,8 +148,13 @@ public class CandidateRest {
 	 */
 	@POST
 	@Path("/addcandidate")
-	@Consumes({MediaType.MULTIPART_FORM_DATA})
-	public void addCandidate(@FormDataParam("etunimi") String etunimi, @FormDataParam("sukunimi") String sukunimi, @FormDataParam("puolue") String puolue, @FormDataParam("kotipaikkakunta") String kotipaikkakunta, @FormDataParam("ika") String ika, @FormDataParam("miksi_eduskuntaan") String miksi_eduskuntaan, @FormDataParam("mita_asioita_haluat_edistaa") String mita_asioita_haluat_edistaa, @FormDataParam("ammatti") String ammatti, @FormDataParam("kuva") InputStream fileInputStream, @FormDataParam("kuva") FormDataContentDisposition fileMetaData, @Context ServletContext sc) {
+	@Consumes({ MediaType.MULTIPART_FORM_DATA })
+	public void addCandidate(@FormDataParam("etunimi") String etunimi, @FormDataParam("sukunimi") String sukunimi,
+			@FormDataParam("puolue") String puolue, @FormDataParam("kotipaikkakunta") String kotipaikkakunta,
+			@FormDataParam("ika") String ika, @FormDataParam("miksi_eduskuntaan") String miksi_eduskuntaan,
+			@FormDataParam("mita_asioita_haluat_edistaa") String mita_asioita_haluat_edistaa,
+			@FormDataParam("ammatti") String ammatti, @FormDataParam("kuva") InputStream fileInputStream,
+			@FormDataParam("kuva") FormDataContentDisposition fileMetaData, @Context ServletContext sc) {		
 		Ehdokkaat e = new Ehdokkaat();
 		e.setEtunimi(etunimi);
 		e.setSukunimi(sukunimi);
@@ -144,42 +164,52 @@ public class CandidateRest {
 		e.setMiksiEduskuntaan(miksi_eduskuntaan);
 		e.setMitaAsioitaHaluatEdistaa(mita_asioita_haluat_edistaa);
 		e.setAmmatti(ammatti);
-		e.setKuva(fileMetaData.getFileName());
-		
-		String UPLOAD_PATH="./img";
-	    try{
-	        int read = 0;
-	        byte[] bytes = new byte[1024];
-	 
-	        OutputStream out = new FileOutputStream(new File(UPLOAD_PATH + "/"+fileMetaData.getFileName()));
-	        while ((read = fileInputStream.read(bytes)) != -1) 
-	        {
-	            out.write(bytes, 0, read);
-	        }
-	        out.flush();
-	        out.close();
-	        
-	    } 
-	    catch (IOException exception){
-	        throw new WebApplicationException("Error while uploading file. Please try again !!");
-	    }
-		
+
+		try {
+
+			if (fileMetaData != null && fileInputStream != null) {
+				e.setKuva(fileMetaData.getFileName());
+
+				String UPLOAD_PATH = "./img";
+				try {
+					int read = 0;
+					byte[] bytes = new byte[1024];
+
+					OutputStream out = new FileOutputStream(new File(UPLOAD_PATH + "/" + fileMetaData.getFileName()));
+					while ((read = fileInputStream.read(bytes)) != -1) {
+						out.write(bytes, 0, read);
+					}
+					out.flush();
+					out.close();
+				} catch (IOException exception) {
+					throw new WebApplicationException("Error while uploading file. Please try again !!");
+				}
+			} else {
+				e.setKuva(null);
+			}
+		} catch (Exception exception) {
+			System.out.println("Error on " + exception);
+			e.setKuva(null);
+		}
+
 		Dao dao = new Dao();
-		
-		dao.addCandidate(e);
-		
+
+		String success = dao.addCandidate(e);
+
+		request.setAttribute("success", success);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/success.jsp");
 		try {
 			rd.forward(request, response);
 		} catch (ServletException | IOException exception) {
 			// TODO Auto-generated catch block
 			exception.printStackTrace();
-		} 
+		}
 	}
-	
+
 	/**
 	 * @author Riikka Siukola
 	 * 
+	 *Method removes a candidate from the database using dao class. It receives the id as a path parameter.
 	 * @param id
 	 */
 	@GET
@@ -187,29 +217,27 @@ public class CandidateRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	public void deleteCandidate(@PathParam("id") int id) {
 		Dao dao = new Dao();
-		
-		int idnum = Integer.valueOf(id);
-		
-		dao.deleteCandidate(idnum);
-		
+
+		String success = dao.deleteCandidate(id);
+
+		request.setAttribute("success", success);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/success.jsp");
 		try {
 			rd.forward(request, response);
 		} catch (ServletException | IOException exception) {
 			// TODO Auto-generated catch block
 			exception.printStackTrace();
-		} 
+		}
 	}
-	
-	
+
 	/**
 	 * @author Sanna Nieminen-Vuorio
 	 */
 	@GET
 	@Path("/getcandidatesbyparty/{party}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void getCandidatesByParty(@PathParam("party") String party) //throws ServletException, IOException
-	{ 
+	public void getCandidatesByParty(@PathParam("party") String party) // throws ServletException, IOException
+	{
 		List<Ehdokkaat> candidateList = new ArrayList<Ehdokkaat>();
 		Dao dao = new Dao();
 
@@ -222,57 +250,53 @@ public class CandidateRest {
 		} catch (ServletException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
-		
+		}
 
-	} //getCandidatesByParty-sulje
-	
-	
+	} // getCandidatesByParty-sulje
+
 	/**
 	 * @author Sanna Nieminen-Vuorio
 	 */
-	@POST //have to be post, because the info comes from form
+	@POST // have to be post, because the info comes from form
 	@Path("/editcandidate")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes({MediaType.MULTIPART_FORM_DATA}) 
-	public void editCandidate(@FormDataParam("ehdokasId") int id, @FormDataParam("sukunimi") String sukunimi, @FormDataParam("etunimi") String etunimi, @FormDataParam("puolue") String puolue, @FormDataParam("kotipaikkakunta") String kotipaikkakunta, @FormDataParam("ika") int ika, @FormDataParam("ammatti") String ammatti, @FormDataParam("miksiEduskuntaan") String miksiEduskuntaan, @FormDataParam("mitaAsioitaHaluatEdistaa") String mitaAsioitaHaluatEdistaa, @FormDataParam("kuva") InputStream fileInputStream, @FormDataParam("kuva") FormDataContentDisposition fileMetaData, @Context ServletContext sc)
-	{
-	
-		
+	@Consumes({ MediaType.MULTIPART_FORM_DATA })
+	public void editCandidate(@FormDataParam("ehdokasId") int id, @FormDataParam("sukunimi") String sukunimi,
+			@FormDataParam("etunimi") String etunimi, @FormDataParam("puolue") String puolue,
+			@FormDataParam("kotipaikkakunta") String kotipaikkakunta, @FormDataParam("ika") int ika,
+			@FormDataParam("ammatti") String ammatti, @FormDataParam("miksiEduskuntaan") String miksiEduskuntaan,
+			@FormDataParam("mitaAsioitaHaluatEdistaa") String mitaAsioitaHaluatEdistaa,
+			@FormDataParam("kuva") InputStream fileInputStream,
+			@FormDataParam("kuva") FormDataContentDisposition fileMetaData, @Context ServletContext sc) {
+
 		List<Ehdokkaat> candidateList = new ArrayList<Ehdokkaat>();
 		Dao dao = new Dao();
-		Ehdokkaat ehdokas = new Ehdokkaat(id, sukunimi, etunimi, puolue, kotipaikkakunta, ika, miksiEduskuntaan, mitaAsioitaHaluatEdistaa, ammatti);
+		Ehdokkaat ehdokas = new Ehdokkaat(id, sukunimi, etunimi, puolue, kotipaikkakunta, ika, miksiEduskuntaan,
+				mitaAsioitaHaluatEdistaa, ammatti);
 		try {
-			
-			if(fileMetaData != null && fileInputStream != null)
-			{
+
+			if (fileMetaData != null && fileInputStream != null) {
 				ehdokas.setKuva(fileMetaData.getFileName());
-				
-				String UPLOAD_PATH="./img";
-			    try{
-			        int read = 0;
-			        byte[] bytes = new byte[1024];
-			 
-			        OutputStream out = new FileOutputStream(new File(UPLOAD_PATH + "/"+fileMetaData.getFileName()));
-			        while ((read = fileInputStream.read(bytes)) != -1) 
-			        {
-			            out.write(bytes, 0, read);
-			        }
-			        out.flush();
-			        out.close();
-			    } 
-			    catch (IOException exception){
-			        throw new WebApplicationException("Error while uploading file. Please try again !!");
-			    }
-			}
-			else
-			{
+
+				String UPLOAD_PATH = "./img";
+				try {
+					int read = 0;
+					byte[] bytes = new byte[1024];
+
+					OutputStream out = new FileOutputStream(new File(UPLOAD_PATH + "/" + fileMetaData.getFileName()));
+					while ((read = fileInputStream.read(bytes)) != -1) {
+						out.write(bytes, 0, read);
+					}
+					out.flush();
+					out.close();
+				} catch (IOException exception) {
+					throw new WebApplicationException("Error while uploading file. Please try again !!");
+				}
+			} else {
 				ehdokas.setKuva(dao.getCandidateById(id).getKuva());
 			}
-		}
-		catch(Exception e)
-		{
-			System.out.println("Error on "+ e);
+		} catch (Exception e) {
+			System.out.println("Error on " + e);
 			ehdokas.setKuva(dao.getCandidateById(id).getKuva());
 		}
 
@@ -285,7 +309,7 @@ public class CandidateRest {
 		} catch (ServletException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
-	} //EditCandidate-sulje
-	
+		}
+	} // EditCandidate-sulje
+
 } // class sulje

@@ -31,14 +31,13 @@ public class Dao {
 		return list;
 	}
 
+	/**
+	 * Method gets all questions from the database and returns a list of them.
+	 * @return
+	 */
 	public List<Kysymykset> getAllQuestions()
 	{
-
-
 		EntityManager em=emf.createEntityManager();
-
-
-
 		List<Kysymykset> list = em.createQuery("select a from Kysymykset a").getResultList();
 		em.close();
 
@@ -107,13 +106,22 @@ public class Dao {
 	 * @param e for Ehdokkaat
 	 */
 	
-	public void addCandidate(Ehdokkaat e) {
+	public String addCandidate(Ehdokkaat e) {
+		String done = "";
 
 		EntityManager em=emf.createEntityManager();
 		em.getTransaction().begin();
-		em.persist(e);
+		try {
+			em.persist(e);
+			done = "Ehdokkaan lisääminen onnistui.";
+		} catch (Exception exception) {
+			done = "Ehdokkaan lisääminen epäonnistui.";
+		}
 		em.getTransaction().commit();
 		em.close();
+		
+		return done;
+
 	}
 
 	/**
@@ -121,7 +129,8 @@ public class Dao {
 	 * Removes a candidate and their answers from the database
 	 * @param id
 	 */
-	public void deleteCandidate(int id) {
+	public String deleteCandidate(int id) {
+		String done = "";
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 				
@@ -131,13 +140,15 @@ public class Dao {
 
 		try {
 			em.remove(ehdokas);
+			done = "Ehdokkaan poistaminen onnistui.";
 		} catch (Exception e) {
-
+			done = "Ehdokkaan poistaminen epäonnistui.";
 		}
 
 		em.getTransaction().commit();
 		em.close();
 
+		return done;
 	}
 
 	/**

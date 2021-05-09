@@ -28,8 +28,9 @@ import dao.Dao;
 import data.*;
 
 /**
- * @author Riikka Siukola This class will determine the five best candidates
- *         based on the user's answers.
+ * @author Riikka Siukola 
+ * 
+ * This servlet will determine the five best candidates based on the user's answers.
  */
 
 @WebServlet(name = "bestCandidates", urlPatterns = { "/bestcandidates" })
