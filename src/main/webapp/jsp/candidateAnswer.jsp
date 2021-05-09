@@ -16,11 +16,8 @@
 
 <form method="post" action="/updatecandidateanswer">
 	
-	<div class="dropdown">
-	<button class="dropbtn" type="button" disabled>Valitse ehdokas:</button>
-	<div class="dropdown-content">
 	<select name="ehdokasId">
-	<option></option>
+	<option>Valitse ehdokas</option>
 	<c:forEach var="candidate" items="${requestScope.candidatelist}">
 	
 		<option value='${candidate.ehdokasId}'>${candidate.etunimi} ${candidate.sukunimi}</option>
@@ -28,8 +25,6 @@
 		
 		</select>
 
-	</div>
-</div>
 <br><br>
 	<c:forEach var="question" items="${requestScope.questionlist}">
 		<b>${question.kysymysId}: </b>${question.kysymys} <br> <br>
