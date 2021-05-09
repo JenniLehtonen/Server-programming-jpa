@@ -20,7 +20,13 @@ import javax.ws.rs.core.Context;
 
 import data.Admin;
 
-
+/**
+ * 
+ * @author Jenni Lehtonen
+ * This file is for log in feature. Here admin's real password and the password provided by the user are sent to be crypted and and then sent to jsp
+ * where they are sent to be compared
+ *
+ */
 @Path("/loginrest")
 public class Login {
 	@Context HttpServletRequest request;
@@ -30,6 +36,11 @@ public class Login {
 	String adminPassword;
 	String MD5Password;
 	
+	/**
+	 * This method is for directing to login.jsp
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	@GET
 	@Path("/loginpage")
 	public void goToLoginPage() throws ServletException, IOException {
@@ -37,6 +48,14 @@ public class Login {
 		 dispatcher.forward(request, response); 
 	}
 	
+	/**
+	 * Here the admin's password is searched from the database. After that admin's password and the password provided by the user are crypted and
+	 * sent to login.jsp where they will be sent to be compared
+	 * @param username, comes from login.jsp
+	 * @param password, comes from login.jsp
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	@POST
 	@Path("/login")
 	@Consumes("application/x-www-form-urlencoded")
@@ -61,7 +80,7 @@ public class Login {
 			}
 		
 		/**
-		 * Send admin's real password and the password provided by the user to the method that creates crypts them
+		 * Send admin's real password and the password provided by the user to the method that crypts them
 		 */
 		try {
 			MD5Password = data.LoginData.crypt(adminPassword);
