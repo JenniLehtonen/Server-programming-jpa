@@ -24,7 +24,7 @@ import dao.*;
 
 /**
  * 
- * @author Riikka Siukola, Sanna Nieminen-Vuorio, Jenni Lehtonen
+ * @author Riikka Siukola, Sanna Nieminen-Vuorio, Jenni Lehtonen, Liisa Vuorenmaa
  * Restful for handling candidate's and user's answers
  *
  */
